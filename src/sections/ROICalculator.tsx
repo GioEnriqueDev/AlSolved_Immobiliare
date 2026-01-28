@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useInView, useSpring, useTransform } from 'framer-motion';
-import { TrendingUp, DollarSign, Percent, Calendar, ArrowRight, Sparkles, Euro } from 'lucide-react';
+import { TrendingUp, Percent, Calendar, ArrowRight, Sparkles, Euro } from 'lucide-react';
 import MagneticButton from '../components/custom/MagneticButton';
 import SpotlightCard from '../components/custom/SpotlightCard';
 import GlowingBorder from '../components/custom/GlowingBorder';

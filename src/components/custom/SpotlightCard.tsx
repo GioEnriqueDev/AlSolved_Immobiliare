@@ -1,4 +1,4 @@
-import { useRef, useState, ReactNode, CSSProperties } from 'react';
+import { useRef, useState, type ReactNode, type CSSProperties } from 'react';
 import { motion } from 'framer-motion';
 
 interface SpotlightCardProps {
