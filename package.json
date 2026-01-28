@@ -2,6 +2,7 @@
   "name": "my-app",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://GioEnriqueDev.github.io/AlSolved_Immobiliare/",
   "type": "module",
   "scripts": {
     "dev": "vite",
