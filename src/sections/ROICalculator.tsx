@@ -1,10 +1,11 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, useInView, useSpring, useTransform } from 'framer-motion';
 import { TrendingUp, Percent, Calendar, ArrowRight, Sparkles, Euro } from 'lucide-react';
 import MagneticButton from '../components/custom/MagneticButton';
 import SpotlightCard from '../components/custom/SpotlightCard';
 import GlowingBorder from '../components/custom/GlowingBorder';
 import TextReveal from '../components/custom/TextReveal';
+import { calculator } from '../data/siteContent';
 
 const ROICalculator = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -14,11 +15,9 @@ const ROICalculator = () => {
   const [years, setYears] = useState(5);
   const [roiRate, setRoiRate] = useState(35);
 
-  // Calculate projections
   const projectedValue = investment * Math.pow(1 + roiRate / 100, years);
   const totalReturn = projectedValue - investment;
 
-  // Animated values
   const animatedInvestment = useSpring(investment, { stiffness: 100, damping: 30 });
   const animatedProjected = useSpring(projectedValue, { stiffness: 100, damping: 30 });
   const animatedReturn = useSpring(totalReturn, { stiffness: 100, damping: 30 });
@@ -38,27 +37,29 @@ const ROICalculator = () => {
     }).format(value);
   };
 
-  // Generate chart data points
-  const generateChartData = () => {
+  const chartData = useMemo(() => {
     const points = [];
     for (let i = 0; i <= years; i++) {
       const value = investment * Math.pow(1 + roiRate / 100, i);
       points.push({ year: i, value });
     }
     return points;
-  };
+  }, [investment, roiRate, years]);
 
-  const chartData = generateChartData();
-  const maxValue = Math.max(...chartData.map(d => d.value));
+  const maxValue = useMemo(() => Math.max(...chartData.map((d) => d.value)), [chartData]);
 
-  // SVG chart path
-  const chartPath = chartData.map((point, index) => {
-    const x = (index / (chartData.length - 1)) * 100;
-    const y = 100 - (point.value / maxValue) * 80 - 10;
-    return `${index === 0 ? 'M' : 'L'} ${x} ${y}`;
-  }).join(' ');
+  const chartPath = useMemo(
+    () =>
+      chartData
+        .map((point, index) => {
+          const x = (index / (chartData.length - 1)) * 100;
+          const y = 100 - (point.value / maxValue) * 80 - 10;
+          return `${index === 0 ? 'M' : 'L'} ${x} ${y}`;
+        })
+        .join(' '),
+    [chartData, maxValue]
+  );
 
-  // Area path for gradient fill
   const areaPath = `${chartPath} L 100 100 L 0 100 Z`;
 
   const sliderVariants = {
@@ -79,14 +80,12 @@ const ROICalculator = () => {
       ref={containerRef}
       className="relative min-h-screen w-full py-24 px-6 sm:px-12 lg:px-24 bg-charcoal-950 overflow-hidden"
     >
-      {/* Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold-500/5 rounded-full blur-[120px]" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gold-500/5 rounded-full blur-[120px]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
-        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -95,23 +94,20 @@ const ROICalculator = () => {
         >
           <div className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full mb-6 border border-gold-500/20">
             <Sparkles className="w-4 h-4 text-gold-400" />
-            <span className="text-gold-300 text-xs tracking-[0.2em] uppercase">Calcolatore Investimenti</span>
+            <span className="text-gold-300 text-xs tracking-[0.2em] uppercase">{calculator.badge}</span>
           </div>
 
           <TextReveal delay={0.1}>
             <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6">
-              Calcola i Tuoi{' '}
-              <span className="text-gradient">Rendimenti</span>
+              {calculator.title} <span className="text-gradient">{calculator.titleAccent}</span>
             </h2>
           </TextReveal>
 
-          <p className="text-charcoal-300 text-lg max-w-2xl mx-auto">
-            Scopri come cresce il tuo investimento con la nostra strategia di riqualificazione.
-            Regola i parametri per esplorare diversi scenari.
-          </p>
+          <p className="text-charcoal-300 text-lg max-w-2xl mx-auto mb-3">{calculator.description}</p>
+          <p className="text-charcoal-400 text-sm max-w-2xl mx-auto">{calculator.subtitle}</p>
+          <p className="text-charcoal-500 text-xs uppercase tracking-[0.18em] mt-4">{calculator.guidance}</p>
         </motion.div>
 
-        {/* Calculator Grid */}
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Left: Controls */}
           <motion.div
@@ -134,28 +130,30 @@ const ROICalculator = () => {
                       <Euro className="w-5 h-5 text-gold-400" />
                     </div>
                     <div>
-                      <label className="text-white font-medium">Importo Investimento</label>
-                      <p className="text-charcoal-400 text-sm">Capitale iniziale</p>
+                      <label htmlFor="investment" className="text-white font-medium">
+                        {calculator.labels.amount.label}
+                      </label>
+                      <p className="text-charcoal-400 text-sm">{calculator.labels.amount.description}</p>
                     </div>
                   </div>
-                  <motion.span
-                    className="text-2xl font-display font-bold text-gold-400"
-                  >
-                    {useTransform(animatedInvestment, v => formatCurrency(v))}
+                  <motion.span className="text-2xl font-display font-bold text-gold-400">
+                    {useTransform(animatedInvestment, (v) => formatCurrency(v))}
                   </motion.span>
                 </div>
                 <input
+                  id="investment"
                   type="range"
-                  min="100000"
-                  max="2000000"
+                  min={calculator.labels.amount.format.min}
+                  max={calculator.labels.amount.format.max}
                   step="50000"
                   value={investment}
                   onChange={(e) => setInvestment(Number(e.target.value))}
                   className="w-full"
+                  aria-label="Regola l'importo dell'investimento"
                 />
                 <div className="flex justify-between text-xs text-charcoal-500 mt-2">
-                  <span>€100K</span>
-                  <span>€2M</span>
+                  <span>{calculator.labels.amount.minLabel}</span>
+                  <span>{calculator.labels.amount.maxLabel}</span>
                 </div>
               </SpotlightCard>
             </motion.div>
@@ -174,26 +172,28 @@ const ROICalculator = () => {
                       <Calendar className="w-5 h-5 text-gold-400" />
                     </div>
                     <div>
-                      <label className="text-white font-medium">Periodo Investimento</label>
-                      <p className="text-charcoal-400 text-sm">Anni fino all'uscita</p>
+                      <label htmlFor="years" className="text-white font-medium">
+                        {calculator.labels.years.label}
+                      </label>
+                      <p className="text-charcoal-400 text-sm">{calculator.labels.years.description}</p>
                     </div>
                   </div>
-                  <span className="text-2xl font-display font-bold text-gold-400">
-                    {years} anni
-                  </span>
+                  <span className="text-2xl font-display font-bold text-gold-400">{years} anni</span>
                 </div>
                 <input
+                  id="years"
                   type="range"
-                  min="1"
-                  max="10"
+                  min={calculator.labels.years.format.min}
+                  max={calculator.labels.years.format.max}
                   step="1"
                   value={years}
                   onChange={(e) => setYears(Number(e.target.value))}
                   className="w-full"
+                  aria-label="Regola la durata dell'investimento"
                 />
                 <div className="flex justify-between text-xs text-charcoal-500 mt-2">
-                  <span>1 anno</span>
-                  <span>10 anni</span>
+                  <span>{calculator.labels.years.minLabel}</span>
+                  <span>{calculator.labels.years.maxLabel}</span>
                 </div>
               </SpotlightCard>
             </motion.div>
@@ -212,26 +212,28 @@ const ROICalculator = () => {
                       <Percent className="w-5 h-5 text-gold-400" />
                     </div>
                     <div>
-                      <label className="text-white font-medium">ROI Previsto</label>
-                      <p className="text-charcoal-400 text-sm">Tasso di rendimento annuo</p>
+                      <label htmlFor="roi" className="text-white font-medium">
+                        {calculator.labels.roi.label}
+                      </label>
+                      <p className="text-charcoal-400 text-sm">{calculator.labels.roi.description}</p>
                     </div>
                   </div>
-                  <span className="text-2xl font-display font-bold text-gold-400">
-                    {roiRate}%
-                  </span>
+                  <span className="text-2xl font-display font-bold text-gold-400">{roiRate}%</span>
                 </div>
                 <input
+                  id="roi"
                   type="range"
-                  min="10"
-                  max="50"
+                  min={calculator.labels.roi.format.min}
+                  max={calculator.labels.roi.format.max}
                   step="5"
                   value={roiRate}
                   onChange={(e) => setRoiRate(Number(e.target.value))}
                   className="w-full"
+                  aria-label="Regola il ROI previsto"
                 />
                 <div className="flex justify-between text-xs text-charcoal-500 mt-2">
-                  <span>10%</span>
-                  <span>50%</span>
+                  <span>{calculator.labels.roi.minLabel}</span>
+                  <span>{calculator.labels.roi.maxLabel}</span>
                 </div>
               </SpotlightCard>
             </motion.div>
@@ -244,7 +246,6 @@ const ROICalculator = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="space-y-6"
           >
-            {/* Results Cards */}
             <div className="grid grid-cols-2 gap-4">
               <GlowingBorder className="glass rounded-2xl p-6" borderRadius="1rem">
                 <div className="flex items-center gap-2 mb-2">
@@ -252,7 +253,7 @@ const ROICalculator = () => {
                   <span className="text-charcoal-400 text-sm">Valore Proiettato</span>
                 </div>
                 <motion.div className="text-2xl md:text-3xl font-display font-bold text-white">
-                  {useTransform(animatedProjected, v => formatCurrency(v))}
+                  {useTransform(animatedProjected, (v) => formatCurrency(v))}
                 </motion.div>
               </GlowingBorder>
 
@@ -262,12 +263,11 @@ const ROICalculator = () => {
                   <span className="text-charcoal-400 text-sm">Rendimento Totale</span>
                 </div>
                 <motion.div className="text-2xl md:text-3xl font-display font-bold text-green-400">
-                  {useTransform(animatedReturn, v => `+${formatCurrency(v)}`)}
+                  {useTransform(animatedReturn, (v) => `+${formatCurrency(v)}`)}
                 </motion.div>
               </SpotlightCard>
             </div>
 
-            {/* Chart */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -283,11 +283,7 @@ const ROICalculator = () => {
                 </div>
 
                 <div className="relative h-64 w-full">
-                  <svg
-                    viewBox="0 0 100 100"
-                    preserveAspectRatio="none"
-                    className="w-full h-full"
-                  >
+                  <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full">
                     <defs>
                       <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="0%" stopColor="#c9902e" stopOpacity="0.4" />
@@ -295,7 +291,6 @@ const ROICalculator = () => {
                       </linearGradient>
                     </defs>
 
-                    {/* Grid lines */}
                     {[0, 25, 50, 75, 100].map((y) => (
                       <line
                         key={y}
@@ -308,7 +303,6 @@ const ROICalculator = () => {
                       />
                     ))}
 
-                    {/* Area fill */}
                     <motion.path
                       d={areaPath}
                       fill="url(#chartGradient)"
@@ -317,7 +311,6 @@ const ROICalculator = () => {
                       transition={{ duration: 1, delay: 0.8 }}
                     />
 
-                    {/* Line */}
                     <motion.path
                       d={chartPath}
                       fill="none"
@@ -330,7 +323,6 @@ const ROICalculator = () => {
                       transition={{ duration: 1.5, delay: 0.5, ease: 'easeInOut' }}
                     />
 
-                    {/* Data points */}
                     {chartData.map((point, index) => {
                       const x = (index / (chartData.length - 1)) * 100;
                       const y = 100 - (point.value / maxValue) * 80 - 10;
@@ -349,27 +341,29 @@ const ROICalculator = () => {
                     })}
                   </svg>
 
-                  {/* X-axis labels */}
                   <div className="absolute bottom-0 left-0 right-0 flex justify-between text-xs text-charcoal-500">
-                    {chartData.filter((_, i) => i % 2 === 0).map((point, index) => (
-                      <span key={index}>Anno {point.year}</span>
-                    ))}
+                    {chartData
+                      .filter((_, i) => i % 2 === 0)
+                      .map((point, index) => (
+                        <span key={index}>Anno {point.year}</span>
+                      ))}
                   </div>
                 </div>
               </SpotlightCard>
             </motion.div>
 
-            {/* CTA */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.8, duration: 0.8 }}
             >
               <MagneticButton
+                href="#contact"
                 className="w-full group relative py-4 bg-gradient-to-r from-gold-500 to-gold-600 text-charcoal-950 font-semibold rounded-xl overflow-hidden transition-all duration-300 hover:shadow-glow"
+                aria-label="Prenota una chiamata con i nostri consulenti"
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">
-                  Inizia il Tuo Percorso di Investimento
+                  {calculator.ctaLabel}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
               </MagneticButton>

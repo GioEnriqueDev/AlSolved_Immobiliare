@@ -1,5 +1,5 @@
 import { useRef, useState, type ReactNode, type CSSProperties } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
 interface SpotlightCardProps {
     children: ReactNode;
@@ -18,8 +18,11 @@ const SpotlightCard = ({
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [opacity, setOpacity] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
+    const prefersReducedMotion = useReducedMotion();
+    const isMotionEnabled = !prefersReducedMotion;
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!isMotionEnabled) return;
         if (!divRef.current) return;
         const rect = divRef.current.getBoundingClientRect();
         setPosition({
@@ -29,6 +32,7 @@ const SpotlightCard = ({
     };
 
     const handleMouseEnter = () => {
+        if (!isMotionEnabled) return;
         setOpacity(1);
         setIsHovered(true);
     };
@@ -44,10 +48,11 @@ const SpotlightCard = ({
             onMouseMove={handleMouseMove}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            role="group"
             className={`relative overflow-hidden ${className}`}
             style={style}
-            whileHover={{ scale: 1.02, y: -5 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+            whileHover={isMotionEnabled ? { scale: 1.02, y: -5 } : {}}
+            transition={isMotionEnabled ? { type: 'spring', stiffness: 400, damping: 17 } : { duration: 0 }}
         >
             {/* Spotlight effect */}
             <div

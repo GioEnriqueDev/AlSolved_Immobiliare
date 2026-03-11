@@ -2,18 +2,14 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import MagneticButton from './MagneticButton';
+import { navLinks, brand } from '../../data/siteContent';
 
-const navLinks = [
-  { label: 'Home', href: '#hero' },
-  { label: 'Calcolatore', href: '#calculator' },
-  { label: 'Progetti', href: '#projects' },
-  { label: 'Chi Siamo', href: '#about' },
-  { label: 'Contatti', href: '#contact' },
-];
+const contactHref = '#contact';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const mobileMenuId = 'mobile-navigation-menu';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,9 +20,23 @@ const Navigation = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isMobileMenuOpen]);
+
   return (
     <>
       <motion.nav
+        role="navigation"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.8, delay: 0.5 }}
@@ -41,6 +51,7 @@ const Navigation = () => {
             <motion.a
               href="#hero"
               className="flex items-center gap-3"
+              aria-label={`Torna alla home di ${brand.name}`}
               whileHover={{ scale: 1.02 }}
             >
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center shadow-glow">
@@ -58,6 +69,7 @@ const Navigation = () => {
                   key={link.label}
                   href={link.href}
                   className="text-sm text-charcoal-300 hover:text-white transition-colors relative group"
+                  aria-label={`Vai a ${link.label}`}
                   whileHover={{ y: -2 }}
                 >
                   {link.label}
@@ -68,14 +80,22 @@ const Navigation = () => {
 
             {/* CTA Button */}
             <div className="hidden md:block">
-              <MagneticButton className="px-6 py-2.5 bg-gold-500 text-charcoal-950 text-sm font-semibold rounded-full hover:shadow-glow transition-all duration-300">
+              <MagneticButton
+                href={contactHref}
+                className="px-6 py-2.5 bg-gold-500 text-charcoal-950 text-sm font-semibold rounded-full hover:shadow-glow transition-all duration-300"
+                aria-label="Vai alla sezione contatti"
+              >
                 Contattaci
               </MagneticButton>
             </div>
 
             {/* Mobile Menu Button */}
             <button
+              type="button"
               className="md:hidden w-10 h-10 glass rounded-xl flex items-center justify-center border border-white/10"
+              aria-expanded={isMobileMenuOpen}
+              aria-controls={mobileMenuId}
+              aria-label={isMobileMenuOpen ? 'Chiudi menu navigazione' : 'Apri menu navigazione'}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               {isMobileMenuOpen ? (
@@ -92,11 +112,14 @@ const Navigation = () => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
+            id={mobileMenuId}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-40 md:hidden"
+            role="dialog"
+            aria-modal="true"
           >
             <div className="absolute inset-0 bg-charcoal-950/95 backdrop-blur-xl" />
             <div className="relative h-full flex flex-col items-center justify-center gap-8">
@@ -107,6 +130,7 @@ const Navigation = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
+                  aria-label={`Vai a ${link.label}`}
                   className="text-2xl font-display text-white"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -118,7 +142,11 @@ const Navigation = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
               >
-                <MagneticButton className="px-8 py-3 bg-gold-500 text-charcoal-950 font-semibold rounded-full">
+                <MagneticButton
+                  href={contactHref}
+                  className="px-8 py-3 bg-gold-500 text-charcoal-950 font-semibold rounded-full"
+                  aria-label="Vai alla sezione contatti"
+                >
                   Contattaci
                 </MagneticButton>
               </motion.div>
