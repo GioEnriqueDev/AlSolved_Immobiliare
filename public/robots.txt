@@ -1,4 +1,2 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://gioenriquedev.github.io/AlSolved_Immobiliare/sitemap.xml

@@ -4,8 +4,7 @@ import { defineConfig } from "vite"
 
 // https://vite.dev/config/
 export default defineConfig({
-  // Per GitHub Pages: usa il nome del repository come base path
-  base: '/AlSolved_Immobiliare/',
+  base: './',
   plugins: [react()],
   resolve: {
     alias: {
