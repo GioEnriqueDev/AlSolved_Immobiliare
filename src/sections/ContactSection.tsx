@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { ArrowRight, Clock3, Mail, MapPin, Phone } from 'lucide-react';
-import { contact, seller, type FormField } from '../data/siteContent';
+import { contact, routes, seller, type FormField } from '../data/siteContent';
 import MagneticButton from '../components/custom/MagneticButton';
 
 type SellerFormValues = {
@@ -186,7 +186,7 @@ const ContactSection = () => {
                 </p>
               </div>
               <MagneticButton
-                href="#hero"
+                href={routes.home}
                 className="inline-flex rounded-full border border-white/10 bg-black/30 px-5 py-2.5 text-sm text-white"
                 aria-label="Torna all inizio della pagina"
               >

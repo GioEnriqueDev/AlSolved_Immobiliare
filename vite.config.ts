@@ -14,6 +14,13 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        about: path.resolve(__dirname, 'chi-siamo.html'),
+        projects: path.resolve(__dirname, 'progetti.html'),
+        invest: path.resolve(__dirname, 'investi-con-noi.html'),
+        sell: path.resolve(__dirname, 'vendi-il-tuo-immobile.html'),
+      },
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],

@@ -50,6 +50,13 @@ export interface FormField {
   options?: FieldOption[];
 }
 
+export interface OverviewCard {
+  title: string;
+  description: string;
+  href: string;
+  label: string;
+}
+
 export const brand = {
   name: 'Leone Group Immobiliare',
   shortName: 'Leone Group',
@@ -62,11 +69,19 @@ export const brand = {
   year: new Date().getFullYear(),
 };
 
+export const routes = {
+  home: './',
+  about: './chi-siamo.html',
+  projects: './progetti.html',
+  invest: './investi-con-noi.html',
+  sell: './vendi-il-tuo-immobile.html',
+};
+
 export const navLinks: NavItem[] = [
-  { label: 'Chi Siamo', href: '#about' },
-  { label: 'Progetti', href: '#projects' },
-  { label: 'Investi con Noi', href: '#invest' },
-  { label: 'Vendi il tuo immobile', href: '#sell' },
+  { label: 'Chi Siamo', href: routes.about },
+  { label: 'Progetti', href: routes.projects },
+  { label: 'Investi con Noi', href: routes.invest },
+  { label: 'Vendi il tuo immobile', href: routes.sell },
 ];
 
 export const hero = {
@@ -92,14 +107,78 @@ export const hero = {
   ctas: {
     primary: {
       label: 'Scopri i progetti',
-      href: '#projects',
+      href: routes.projects,
     },
     secondary: {
       label: 'Investi con noi',
-      href: '#invest',
+      href: routes.invest,
     },
   },
   scrollHint: 'Scorri',
+};
+
+export const homeOverview = {
+  badge: 'Architettura SEO',
+  title: 'Una home piu essenziale e pagine istituzionali dedicate.',
+  description:
+    'La struttura e pensata per distribuire i contenuti su piu pagine strategiche: migliore leggibilita, piu profondita editoriale e una base piu solida per il posizionamento organico.',
+  cards: [
+    {
+      title: 'Chi Siamo',
+      description:
+        'Mission, posizionamento, processo operativo e visione della societa in una pagina istituzionale dedicata.',
+      href: routes.about,
+      label: 'Vai alla pagina',
+    },
+    {
+      title: 'Progetti',
+      description:
+        'Track record, numeri in evidenza, operazioni concluse e in pipeline con un taglio piu credibile e trasparente.',
+      href: routes.projects,
+      label: 'Scopri i progetti',
+    },
+    {
+      title: 'Investi con Noi',
+      description:
+        'Modello di business, vantaggi, modalita operative, simulatore e form dedicato per lead di investimento.',
+      href: routes.invest,
+      label: 'Apri la pagina investitori',
+    },
+    {
+      title: 'Vendi il tuo immobile',
+      description:
+        'Landing dedicata alla lead generation con form strutturato, promessa di risposta rapida e focus sul target immobiliare corretto.',
+      href: routes.sell,
+      label: 'Richiedi valutazione',
+    },
+  ] as OverviewCard[],
+};
+
+export const pageHeaders = {
+  about: {
+    badge: 'Pagina istituzionale',
+    title: 'Chi Siamo',
+    description:
+      'Una pagina dedicata a identita, metodo di lavoro, autorevolezza e posizionamento della Leone Group Immobiliare.',
+  },
+  projects: {
+    badge: 'Track record',
+    title: 'Progetti',
+    description:
+      'Una pagina pensata per mostrare numeri, operazioni, risultati e credibilita del gruppo in modo ordinato e misurabile.',
+  },
+  invest: {
+    badge: 'Investor relations',
+    title: 'Investi con Noi',
+    description:
+      'Una pagina specifica per investitori con business model, vantaggi competitivi, simulatore indicativo e richiesta dossier.',
+  },
+  sell: {
+    badge: 'Lead generation',
+    title: 'Vendi il tuo immobile',
+    description:
+      'Una landing istituzionale dedicata ai proprietari che desiderano ricevere una valutazione e capire la soluzione piu adatta.',
+  },
 };
 
 export const about = {
@@ -172,7 +251,7 @@ export const projectSection = {
     'Le schede progetto sono impostate come layout dimostrativo e possono essere aggiornate con i dati reali delle vostre operazioni concluse e in corso.',
   showcaseCta: {
     label: 'Richiedi portfolio e documentazione',
-    href: '#invest',
+    href: routes.invest,
   },
 };
 
@@ -422,10 +501,11 @@ export const socialLinks: SocialLink[] = [];
 
 export const footer = {
   quickLinks: [
-    { label: 'Chi Siamo', href: '#about' },
-    { label: 'Progetti', href: '#projects' },
-    { label: 'Investi con Noi', href: '#invest' },
-    { label: 'Vendi il tuo immobile', href: '#sell' },
+    { label: 'Home', href: routes.home },
+    { label: 'Chi Siamo', href: routes.about },
+    { label: 'Progetti', href: routes.projects },
+    { label: 'Investi con Noi', href: routes.invest },
+    { label: 'Vendi il tuo immobile', href: routes.sell },
   ] as NavItem[],
   legal: [
     { label: 'Privacy Policy', href: '#privacy' },

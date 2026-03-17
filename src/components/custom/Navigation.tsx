@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import MagneticButton from './MagneticButton';
-import { navLinks, brand } from '../../data/siteContent';
+import { navLinks, brand, routes } from '../../data/siteContent';
 
-const contactHref = '#sell';
+interface NavigationProps {
+  currentPath: string;
+}
 
-const Navigation = () => {
+const Navigation = ({ currentPath }: NavigationProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const mobileMenuId = 'mobile-navigation-menu';
@@ -51,7 +53,7 @@ const Navigation = () => {
         <div className="mx-auto max-w-7xl px-6 sm:px-12 lg:px-24">
           <div className="flex items-center justify-between gap-6">
             <motion.a
-              href="#hero"
+              href={routes.home}
               className="flex items-center gap-3"
               aria-label={`Torna alla home di ${brand.name}`}
               whileHover={{ scale: 1.01 }}
@@ -66,23 +68,29 @@ const Navigation = () => {
             </motion.a>
 
             <div className="hidden items-center gap-8 md:flex">
-              {navLinks.map((link) => (
-                <motion.a
-                  key={link.label}
-                  href={link.href}
-                  className="group relative text-sm text-charcoal-300 transition-colors hover:text-white"
-                  aria-label={`Vai a ${link.label}`}
-                  whileHover={{ y: -2 }}
-                >
-                  {link.label}
-                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-gold-400 transition-all duration-300 group-hover:w-full" />
-                </motion.a>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = link.href === currentPath;
+
+                return (
+                  <motion.a
+                    key={link.label}
+                    href={link.href}
+                    className={`group relative text-sm transition-colors ${
+                      isActive ? 'text-white' : 'text-charcoal-300 hover:text-white'
+                    }`}
+                    aria-label={`Vai a ${link.label}`}
+                    whileHover={{ y: -2 }}
+                  >
+                    {link.label}
+                    <span className={`absolute -bottom-1 left-0 h-px bg-gold-400 transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+                  </motion.a>
+                );
+              })}
             </div>
 
             <div className="hidden md:block">
               <MagneticButton
-                href={contactHref}
+                href={routes.sell}
                 className="rounded-full bg-gold-500 px-6 py-2.5 text-sm font-semibold text-charcoal-950 transition-all duration-300 hover:shadow-glow"
                 aria-label="Vai alla sezione per vendere il tuo immobile"
               >
@@ -134,7 +142,7 @@ const Navigation = () => {
               ))}
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
                 <MagneticButton
-                  href={contactHref}
+                  href={routes.sell}
                   className="rounded-full bg-gold-500 px-8 py-3 font-semibold text-charcoal-950"
                   aria-label="Vai alla sezione per vendere il tuo immobile"
                   onClick={closeMenu}
