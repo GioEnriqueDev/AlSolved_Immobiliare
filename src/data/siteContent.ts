@@ -248,7 +248,7 @@ export const projectSection = {
     { value: '5.000+', label: 'Metri cubi riqualificati', detail: 'Recupero volumetrico e nuova qualita degli spazi.' },
   ] as StatItem[],
   portfolioNote:
-    'Le schede progetto sono impostate come layout dimostrativo e possono essere aggiornate con i dati reali delle vostre operazioni concluse e in corso.',
+    'Su richiesta condividiamo maggiori dettagli sulle operazioni concluse, sui progetti in corso e sulle opportunita attualmente in valutazione.',
   showcaseCta: {
     label: 'Richiedi portfolio e documentazione',
     href: routes.invest,
