@@ -64,7 +64,7 @@ export const brand = {
   tagline: 'Sviluppo immobiliare, riqualificazione urbana e valorizzazione di immobili residenziali e direzionali.',
   description:
     'Rigeneriamo immobili datati, sottoutilizzati o non piu in linea con il mercato, trasformandoli in asset moderni, funzionali e ad alto valore aggiunto.',
-  logoSrc: './leone-group-logo.png',
+  logoSrc: './leone-luxury-logo.png',
   logoAlt: 'Logo Leone Group Immobiliare',
   year: new Date().getFullYear(),
 };
