@@ -4,7 +4,7 @@ import { Menu, X } from 'lucide-react';
 import MagneticButton from './MagneticButton';
 import { navLinks, brand } from '../../data/siteContent';
 
-const contactHref = '#contact';
+const contactHref = '#sell';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -13,7 +13,7 @@ const Navigation = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100);
+      setIsScrolled(window.scrollY > 80);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -33,82 +33,77 @@ const Navigation = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isMobileMenuOpen]);
 
+  const closeMenu = () => setIsMobileMenuOpen(false);
+
   return (
     <>
       <motion.nav
         role="navigation"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.8, delay: 0.5 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-            ? 'py-4 backdrop-blur-xl bg-charcoal-950/80 border-b border-white/5'
-            : 'py-6 bg-transparent'
-          }`}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        className={`fixed left-0 right-0 top-0 z-50 transition-all duration-500 ${
+          isScrolled
+            ? 'border-b border-white/5 bg-charcoal-950/85 py-4 backdrop-blur-xl'
+            : 'bg-transparent py-6'
+        }`}
       >
-        <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-24">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
+        <div className="mx-auto max-w-7xl px-6 sm:px-12 lg:px-24">
+          <div className="flex items-center justify-between gap-6">
             <motion.a
               href="#hero"
               className="flex items-center gap-3"
               aria-label={`Torna alla home di ${brand.name}`}
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.01 }}
             >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center shadow-glow">
-                <span className="text-charcoal-950 font-display font-bold text-lg">L</span>
+              <div className="rounded-2xl border border-white/10 bg-charcoal-900/90 p-1.5 shadow-glow">
+                <img src={brand.logoSrc} alt={brand.logoAlt} className="h-10 w-auto rounded-xl object-contain sm:h-12" />
               </div>
-              <span className="font-serif text-xl text-white hidden sm:block">
-                Leone Group
-              </span>
+              <div className="hidden sm:block">
+                <p className="font-serif text-lg text-white">{brand.shortName}</p>
+                <p className="text-xs uppercase tracking-[0.22em] text-charcoal-400">Immobiliare</p>
+              </div>
             </motion.a>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
+            <div className="hidden items-center gap-8 md:flex">
               {navLinks.map((link) => (
                 <motion.a
                   key={link.label}
                   href={link.href}
-                  className="text-sm text-charcoal-300 hover:text-white transition-colors relative group"
+                  className="group relative text-sm text-charcoal-300 transition-colors hover:text-white"
                   aria-label={`Vai a ${link.label}`}
                   whileHover={{ y: -2 }}
                 >
                   {link.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold-400 group-hover:w-full transition-all duration-300" />
+                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-gold-400 transition-all duration-300 group-hover:w-full" />
                 </motion.a>
               ))}
             </div>
 
-            {/* CTA Button */}
             <div className="hidden md:block">
               <MagneticButton
                 href={contactHref}
-                className="px-6 py-2.5 bg-gold-500 text-charcoal-950 text-sm font-semibold rounded-full hover:shadow-glow transition-all duration-300"
-                aria-label="Vai alla sezione contatti"
+                className="rounded-full bg-gold-500 px-6 py-2.5 text-sm font-semibold text-charcoal-950 transition-all duration-300 hover:shadow-glow"
+                aria-label="Vai alla sezione per vendere il tuo immobile"
               >
-                Contattaci
+                Richiedi valutazione
               </MagneticButton>
             </div>
 
-            {/* Mobile Menu Button */}
             <button
               type="button"
-              className="md:hidden w-10 h-10 glass rounded-xl flex items-center justify-center border border-white/10"
+              className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 md:hidden"
               aria-expanded={isMobileMenuOpen}
               aria-controls={mobileMenuId}
               aria-label={isMobileMenuOpen ? 'Chiudi menu navigazione' : 'Apri menu navigazione'}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              onClick={() => setIsMobileMenuOpen((current) => !current)}
             >
-              {isMobileMenuOpen ? (
-                <X className="w-5 h-5 text-white" />
-              ) : (
-                <Menu className="w-5 h-5 text-white" />
-              )}
+              {isMobileMenuOpen ? <X className="h-5 w-5 text-white" /> : <Menu className="h-5 w-5 text-white" />}
             </button>
           </div>
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -122,32 +117,29 @@ const Navigation = () => {
             aria-modal="true"
           >
             <div className="absolute inset-0 bg-charcoal-950/95 backdrop-blur-xl" />
-            <div className="relative h-full flex flex-col items-center justify-center gap-8">
+            <div className="relative flex h-full flex-col items-center justify-center gap-8 px-6 text-center">
               {navLinks.map((link, index) => (
                 <motion.a
                   key={link.label}
                   href={link.href}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ delay: index * 0.08 }}
                   aria-label={`Vai a ${link.label}`}
-                  className="text-2xl font-display text-white"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="font-display text-2xl text-white"
+                  onClick={closeMenu}
                 >
                   {link.label}
                 </motion.a>
               ))}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-              >
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
                 <MagneticButton
                   href={contactHref}
-                  className="px-8 py-3 bg-gold-500 text-charcoal-950 font-semibold rounded-full"
-                  aria-label="Vai alla sezione contatti"
+                  className="rounded-full bg-gold-500 px-8 py-3 font-semibold text-charcoal-950"
+                  aria-label="Vai alla sezione per vendere il tuo immobile"
+                  onClick={closeMenu}
                 >
-                  Contattaci
+                  Richiedi valutazione
                 </MagneticButton>
               </motion.div>
             </div>

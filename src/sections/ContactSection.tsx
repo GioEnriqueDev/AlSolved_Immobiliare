@@ -1,78 +1,168 @@
-﻿import { useState, type FormEvent } from 'react';
-import { Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
-import { contact } from '../data/siteContent';
+import { useState, type FormEvent } from 'react';
+import { ArrowRight, Clock3, Mail, MapPin, Phone } from 'lucide-react';
+import { contact, seller, type FormField } from '../data/siteContent';
 import MagneticButton from '../components/custom/MagneticButton';
 
+type SellerFormValues = {
+  name: string;
+  email: string;
+  phone: string;
+  squareMeters: string;
+  address: string;
+  floor: string;
+  condition: string;
+  notes: string;
+};
+
+const initialFormValues: SellerFormValues = {
+  name: '',
+  email: '',
+  phone: '',
+  squareMeters: '',
+  address: '',
+  floor: '',
+  condition: '',
+  notes: '',
+};
+
+const fieldClassName =
+  'mt-2 w-full rounded-2xl border border-white/10 bg-charcoal-900 px-4 py-3 text-white outline-none ring-gold-400 focus-visible:ring-2';
+
 const ContactSection = () => {
-  const [formValues, setFormValues] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
-  });
+  const [formValues, setFormValues] = useState<SellerFormValues>(initialFormValues);
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    const messageSent = formValues.name.trim() && formValues.email.trim() && formValues.message.trim();
-    setStatus(messageSent ? 'success' : 'error');
 
-    if (messageSent) {
-      setFormValues({
-        name: '',
-        email: '',
-        phone: '',
-        message: '',
-      });
+    const isValid =
+      formValues.name.trim() &&
+      formValues.email.trim() &&
+      formValues.phone.trim() &&
+      formValues.squareMeters.trim() &&
+      formValues.address.trim() &&
+      formValues.floor.trim() &&
+      formValues.condition.trim();
+
+    setStatus(isValid ? 'success' : 'error');
+
+    if (isValid) {
+      setFormValues(initialFormValues);
     }
   };
 
+  const renderField = (fieldId: keyof SellerFormValues, field: FormField) => {
+    if (field.type === 'textarea') {
+      return (
+        <textarea
+          id={fieldId}
+          rows={4}
+          value={formValues[fieldId]}
+          placeholder={field.placeholder}
+          className={fieldClassName}
+          onChange={(event) => setFormValues((current) => ({ ...current, [fieldId]: event.target.value }))}
+          required={field.required}
+        />
+      );
+    }
+
+    if (field.type === 'select') {
+      return (
+        <select
+          id={fieldId}
+          value={formValues[fieldId]}
+          className={fieldClassName}
+          onChange={(event) => setFormValues((current) => ({ ...current, [fieldId]: event.target.value }))}
+          required={field.required}
+        >
+          <option value="">{field.placeholder}</option>
+          {field.options?.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      );
+    }
+
+    return (
+      <input
+        id={fieldId}
+        type={field.type}
+        value={formValues[fieldId]}
+        placeholder={field.placeholder}
+        className={fieldClassName}
+        onChange={(event) => setFormValues((current) => ({ ...current, [fieldId]: event.target.value }))}
+        required={field.required}
+      />
+    );
+  };
+
   return (
-    <section className="py-24 px-6 sm:px-12 lg:px-24 bg-black" id={contact.id}>
-      <div className="max-w-7xl mx-auto">
-        <div className="grid gap-12 lg:grid-cols-2">
+    <section className="bg-black px-6 py-24 sm:px-12 lg:px-24" id={seller.id}>
+      <div className="mx-auto max-w-7xl">
+        <div className="grid gap-12 xl:grid-cols-[0.92fr,1.08fr]">
           <div>
-            <p className="text-gold-300 text-xs tracking-[0.2em] uppercase mb-4">Contatti</p>
-            <h2 className="font-display text-4xl sm:text-5xl font-bold text-white mb-6">{contact.title}</h2>
-            <p className="text-charcoal-300 text-lg mb-4">{contact.subtitle}</p>
-            <p className="text-charcoal-400 mb-10">{contact.description}</p>
+            <p className="mb-4 text-xs uppercase tracking-[0.26em] text-gold-300">{seller.badge}</p>
+            <h2 className="font-display text-4xl font-bold text-white sm:text-5xl">{seller.title}</h2>
+            <p className="mt-6 text-lg leading-relaxed text-charcoal-300">{seller.subtitle}</p>
+            <p className="mt-4 text-base leading-relaxed text-charcoal-400">{seller.description}</p>
 
-            <a
-              href={`mailto:${contact.details.email}`}
-              id="contact-mail"
-              className="inline-flex items-center gap-3 text-gold-300 font-medium mb-8 underline underline-offset-4"
-              aria-label={`Scrivi direttamente a ${contact.details.email}`}
-            >
-              <Mail className="w-4 h-4" />
-              {contact.ctaSecondary.label}
-            </a>
+            <div className="mt-8 rounded-[2rem] border border-gold-500/20 bg-gold-500/10 p-6">
+              <div className="flex items-center gap-3">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gold-500 text-charcoal-950">
+                  <Clock3 className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="text-xs uppercase tracking-[0.22em] text-gold-200">Valutazione rapida</p>
+                  <p className="mt-1 text-lg font-semibold text-white">Risposta entro 24 ore</p>
+                </div>
+              </div>
+              <p className="mt-4 text-sm leading-relaxed text-charcoal-200">
+                Il form e pensato per raccogliere subito le informazioni chiave e accelerare la valutazione preliminare dell immobile.
+              </p>
+            </div>
 
-            <div className="space-y-4">
+            <div className="mt-8 grid gap-4">
+              {seller.offers.map((offer) => (
+                <div key={offer.title} className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+                  <p className="text-xs uppercase tracking-[0.22em] text-gold-300">{offer.title}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-charcoal-300">{offer.text}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-8 rounded-[2rem] border border-white/10 bg-charcoal-900/75 p-6">
+              <p className="text-xs uppercase tracking-[0.22em] text-gold-300">Lead generation</p>
+              <p className="mt-3 text-sm leading-relaxed text-charcoal-400">{seller.campaignNote}</p>
+            </div>
+
+            <div className="mt-8 space-y-4">
               <a
                 href={`tel:${contact.details.phone.replace(/\s+/g, '')}`}
-                className="flex items-center gap-3 text-charcoal-200 hover:text-white"
+                className="flex items-center gap-3 text-charcoal-200 transition-colors hover:text-white"
                 aria-label={`Chiama ${contact.details.phone}`}
               >
-                <span className="w-10 h-10 rounded-xl glass flex items-center justify-center">
-                  <Phone className="w-4 h-4" />
+                <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
+                  <Phone className="h-4 w-4" />
                 </span>
                 <span>{contact.details.phone}</span>
               </a>
 
               <a
                 href={`mailto:${contact.details.email}`}
-                className="flex items-center gap-3 text-charcoal-200 hover:text-white"
-                aria-label={`Scrivi un'e-mail a ${contact.details.email}`}
+                className="flex items-center gap-3 text-charcoal-200 transition-colors hover:text-white"
+                aria-label={`Scrivi a ${contact.details.email}`}
               >
-                <span className="w-10 h-10 rounded-xl glass flex items-center justify-center">
-                  <Mail className="w-4 h-4" />
+                <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
+                  <Mail className="h-4 w-4" />
                 </span>
                 <span>{contact.details.email}</span>
               </a>
 
               <p className="flex items-start gap-3 text-charcoal-200">
-                <span className="w-10 h-10 rounded-xl glass flex items-center justify-center shrink-0">
-                  <MapPin className="w-4 h-4" />
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
+                  <MapPin className="h-4 w-4" />
                 </span>
                 <span>
                   {contact.details.addressLine1}
@@ -84,96 +174,71 @@ const ContactSection = () => {
           </div>
 
           <form
-            id="contact-form"
             onSubmit={handleSubmit}
-            className="glass border border-white/10 rounded-3xl p-6 sm:p-8 space-y-5"
+            className="rounded-[2rem] border border-white/10 bg-white/5 p-6 backdrop-blur-xl sm:p-8"
             noValidate
-            aria-live="polite"
           >
-            <h3 className="text-white text-2xl font-display font-bold">{contact.form.title}</h3>
+            <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <h3 className="font-display text-2xl font-bold text-white">{seller.form.title}</h3>
+                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-charcoal-400">
+                  Compila il form con i dati essenziali del tuo immobile: ti ricontatteremo con una prima valutazione e la soluzione piu adatta.
+                </p>
+              </div>
+              <MagneticButton
+                href="#hero"
+                className="inline-flex rounded-full border border-white/10 bg-black/30 px-5 py-2.5 text-sm text-white"
+                aria-label="Torna all inizio della pagina"
+              >
+                Torna su
+              </MagneticButton>
+            </div>
 
-            <label className="block text-sm" htmlFor="contact-name">
-              <span className="text-charcoal-300">{contact.form.fields.name.label}</span>
-              <input
-                id="contact-name"
-                name="contact-name"
-                type="text"
-                value={formValues.name}
-                placeholder={contact.form.fields.name.placeholder}
-                autoComplete="name"
-                className="mt-2 w-full rounded-xl border border-white/10 bg-charcoal-900 px-4 py-3 text-white outline-none focus-visible:ring-2 ring-gold-400"
-                onChange={(event) => setFormValues((prev) => ({ ...prev, name: event.target.value }))}
-                required
-              />
-            </label>
+            <div className="grid gap-4 md:grid-cols-2">
+              {(Object.entries(seller.form.fields) as Array<[keyof SellerFormValues, FormField]>).map(([fieldId, field]) => (
+                <label
+                  key={fieldId}
+                  className={`block text-sm ${field.type === 'textarea' ? 'md:col-span-2' : ''}`}
+                  htmlFor={fieldId}
+                >
+                  <span className="text-charcoal-300">{field.label}</span>
+                  {renderField(fieldId, field)}
+                </label>
+              ))}
+            </div>
 
-            <label className="block text-sm" htmlFor="contact-email">
-              <span className="text-charcoal-300">{contact.form.fields.email.label}</span>
-              <input
-                id="contact-email"
-                name="contact-email"
-                type="email"
-                value={formValues.email}
-                placeholder={contact.form.fields.email.placeholder}
-                autoComplete="email"
-                inputMode="email"
-                className="mt-2 w-full rounded-xl border border-white/10 bg-charcoal-900 px-4 py-3 text-white outline-none focus-visible:ring-2 ring-gold-400"
-                onChange={(event) => setFormValues((prev) => ({ ...prev, email: event.target.value }))}
-                required
-              />
-            </label>
+            <div className="mt-6 rounded-3xl border border-white/10 bg-charcoal-900/70 p-5">
+              <p className="text-sm leading-relaxed text-charcoal-300">
+                Obiettivo della pagina: intercettare proprietari di immobili di grande metratura, raccogliere lead qualificate e trasformarle in opportunita di acquisizione, vendita o valorizzazione.
+              </p>
+            </div>
 
-            <label className="block text-sm" htmlFor="contact-phone">
-              <span className="text-charcoal-300">{contact.form.fields.phone.label}</span>
-              <input
-                id="contact-phone"
-                name="contact-phone"
-                type="tel"
-                value={formValues.phone}
-                placeholder={contact.form.fields.phone.placeholder}
-                autoComplete="tel"
-                inputMode="tel"
-                className="mt-2 w-full rounded-xl border border-white/10 bg-charcoal-900 px-4 py-3 text-white outline-none focus-visible:ring-2 ring-gold-400"
-                onChange={(event) => setFormValues((prev) => ({ ...prev, phone: event.target.value }))}
-              />
-            </label>
+            <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <button
+                type="submit"
+                className="group inline-flex items-center justify-center gap-2 rounded-2xl bg-gold-500 px-6 py-3 font-semibold text-charcoal-950 transition hover:shadow-glow"
+              >
+                {seller.form.button}
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </button>
 
-            <label className="block text-sm" htmlFor="contact-message">
-              <span className="text-charcoal-300">{contact.form.fields.message.label}</span>
-              <textarea
-                id="contact-message"
-                name="contact-message"
-                value={formValues.message}
-                placeholder={contact.form.fields.message.placeholder}
-                rows={4}
-                className="mt-2 w-full rounded-xl border border-white/10 bg-charcoal-900 px-4 py-3 text-white outline-none focus-visible:ring-2 ring-gold-400 resize-y"
-                onChange={(event) => setFormValues((prev) => ({ ...prev, message: event.target.value }))}
-                required
-              />
-            </label>
-
-            <MagneticButton
-              type="submit"
-              className="w-full group bg-gradient-to-r from-gold-500 to-gold-600 rounded-xl py-3 text-charcoal-950 font-semibold"
-              aria-label="Invia la tua richiesta"
-            >
-              <span className="inline-flex items-center justify-center gap-2">
-                {contact.form.button}
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </span>
-            </MagneticButton>
-
-            <p
-              className={`text-sm ${status === 'success' ? 'text-green-400' : status === 'error' ? 'text-red-400' : 'text-charcoal-400'}`}
-              role="status"
-              aria-live="polite"
-            >
-              {status === 'success'
-                ? 'Grazie, abbiamo ricevuto la tua richiesta. Ti contatteremo al più presto.'
-                : status === 'error'
-                  ? 'Compila almeno nome, email e messaggio per inviare la richiesta.'
-                  : 'I dati vengono trattati per contattarci con te in merito alla tua richiesta.'}
-            </p>
+              <p
+                className={`text-sm ${
+                  status === 'success'
+                    ? 'text-green-400'
+                    : status === 'error'
+                      ? 'text-red-400'
+                      : 'text-charcoal-400'
+                }`}
+                role="status"
+              >
+                {status === 'success'
+                  ? 'Richiesta inviata. Ti contatteremo entro 24 ore con una prima valutazione.'
+                  : status === 'error'
+                    ? 'Compila tutti i campi obbligatori per inviare la richiesta.'
+                    : 'I dati vengono utilizzati solo per la valutazione dell immobile e il successivo ricontatto.'}
+              </p>
+            </div>
           </form>
         </div>
       </div>
@@ -182,5 +247,3 @@ const ContactSection = () => {
 };
 
 export default ContactSection;
-
-

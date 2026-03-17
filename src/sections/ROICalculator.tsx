@@ -1,19 +1,33 @@
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
 import { motion, useInView, useSpring, useTransform } from 'framer-motion';
-import { TrendingUp, Percent, Calendar, ArrowRight, Sparkles, Euro } from 'lucide-react';
+import {
+  ArrowRight,
+  BarChart3,
+  Calendar,
+  Euro,
+  FileText,
+  Percent,
+  ShieldCheck,
+  TrendingUp,
+} from 'lucide-react';
 import MagneticButton from '../components/custom/MagneticButton';
-import SpotlightCard from '../components/custom/SpotlightCard';
-import GlowingBorder from '../components/custom/GlowingBorder';
-import TextReveal from '../components/custom/TextReveal';
-import { calculator } from '../data/siteContent';
+import { calculator, invest } from '../data/siteContent';
 
 const ROICalculator = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: '-100px' });
 
   const [investment, setInvestment] = useState(500000);
-  const [years, setYears] = useState(5);
-  const [roiRate, setRoiRate] = useState(35);
+  const [years, setYears] = useState(4);
+  const [roiRate, setRoiRate] = useState(30);
+  const [investorForm, setInvestorForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    capital: '',
+    message: '',
+  });
+  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const projectedValue = investment * Math.pow(1 + roiRate / 100, years);
   const totalReturn = projectedValue - investment;
@@ -28,32 +42,35 @@ const ROICalculator = () => {
     animatedReturn.set(totalReturn);
   }, [investment, projectedValue, totalReturn, animatedInvestment, animatedProjected, animatedReturn]);
 
-  const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat('it-IT', {
+  const formatCurrency = (value: number) =>
+    new Intl.NumberFormat('it-IT', {
       style: 'currency',
       currency: 'EUR',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(value);
-  };
 
-  const chartData = useMemo(() => {
-    const points = [];
-    for (let i = 0; i <= years; i++) {
-      const value = investment * Math.pow(1 + roiRate / 100, i);
-      points.push({ year: i, value });
-    }
-    return points;
-  }, [investment, roiRate, years]);
+  const formattedInvestment = useTransform(animatedInvestment, formatCurrency);
+  const formattedProjected = useTransform(animatedProjected, formatCurrency);
+  const formattedReturn = useTransform(animatedReturn, (value) => `+${formatCurrency(value)}`);
 
-  const maxValue = useMemo(() => Math.max(...chartData.map((d) => d.value)), [chartData]);
+  const chartData = useMemo(
+    () =>
+      Array.from({ length: years + 1 }, (_, index) => ({
+        year: index,
+        value: investment * Math.pow(1 + roiRate / 100, index),
+      })),
+    [investment, roiRate, years]
+  );
+
+  const maxValue = useMemo(() => Math.max(...chartData.map((point) => point.value)), [chartData]);
 
   const chartPath = useMemo(
     () =>
       chartData
         .map((point, index) => {
-          const x = (index / (chartData.length - 1)) * 100;
-          const y = 100 - (point.value / maxValue) * 80 - 10;
+          const x = chartData.length === 1 ? 0 : (index / (chartData.length - 1)) * 100;
+          const y = 100 - (point.value / maxValue) * 78 - 10;
           return `${index === 0 ? 'M' : 'L'} ${x} ${y}`;
         })
         .join(' '),
@@ -62,313 +79,435 @@ const ROICalculator = () => {
 
   const areaPath = `${chartPath} L 100 100 L 0 100 Z`;
 
-  const sliderVariants = {
-    hidden: { opacity: 0, x: -50 },
-    visible: (i: number) => ({
-      opacity: 1,
-      x: 0,
-      transition: {
-        delay: 0.3 + i * 0.15,
-        duration: 0.8,
-        ease: [0.25, 0.46, 0.45, 0.94] as const,
-      },
-    }),
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+
+    const isValid =
+      investorForm.name.trim() &&
+      investorForm.email.trim() &&
+      investorForm.capital.trim() &&
+      investorForm.message.trim();
+
+    setStatus(isValid ? 'success' : 'error');
+
+    if (isValid) {
+      setInvestorForm({
+        name: '',
+        email: '',
+        phone: '',
+        capital: '',
+        message: '',
+      });
+    }
   };
 
   return (
-    <section
-      ref={containerRef}
-      className="relative min-h-screen w-full py-24 px-6 sm:px-12 lg:px-24 bg-charcoal-950 overflow-hidden"
-    >
+    <section ref={containerRef} className="relative overflow-hidden bg-charcoal-950 px-6 py-24 sm:px-12 lg:px-24">
       <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold-500/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gold-500/5 rounded-full blur-[120px]" />
+        <div className="absolute left-0 top-24 h-80 w-80 rounded-full bg-gold-500/5 blur-[140px]" />
+        <div className="absolute bottom-0 right-0 h-[28rem] w-[28rem] rounded-full bg-gold-500/5 blur-[170px]" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto">
+      <div className="relative mx-auto max-w-7xl">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ opacity: 0, y: 28 }}
+          animate={isInView ? { opacity: 1, y: 0 } : undefined}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="mb-14 max-w-4xl"
         >
-          <div className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full mb-6 border border-gold-500/20">
-            <Sparkles className="w-4 h-4 text-gold-400" />
-            <span className="text-gold-300 text-xs tracking-[0.2em] uppercase">{calculator.badge}</span>
-          </div>
-
-          <TextReveal delay={0.1}>
-            <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6">
-              {calculator.title} <span className="text-gradient">{calculator.titleAccent}</span>
-            </h2>
-          </TextReveal>
-
-          <p className="text-charcoal-300 text-lg max-w-2xl mx-auto mb-3">{calculator.description}</p>
-          <p className="text-charcoal-400 text-sm max-w-2xl mx-auto">{calculator.subtitle}</p>
-          <p className="text-charcoal-500 text-xs uppercase tracking-[0.18em] mt-4">{calculator.guidance}</p>
+          <p className="mb-4 text-xs uppercase tracking-[0.26em] text-gold-300">{invest.badge}</p>
+          <h2 className="font-display text-4xl font-bold text-white sm:text-5xl">{invest.title}</h2>
+          <p className="mt-6 text-lg leading-relaxed text-charcoal-300">{invest.intro}</p>
+          <p className="mt-4 text-base leading-relaxed text-charcoal-400">{invest.description}</p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
-          {/* Left: Controls */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="space-y-8"
-          >
-            {/* Investment Amount Slider */}
+        <div className="grid gap-8 xl:grid-cols-[0.92fr,1.08fr]">
+          <div className="space-y-6">
             <motion.div
-              custom={0}
-              initial="hidden"
-              animate={isInView ? 'visible' : 'hidden'}
-              variants={sliderVariants}
+              initial={{ opacity: 0, y: 24 }}
+              animate={isInView ? { opacity: 1, y: 0 } : undefined}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="grid gap-4 md:grid-cols-3 xl:grid-cols-1"
             >
-              <SpotlightCard className="glass rounded-2xl p-6 md:p-8 border border-white/5">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-gold-500/20 flex items-center justify-center">
-                      <Euro className="w-5 h-5 text-gold-400" />
+              {invest.pillars.map((pillar, index) => {
+                const Icon = [ShieldCheck, BarChart3, FileText][index] ?? ShieldCheck;
+
+                return (
+                  <div key={pillar.title} className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gold-500/15">
+                      <Icon className="h-5 w-5 text-gold-400" />
                     </div>
-                    <div>
-                      <label htmlFor="investment" className="text-white font-medium">
-                        {calculator.labels.amount.label}
-                      </label>
-                      <p className="text-charcoal-400 text-sm">{calculator.labels.amount.description}</p>
-                    </div>
+                    <h3 className="mt-5 text-xl font-semibold text-white">{pillar.title}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-charcoal-400">{pillar.text}</p>
                   </div>
-                  <motion.span className="text-2xl font-display font-bold text-gold-400">
-                    {useTransform(animatedInvestment, (v) => formatCurrency(v))}
-                  </motion.span>
-                </div>
-                <input
-                  id="investment"
-                  type="range"
-                  min={calculator.labels.amount.format.min}
-                  max={calculator.labels.amount.format.max}
-                  step="50000"
-                  value={investment}
-                  onChange={(e) => setInvestment(Number(e.target.value))}
-                  className="w-full"
-                  aria-label="Regola l'importo dell'investimento"
-                />
-                <div className="flex justify-between text-xs text-charcoal-500 mt-2">
-                  <span>{calculator.labels.amount.minLabel}</span>
-                  <span>{calculator.labels.amount.maxLabel}</span>
-                </div>
-              </SpotlightCard>
+                );
+              })}
             </motion.div>
 
-            {/* Investment Period Slider */}
             <motion.div
-              custom={1}
-              initial="hidden"
-              animate={isInView ? 'visible' : 'hidden'}
-              variants={sliderVariants}
+              initial={{ opacity: 0, y: 24 }}
+              animate={isInView ? { opacity: 1, y: 0 } : undefined}
+              transition={{ duration: 0.8, delay: 0.15 }}
+              className="rounded-[2rem] border border-white/10 bg-black/20 p-6 backdrop-blur-xl sm:p-8"
             >
-              <SpotlightCard className="glass rounded-2xl p-6 md:p-8 border border-white/5">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-gold-500/20 flex items-center justify-center">
-                      <Calendar className="w-5 h-5 text-gold-400" />
-                    </div>
-                    <div>
-                      <label htmlFor="years" className="text-white font-medium">
-                        {calculator.labels.years.label}
-                      </label>
-                      <p className="text-charcoal-400 text-sm">{calculator.labels.years.description}</p>
-                    </div>
+              <p className="text-xs uppercase tracking-[0.24em] text-gold-300">{invest.operatingTitle}</p>
+              <div className="mt-6 space-y-4">
+                {invest.operatingSteps.map((step, index) => (
+                  <div key={step} className="grid gap-3 rounded-2xl border border-white/5 bg-charcoal-900/75 p-4 sm:grid-cols-[56px,1fr]">
+                    <div className="font-display text-2xl font-bold text-gold-400">{`0${index + 1}`}</div>
+                    <p className="text-sm leading-relaxed text-charcoal-300">{step}</p>
                   </div>
-                  <span className="text-2xl font-display font-bold text-gold-400">{years} anni</span>
-                </div>
-                <input
-                  id="years"
-                  type="range"
-                  min={calculator.labels.years.format.min}
-                  max={calculator.labels.years.format.max}
-                  step="1"
-                  value={years}
-                  onChange={(e) => setYears(Number(e.target.value))}
-                  className="w-full"
-                  aria-label="Regola la durata dell'investimento"
-                />
-                <div className="flex justify-between text-xs text-charcoal-500 mt-2">
-                  <span>{calculator.labels.years.minLabel}</span>
-                  <span>{calculator.labels.years.maxLabel}</span>
-                </div>
-              </SpotlightCard>
+                ))}
+              </div>
             </motion.div>
 
-            {/* ROI Rate Slider */}
             <motion.div
-              custom={2}
-              initial="hidden"
-              animate={isInView ? 'visible' : 'hidden'}
-              variants={sliderVariants}
+              initial={{ opacity: 0, y: 24 }}
+              animate={isInView ? { opacity: 1, y: 0 } : undefined}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="rounded-[2rem] border border-white/10 bg-charcoal-900/70 p-6 sm:p-8"
             >
-              <SpotlightCard className="glass rounded-2xl p-6 md:p-8 border border-white/5">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-gold-500/20 flex items-center justify-center">
-                      <Percent className="w-5 h-5 text-gold-400" />
-                    </div>
-                    <div>
-                      <label htmlFor="roi" className="text-white font-medium">
-                        {calculator.labels.roi.label}
-                      </label>
-                      <p className="text-charcoal-400 text-sm">{calculator.labels.roi.description}</p>
-                    </div>
+              <p className="text-xs uppercase tracking-[0.24em] text-gold-300">{invest.advantagesTitle}</p>
+              <div className="mt-6 grid gap-3">
+                {invest.advantages.map((advantage) => (
+                  <div key={advantage} className="flex gap-3 rounded-2xl border border-white/5 bg-white/5 p-4">
+                    <div className="mt-1 h-2.5 w-2.5 rounded-full bg-gold-400" />
+                    <p className="text-sm leading-relaxed text-charcoal-300">{advantage}</p>
                   </div>
-                  <span className="text-2xl font-display font-bold text-gold-400">{roiRate}%</span>
-                </div>
-                <input
-                  id="roi"
-                  type="range"
-                  min={calculator.labels.roi.format.min}
-                  max={calculator.labels.roi.format.max}
-                  step="5"
-                  value={roiRate}
-                  onChange={(e) => setRoiRate(Number(e.target.value))}
-                  className="w-full"
-                  aria-label="Regola il ROI previsto"
-                />
-                <div className="flex justify-between text-xs text-charcoal-500 mt-2">
-                  <span>{calculator.labels.roi.minLabel}</span>
-                  <span>{calculator.labels.roi.maxLabel}</span>
-                </div>
-              </SpotlightCard>
+                ))}
+              </div>
             </motion.div>
-          </motion.div>
+          </div>
 
-          {/* Right: Results & Chart */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="space-y-6"
-          >
-            <div className="grid grid-cols-2 gap-4">
-              <GlowingBorder className="glass rounded-2xl p-6" borderRadius="1rem">
-                <div className="flex items-center gap-2 mb-2">
-                  <TrendingUp className="w-4 h-4 text-gold-400" />
-                  <span className="text-charcoal-400 text-sm">Valore Proiettato</span>
-                </div>
-                <motion.div className="text-2xl md:text-3xl font-display font-bold text-white">
-                  {useTransform(animatedProjected, (v) => formatCurrency(v))}
-                </motion.div>
-              </GlowingBorder>
-
-              <SpotlightCard className="glass rounded-2xl p-6 border border-white/5">
-                <div className="flex items-center gap-2 mb-2">
-                  <Euro className="w-4 h-4 text-green-400" />
-                  <span className="text-charcoal-400 text-sm">Rendimento Totale</span>
-                </div>
-                <motion.div className="text-2xl md:text-3xl font-display font-bold text-green-400">
-                  {useTransform(animatedReturn, (v) => `+${formatCurrency(v)}`)}
-                </motion.div>
-              </SpotlightCard>
-            </div>
-
+          <div className="space-y-6">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.6, duration: 0.8 }}
+              initial={{ opacity: 0, y: 24 }}
+              animate={isInView ? { opacity: 1, y: 0 } : undefined}
+              transition={{ duration: 0.8, delay: 0.18 }}
+              className="rounded-[2rem] border border-white/10 bg-black/20 p-6 backdrop-blur-xl sm:p-8"
             >
-              <SpotlightCard className="glass rounded-2xl p-6 md:p-8 border border-white/5">
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-white font-medium">Proiezione di Crescita</h3>
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-gold-500" />
-                    <span className="text-charcoal-400 text-sm">Valore</span>
+              <div className="mb-8">
+                <div className="inline-flex items-center gap-2 rounded-full border border-gold-500/20 bg-gold-500/10 px-4 py-2">
+                  <TrendingUp className="h-4 w-4 text-gold-400" />
+                  <span className="text-xs uppercase tracking-[0.2em] text-gold-300">{calculator.badge}</span>
+                </div>
+                <h3 className="mt-6 font-display text-3xl font-bold text-white sm:text-4xl">
+                  {calculator.title} <span className="text-gradient">{calculator.titleAccent}</span>
+                </h3>
+                <p className="mt-4 text-base leading-relaxed text-charcoal-300">{calculator.description}</p>
+                <p className="mt-3 text-sm leading-relaxed text-charcoal-400">{calculator.subtitle}</p>
+                <p className="mt-4 text-xs uppercase tracking-[0.18em] text-charcoal-500">{calculator.guidance}</p>
+              </div>
+
+              <div className="grid gap-5">
+                <div className="rounded-3xl border border-white/10 bg-charcoal-900/70 p-5">
+                  <div className="mb-4 flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gold-500/15">
+                        <Euro className="h-5 w-5 text-gold-400" />
+                      </div>
+                      <div>
+                        <label htmlFor="investment" className="font-medium text-white">
+                          {calculator.labels.amount.label}
+                        </label>
+                        <p className="text-sm text-charcoal-400">{calculator.labels.amount.description}</p>
+                      </div>
+                    </div>
+                    <motion.span className="text-2xl font-display font-bold text-gold-400">{formattedInvestment}</motion.span>
+                  </div>
+                  <input
+                    id="investment"
+                    type="range"
+                    min={calculator.labels.amount.format.min}
+                    max={calculator.labels.amount.format.max}
+                    step="50000"
+                    value={investment}
+                    onChange={(event) => setInvestment(Number(event.target.value))}
+                    className="w-full"
+                    aria-label="Regola l importo dell investimento"
+                  />
+                  <div className="mt-2 flex justify-between text-xs text-charcoal-500">
+                    <span>{calculator.labels.amount.minLabel}</span>
+                    <span>{calculator.labels.amount.maxLabel}</span>
+                  </div>
+                </div>
+
+                <div className="rounded-3xl border border-white/10 bg-charcoal-900/70 p-5">
+                  <div className="mb-4 flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gold-500/15">
+                        <Calendar className="h-5 w-5 text-gold-400" />
+                      </div>
+                      <div>
+                        <label htmlFor="years" className="font-medium text-white">
+                          {calculator.labels.years.label}
+                        </label>
+                        <p className="text-sm text-charcoal-400">{calculator.labels.years.description}</p>
+                      </div>
+                    </div>
+                    <span className="text-2xl font-display font-bold text-gold-400">{years} anni</span>
+                  </div>
+                  <input
+                    id="years"
+                    type="range"
+                    min={calculator.labels.years.format.min}
+                    max={calculator.labels.years.format.max}
+                    step="1"
+                    value={years}
+                    onChange={(event) => setYears(Number(event.target.value))}
+                    className="w-full"
+                    aria-label="Regola l orizzonte temporale"
+                  />
+                  <div className="mt-2 flex justify-between text-xs text-charcoal-500">
+                    <span>{calculator.labels.years.minLabel}</span>
+                    <span>{calculator.labels.years.maxLabel}</span>
+                  </div>
+                </div>
+
+                <div className="rounded-3xl border border-white/10 bg-charcoal-900/70 p-5">
+                  <div className="mb-4 flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gold-500/15">
+                        <Percent className="h-5 w-5 text-gold-400" />
+                      </div>
+                      <div>
+                        <label htmlFor="roi" className="font-medium text-white">
+                          {calculator.labels.roi.label}
+                        </label>
+                        <p className="text-sm text-charcoal-400">{calculator.labels.roi.description}</p>
+                      </div>
+                    </div>
+                    <span className="text-2xl font-display font-bold text-gold-400">{roiRate}%</span>
+                  </div>
+                  <input
+                    id="roi"
+                    type="range"
+                    min={calculator.labels.roi.format.min}
+                    max={calculator.labels.roi.format.max}
+                    step="2"
+                    value={roiRate}
+                    onChange={(event) => setRoiRate(Number(event.target.value))}
+                    className="w-full"
+                    aria-label="Regola il ROI previsto"
+                  />
+                  <div className="mt-2 flex justify-between text-xs text-charcoal-500">
+                    <span>{calculator.labels.roi.minLabel}</span>
+                    <span>{calculator.labels.roi.maxLabel}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                <div className="rounded-3xl border border-white/10 bg-white/5 p-5">
+                  <div className="mb-2 flex items-center gap-2 text-charcoal-400">
+                    <TrendingUp className="h-4 w-4 text-gold-400" />
+                    <span className="text-sm">Valore proiettato</span>
+                  </div>
+                  <motion.div className="text-2xl font-display font-bold text-white sm:text-3xl">{formattedProjected}</motion.div>
+                </div>
+                <div className="rounded-3xl border border-white/10 bg-white/5 p-5">
+                  <div className="mb-2 flex items-center gap-2 text-charcoal-400">
+                    <Euro className="h-4 w-4 text-gold-400" />
+                    <span className="text-sm">Rendimento totale</span>
+                  </div>
+                  <motion.div className="text-2xl font-display font-bold text-gold-400 sm:text-3xl">{formattedReturn}</motion.div>
+                </div>
+              </div>
+
+              <div className="mt-6 rounded-3xl border border-white/10 bg-charcoal-900/75 p-5">
+                <div className="mb-6 flex items-center justify-between gap-4">
+                  <h4 className="text-lg font-medium text-white">Proiezione di crescita</h4>
+                  <div className="flex items-center gap-2 text-sm text-charcoal-400">
+                    <div className="h-3 w-3 rounded-full bg-gold-500" />
+                    <span>Valore</span>
                   </div>
                 </div>
 
                 <div className="relative h-64 w-full">
-                  <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full">
+                  <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="h-full w-full">
                     <defs>
-                      <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#c9902e" stopOpacity="0.4" />
+                      <linearGradient id="investChartGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#c9902e" stopOpacity="0.45" />
                         <stop offset="100%" stopColor="#c9902e" stopOpacity="0" />
                       </linearGradient>
                     </defs>
 
-                    {[0, 25, 50, 75, 100].map((y) => (
+                    {[0, 25, 50, 75, 100].map((line) => (
                       <line
-                        key={y}
+                        key={line}
                         x1="0"
-                        y1={y}
+                        y1={line}
                         x2="100"
-                        y2={y}
+                        y2={line}
                         stroke="rgba(255,255,255,0.05)"
-                        strokeWidth="0.5"
+                        strokeWidth="0.6"
                       />
                     ))}
 
                     <motion.path
                       d={areaPath}
-                      fill="url(#chartGradient)"
+                      fill="url(#investChartGradient)"
                       initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 1, delay: 0.8 }}
+                      animate={isInView ? { opacity: 1 } : undefined}
+                      transition={{ duration: 0.8, delay: 0.3 }}
                     />
 
                     <motion.path
                       d={chartPath}
                       fill="none"
                       stroke="#c9902e"
-                      strokeWidth="0.5"
+                      strokeWidth="0.7"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       initial={{ pathLength: 0 }}
-                      animate={{ pathLength: 1 }}
-                      transition={{ duration: 1.5, delay: 0.5, ease: 'easeInOut' }}
+                      animate={isInView ? { pathLength: 1 } : undefined}
+                      transition={{ duration: 1.2, delay: 0.25, ease: 'easeInOut' }}
                     />
 
                     {chartData.map((point, index) => {
-                      const x = (index / (chartData.length - 1)) * 100;
-                      const y = 100 - (point.value / maxValue) * 80 - 10;
+                      const x = chartData.length === 1 ? 0 : (index / (chartData.length - 1)) * 100;
+                      const y = 100 - (point.value / maxValue) * 78 - 10;
+
                       return (
                         <motion.circle
-                          key={index}
+                          key={`${point.year}-${point.value}`}
                           cx={x}
                           cy={y}
-                          r="1.5"
-                          fill="#c9902e"
+                          r="1.6"
+                          fill="#f2e0b0"
                           initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          transition={{ delay: 0.8 + index * 0.1, duration: 0.3 }}
+                          animate={isInView ? { scale: 1 } : undefined}
+                          transition={{ duration: 0.25, delay: 0.45 + index * 0.08 }}
                         />
                       );
                     })}
                   </svg>
 
                   <div className="absolute bottom-0 left-0 right-0 flex justify-between text-xs text-charcoal-500">
-                    {chartData
-                      .filter((_, i) => i % 2 === 0)
-                      .map((point, index) => (
-                        <span key={index}>Anno {point.year}</span>
-                      ))}
+                    {chartData.map((point) => (
+                      <span key={point.year}>{`Anno ${point.year}`}</span>
+                    ))}
                   </div>
                 </div>
-              </SpotlightCard>
+              </div>
+
+              <div className="mt-6">
+                <MagneticButton
+                  href="#investor-name"
+                  className="group w-full rounded-2xl bg-gradient-to-r from-gold-500 to-gold-600 py-4 font-semibold text-charcoal-950"
+                  aria-label="Prenota una call con il team"
+                >
+                  <span className="flex items-center justify-center gap-2">
+                    {calculator.ctaLabel}
+                    <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </MagneticButton>
+              </div>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.8, duration: 0.8 }}
+            <motion.form
+              initial={{ opacity: 0, y: 24 }}
+              animate={isInView ? { opacity: 1, y: 0 } : undefined}
+              transition={{ duration: 0.8, delay: 0.22 }}
+              onSubmit={handleSubmit}
+              className="rounded-[2rem] border border-white/10 bg-white/5 p-6 backdrop-blur-xl sm:p-8"
+              noValidate
             >
-              <MagneticButton
-                href="#contact"
-                className="w-full group relative py-4 bg-gradient-to-r from-gold-500 to-gold-600 text-charcoal-950 font-semibold rounded-xl overflow-hidden transition-all duration-300 hover:shadow-glow"
-                aria-label="Prenota una chiamata con i nostri consulenti"
-              >
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  {calculator.ctaLabel}
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </MagneticButton>
-            </motion.div>
-          </motion.div>
+              <h3 className="font-display text-2xl font-bold text-white">{invest.formTitle}</h3>
+              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-charcoal-400">{invest.formDescription}</p>
+
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                <label className="block text-sm" htmlFor="investor-name">
+                  <span className="text-charcoal-300">Nome e cognome</span>
+                  <input
+                    id="investor-name"
+                    type="text"
+                    value={investorForm.name}
+                    placeholder="Es. Mario Bianchi"
+                    className="mt-2 w-full rounded-2xl border border-white/10 bg-charcoal-900 px-4 py-3 text-white outline-none ring-gold-400 focus-visible:ring-2"
+                    onChange={(event) => setInvestorForm((current) => ({ ...current, name: event.target.value }))}
+                    required
+                  />
+                </label>
+
+                <label className="block text-sm" htmlFor="investor-email">
+                  <span className="text-charcoal-300">Email</span>
+                  <input
+                    id="investor-email"
+                    type="email"
+                    value={investorForm.email}
+                    placeholder="nome@email.it"
+                    className="mt-2 w-full rounded-2xl border border-white/10 bg-charcoal-900 px-4 py-3 text-white outline-none ring-gold-400 focus-visible:ring-2"
+                    onChange={(event) => setInvestorForm((current) => ({ ...current, email: event.target.value }))}
+                    required
+                  />
+                </label>
+
+                <label className="block text-sm" htmlFor="investor-phone">
+                  <span className="text-charcoal-300">Telefono</span>
+                  <input
+                    id="investor-phone"
+                    type="tel"
+                    value={investorForm.phone}
+                    placeholder="+39 333 1234567"
+                    className="mt-2 w-full rounded-2xl border border-white/10 bg-charcoal-900 px-4 py-3 text-white outline-none ring-gold-400 focus-visible:ring-2"
+                    onChange={(event) => setInvestorForm((current) => ({ ...current, phone: event.target.value }))}
+                  />
+                </label>
+
+                <label className="block text-sm" htmlFor="investor-capital">
+                  <span className="text-charcoal-300">Capitale indicativo</span>
+                  <input
+                    id="investor-capital"
+                    type="text"
+                    value={investorForm.capital}
+                    placeholder="Es. EUR 250.000"
+                    className="mt-2 w-full rounded-2xl border border-white/10 bg-charcoal-900 px-4 py-3 text-white outline-none ring-gold-400 focus-visible:ring-2"
+                    onChange={(event) => setInvestorForm((current) => ({ ...current, capital: event.target.value }))}
+                    required
+                  />
+                </label>
+              </div>
+
+              <label className="mt-4 block text-sm" htmlFor="investor-message">
+                <span className="text-charcoal-300">Messaggio</span>
+                <textarea
+                  id="investor-message"
+                  rows={4}
+                  value={investorForm.message}
+                  placeholder="Indicaci il tuo profilo, l orizzonte temporale e il tipo di operazioni che ti interessano."
+                  className="mt-2 w-full rounded-2xl border border-white/10 bg-charcoal-900 px-4 py-3 text-white outline-none ring-gold-400 focus-visible:ring-2"
+                  onChange={(event) => setInvestorForm((current) => ({ ...current, message: event.target.value }))}
+                  required
+                />
+              </label>
+
+              <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <button
+                  type="submit"
+                  className="rounded-2xl bg-gold-500 px-6 py-3 font-semibold text-charcoal-950 transition hover:shadow-glow"
+                >
+                  Ricevi il dossier
+                </button>
+                <p
+                  className={`text-sm ${
+                    status === 'success'
+                      ? 'text-green-400'
+                      : status === 'error'
+                        ? 'text-red-400'
+                        : 'text-charcoal-400'
+                  }`}
+                  role="status"
+                >
+                  {status === 'success'
+                    ? 'Richiesta inviata. Ti ricontatteremo con una prima presentazione riservata.'
+                    : status === 'error'
+                      ? 'Compila almeno nome, email, capitale indicativo e messaggio.'
+                      : 'I dati sono utilizzati esclusivamente per ricontattarti in merito alle opportunita di investimento.'}
+                </p>
+              </div>
+            </motion.form>
+          </div>
         </div>
       </div>
     </section>

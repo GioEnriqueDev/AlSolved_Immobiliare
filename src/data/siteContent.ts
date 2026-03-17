@@ -12,6 +12,7 @@ export interface SocialLink {
 export interface StatItem {
   value: string;
   label: string;
+  detail?: string;
 }
 
 export interface ContactInfo {
@@ -25,103 +26,285 @@ export interface Project {
   id: number;
   title: string;
   location: string;
+  status: string;
+  assetType: string;
   beforeImage: string;
   afterImage: string;
   investment: string;
   roi: string;
   timeline: string;
   description: string;
+  highlights: string[];
+}
+
+export interface FieldOption {
+  label: string;
+  value: string;
 }
 
 export interface FormField {
   label: string;
   placeholder: string;
   required?: boolean;
-  type: 'text' | 'email' | 'tel' | 'textarea';
+  type: 'text' | 'email' | 'tel' | 'textarea' | 'select';
+  options?: FieldOption[];
 }
 
 export const brand = {
-  name: 'Leone Group',
+  name: 'Leone Group Immobiliare',
+  shortName: 'Leone Group',
   legalName: 'Leone Group Immobiliare',
-  tagline: 'Investiamo in immobili premium e li trasformiamo in opportunità reali.',
+  tagline: 'Sviluppo immobiliare, riqualificazione urbana e valorizzazione di immobili residenziali e direzionali.',
   description:
-    'Trasformiamo immobili sottovalutati in asset premium attraverso riqualificazioni strategiche, sviluppo territoriale e investimenti con visione di lungo periodo.',
+    'Rigeneriamo immobili datati, sottoutilizzati o non piu in linea con il mercato, trasformandoli in asset moderni, funzionali e ad alto valore aggiunto.',
+  logoSrc: '/leone-group-logo.png',
+  logoAlt: 'Logo Leone Group Immobiliare',
   year: new Date().getFullYear(),
 };
 
 export const navLinks: NavItem[] = [
-  { label: 'Home', href: '#hero' },
   { label: 'Chi Siamo', href: '#about' },
-  { label: 'Calcolatore', href: '#calculator' },
   { label: 'Progetti', href: '#projects' },
-  { label: 'Contatti', href: '#contact' },
+  { label: 'Investi con Noi', href: '#invest' },
+  { label: 'Vendi il tuo immobile', href: '#sell' },
 ];
 
 export const hero = {
-  badge: 'Investimenti Immobiliari di Prestigio',
-  brand: 'Leone Group',
-  titlePrimary: 'Investiamo nel',
-  titleHighlight: "Futuro dell'Immobiliare",
+  badge: 'Sviluppo immobiliare e rigenerazione urbana',
+  brandLine: 'Leone Group Immobiliare',
+  titlePrimary: 'Rigeneriamo immobili',
+  titleHighlight: 'e creiamo nuovo valore',
   subtitle:
-    'Trasformiamo immobili sottovalutati in asset premium tramite riqualificazioni strategiche, soluzioni finanziarie avanzate e partnership proprietarie.',
+    'Operiamo nel settore degli investimenti, della riqualificazione e della valorizzazione di immobili residenziali e direzionali con un approccio imprenditoriale, sostenibile e orientato ai risultati.',
   backgroundImage:
-    'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=80',
+    'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1800&q=80',
+  commitments: [
+    'Riqualificazione urbana invece di nuova cementificazione.',
+    'Controllo diretto di analisi, progettazione, lavori e vendita.',
+    'Immobili moderni, efficienti e pensati per le nuove esigenze del mercato.',
+  ],
   stats: [
-    { value: '€500M+', label: 'Asset in gestione' },
-    { value: '150+', label: 'Proprietà trasformate' },
-    { value: '35%', label: 'ROI medio' },
-    { value: '25', label: 'Anni di esperienza' },
+    { value: '30%', label: 'ROI medio', detail: 'Track record sintetico sulle operazioni tipo.' },
+    { value: '6M+', label: 'Euro investiti', detail: 'Capitale attivato in operazioni di sviluppo.' },
+    { value: '50+', label: 'Appartamenti realizzati', detail: 'Unita create o riqualificate.' },
+    { value: '5.000+', label: 'Metri cubi riqualificati', detail: 'Volumi recuperati e ripensati.' },
   ] as StatItem[],
   ctas: {
     primary: {
-      label: 'Contattaci ora',
-      href: '#contact',
+      label: 'Scopri i progetti',
+      href: '#projects',
     },
     secondary: {
-      label: 'Richiedi il nostro documento',
-      href: '#contact',
+      label: 'Investi con noi',
+      href: '#invest',
     },
   },
   scrollHint: 'Scorri',
 };
 
 export const about = {
-  headline: 'La nostra filosofia',
-  title: 'Innoviamo il modo di vivere e investire nel patrimonio immobiliare.',
+  eyebrow: 'Chi siamo',
+  title: 'Una societa di sviluppo immobiliare che trasforma il patrimonio esistente in valore concreto.',
   intro:
-    'Dal 2020 accompagniamo investitori e istituzioni nella trasformazione di asset immobiliari con criteri di sostenibilità, performance operative e design esclusivo.',
-  highlights: [
-    'Processo selettivo: due diligence tecnica e normativa rigorosa.',
-    'Strategia integrata: acquisizione, riqualificazione, valorizzazione e dismissione.',
-    'Reporting trasparente: rendicontazione periodica con metriche operative e di valore.',
-  ] as string[],
+    'Leone Group Immobiliare opera nel settore degli investimenti, della riqualificazione e della valorizzazione di immobili residenziali e direzionali.',
+  body: [
+    'Il nostro focus e rigenerare immobili datati, sottoutilizzati o non piu in linea con le esigenze attuali del mercato, trasformandoli in abitazioni moderne, funzionali e di design.',
+    'Crediamo in un modello di crescita sostenibile e intelligente che metta al centro la riqualificazione urbana anziche il consumo di nuovo suolo. Per questo sviluppiamo interventi mirati di ristrutturazione, frazionamento, cambio di destinazione d uso e ripensamento degli spazi.',
+    'Ogni operazione nasce da un attenta analisi tecnica, economica e urbanistica e si sviluppa attraverso un processo integrato che ci consente di controllare qualita, tempi e costi, garantendo risultati concreti per chi abita e per chi investe.',
+  ],
+  pillars: [
+    {
+      title: 'Mission',
+      text: 'Creare immobili nuovi per concezione, con architettura contemporanea, comfort abitativo ed efficienza energetica.',
+    },
+    {
+      title: 'Posizionamento',
+      text: 'Lavoriamo su residenziale e direzionale con operazioni selettive, orientate alla valorizzazione e alla liquidita finale.',
+    },
+    {
+      title: 'Controllo',
+      text: 'Gestiamo in modo integrato acquisizione, progettazione, lavori e dismissione per mantenere una governance completa del processo.',
+    },
+  ],
+  processTitle: 'Come lavoriamo',
+  process: [
+    {
+      step: '01',
+      title: 'Analisi preliminare',
+      text: 'Due diligence tecnica, urbanistica ed economico-finanziaria per misurare potenziale, costi, margini e rischi.',
+    },
+    {
+      step: '02',
+      title: 'Pianificazione',
+      text: 'Definiamo layout, piano lavori, cronoprogramma e business plan dettagliato prima di ogni esecuzione.',
+    },
+    {
+      step: '03',
+      title: 'Esecuzione interna',
+      text: 'Coordiniamo sviluppo, riqualificazione e valorizzazione con controllo costante su tempi, qualita e budget.',
+    },
+    {
+      step: '04',
+      title: 'Uscita e reporting',
+      text: 'Monitoriamo stato avanzamento, vendita finale e rendicontazione periodica con la massima trasparenza.',
+    },
+  ],
   closing:
-    'Il nostro obiettivo è generare valore duraturo, combinando rigore finanziario e identità architettonica.',
+    'Il nostro obiettivo e migliorare la qualita della vita di chi abita gli spazi che realizziamo e generare valore solido per chi investe.',
+};
+
+export const projectSection = {
+  badge: 'Progetti',
+  title: 'Track record',
+  highlight: 'e trasparenza',
+  description:
+    'Selezioniamo operazioni con potenziale di rivalutazione, pubblichiamo i risultati essenziali e lavoriamo su interventi misurabili per credibilita, solidita e continuita.',
+  boardTitle: 'Numeri in evidenza',
+  boardDescription:
+    'Un quadro sintetico del posizionamento operativo, utile per comunicare subito scala, risultati e focus del gruppo.',
+  boardMetrics: [
+    { value: '30%', label: 'ROI medio', detail: 'Operazioni selezionate con margini sostenibili.' },
+    { value: '6M+', label: 'Euro investiti', detail: 'Capitale movimentato nelle operazioni concluse e in corso.' },
+    { value: '50+', label: 'Appartamenti realizzati', detail: 'Rigenerazioni, frazionamenti e riconversioni concluse.' },
+    { value: '5.000+', label: 'Metri cubi riqualificati', detail: 'Recupero volumetrico e nuova qualita degli spazi.' },
+  ] as StatItem[],
+  portfolioNote:
+    'Le schede progetto sono impostate come layout dimostrativo e possono essere aggiornate con i dati reali delle vostre operazioni concluse e in corso.',
+  showcaseCta: {
+    label: 'Richiedi portfolio e documentazione',
+    href: '#invest',
+  },
+};
+
+export const projects: Project[] = [
+  {
+    id: 1,
+    title: 'Frazionamento residenziale Porta Romana',
+    location: 'Milano',
+    status: 'Concluso',
+    assetType: 'Residenziale',
+    beforeImage: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80',
+    afterImage: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80',
+    investment: 'EUR 1,4M',
+    roi: '31%',
+    timeline: '11 mesi',
+    description:
+      'Acquisizione di un grande appartamento da riorganizzare, riprogettato in piu unita moderne con efficientamento impiantistico e posizionamento commerciale mirato.',
+    highlights: ['6 unita finali', 'Upgrade energetico', 'Vendita integrale al termine lavori'],
+  },
+  {
+    id: 2,
+    title: 'Riconversione direzionale Citta Studi',
+    location: 'Milano',
+    status: 'In corso',
+    assetType: 'Direzionale > Residenziale',
+    beforeImage: 'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=80',
+    afterImage: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80',
+    investment: 'EUR 2,1M',
+    roi: '28%',
+    timeline: '14 mesi',
+    description:
+      'Conversione di spazi non piu allineati al mercato in nuove soluzioni abitative, con analisi urbanistica, ridefinizione dei layout e valorizzazione finale.',
+    highlights: ['Cambio di destinazione d uso', 'Nuovo mix abitativo', 'Business plan con scenari di uscita'],
+  },
+  {
+    id: 3,
+    title: 'Riqualificazione residenziale San Siro',
+    location: 'Milano',
+    status: 'Concluso',
+    assetType: 'Residenziale',
+    beforeImage: 'https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=900&q=80',
+    afterImage: 'https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=900&q=80',
+    investment: 'EUR 950K',
+    roi: '33%',
+    timeline: '9 mesi',
+    description:
+      'Intervento su immobile da ristrutturare con ripensamento distributivo, restyling completo e messa a reddito attraverso una strategia commerciale calibrata.',
+    highlights: ['Taglio moderno degli spazi', 'Capex sotto controllo', 'Forte appetibilita commerciale'],
+  },
+  {
+    id: 4,
+    title: 'Palazzina da valorizzare zona Washington',
+    location: 'Milano',
+    status: 'Pipeline',
+    assetType: 'Intero stabile',
+    beforeImage: 'https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=900&q=80',
+    afterImage: 'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=900&q=80',
+    investment: 'EUR 3,2M',
+    roi: 'Target 30%',
+    timeline: '16 mesi',
+    description:
+      'Operazione in fase di studio su immobile di ampia metratura con potenziale di frazionamento, upgrade energetico e miglioramento del valore di mercato.',
+    highlights: ['Analisi di fattibilita', 'Scenario buy-renovate-sell', 'Forte potenziale di rivalutazione'],
+  },
+];
+
+export const invest = {
+  badge: 'Investi con noi',
+  title: 'Operazioni immobiliari strutturate, trasparenti e orientate alla creazione di valore reale.',
+  intro:
+    'Investire nella Leone Group Immobiliare significa partecipare a operazioni immobiliari basate su analisi approfondite, controllo diretto dei processi e strategie di valorizzazione concrete.',
+  description:
+    'Selezioniamo immobili con elevato potenziale di rivalutazione e sviluppiamo progetti di riqualificazione, frazionamento e riconversione con l obiettivo di generare rendimenti interessanti e sostenibili, mantenendo elevato il controllo sul rischio.',
+  pillars: [
+    {
+      title: 'Selezione rigorosa',
+      text: 'Ogni operazione nasce da un analisi tecnica, urbanistica ed economico-finanziaria approfondita.',
+    },
+    {
+      title: 'Gestione chiavi in mano',
+      text: 'Seguiamo acquisizione, progettazione, lavori e vendita finale per una governance completa.',
+    },
+    {
+      title: 'Misurabilita',
+      text: 'L investitore valuta tempi, costi, margini attesi e scenari con documentazione chiara e leggibile.',
+    },
+  ],
+  operatingTitle: 'Modalita operative',
+  operatingSteps: [
+    'Analisi dell immobile e studio di fattibilita tecnica e urbanistica.',
+    'Predisposizione di business plan dettagliato, cronoprogramma e conto economico previsionale.',
+    'Gestione interna del progetto dalla fase di acquisizione fino alla vendita finale.',
+    'Report periodici sull andamento dell operazione con aggiornamenti su tempi, costi e stato avanzamento.',
+  ],
+  advantagesTitle: 'Vantaggi per chi investe',
+  advantages: [
+    'Accesso a operazioni selezionate normalmente riservate a operatori del settore.',
+    'Gestione completa senza impegno operativo diretto.',
+    'Business plan chiari, dettagliati e verificabili.',
+    'Controllo diretto di tempi, costi e qualita esecutiva.',
+    'Allineamento di interessi grazie alla partecipazione diretta del gruppo nelle operazioni.',
+    'Track record misurabile e relazioni costruite su trasparenza, affidabilita e risultati.',
+  ],
+  formTitle: 'Richiedi il dossier investitore',
+  formDescription:
+    'Lascia i tuoi riferimenti per ricevere una prima presentazione riservata e valutare insieme il profilo di investimento piu adatto.',
 };
 
 export const calculator = {
-  badge: 'Calcolatore Investimenti',
-  title: 'Calcola i tuoi',
-  titleAccent: 'rendimenti',
-  description: 'Scopri come può crescere il tuo investimento con la nostra strategia di riqualificazione.',
+  badge: 'Simulatore rendimento',
+  title: 'Simula',
+  titleAccent: 'il potenziale',
+  description:
+    'Uno strumento indicativo per visualizzare come puo evolvere un investimento immobiliare strutturato nel tempo.',
   subtitle:
-    'Modifica i parametri per confrontare scenari realistici e pianificare il tuo ingresso nel portfolio.',
+    'Modifica capitale, durata e ROI atteso per confrontare scenari diversi e preparare una prima valutazione.',
   guidance:
-    'Simulazione indicativa a scopo informativo, non sostituisce consulenza finanziaria personalizzata.',
+    'Simulazione illustrativa a scopo informativo, non sostituisce consulenza finanziaria o documentazione di progetto.',
   labels: {
     amount: {
       label: 'Importo investibile',
-      description: 'Capitale iniziale',
-      minLabel: '€100K',
-      maxLabel: '€2M',
+      description: 'Capitale iniziale disponibile',
+      minLabel: 'EUR 100K',
+      maxLabel: 'EUR 2M',
       format: {
         min: 100000,
         max: 2000000,
       },
     },
     years: {
-      label: 'Periodo investimento',
-      description: "Anni fino all'uscita",
+      label: 'Orizzonte temporale',
+      description: 'Durata stimata dell investimento',
       minLabel: '1 anno',
       maxLabel: '10 anni',
       format: {
@@ -131,110 +314,55 @@ export const calculator = {
     },
     roi: {
       label: 'ROI previsto',
-      description: 'Tasso di rendimento annuo',
+      description: 'Rendimento medio annuo stimato',
       minLabel: '10%',
-      maxLabel: '50%',
+      maxLabel: '40%',
       format: {
         min: 10,
-        max: 50,
+        max: 40,
       },
     },
   },
-  ctaLabel: 'Prenota una call',
+  ctaLabel: 'Prenota una call con il team',
 };
 
-export const projects = [
-  {
-    id: 1,
-    title: 'Residenze Metropolitane',
-    location: 'Milano, Lombardia',
-    beforeImage: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80',
-    afterImage: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80',
-    investment: '€12,5M',
-    roi: '42%',
-    timeline: '18 mesi',
-    description:
-      'Trasformazione completa di un magazzino storico in 24 unità residenziali di lusso, con nuovi spazi comuni e impianti efficienti.',
-  },
-  {
-    id: 2,
-    title: 'Torri Marina Bay',
-    location: 'Napoli, Campania',
-    beforeImage: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80',
-    afterImage: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80',
-    investment: '€28M',
-    roi: '38%',
-    timeline: '24 mesi',
-    description:
-      'Riqualificazione fronte mare con servizi premium e tecnologia smart home per una nuova tipologia residenziale ad alta domanda.',
-  },
-  {
-    id: 3,
-    title: 'Collezione Heritage',
-    location: 'Firenze, Toscana',
-    beforeImage: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80',
-    afterImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80',
-    investment: '€8,5M',
-    roi: '45%',
-    timeline: '14 mesi',
-    description:
-      'Restauro di palazzi storici con recupero architettonico e impianti moderni per mantenere heritage e aumentare l’attrattiva abitativa.',
-  },
-  {
-    id: 4,
-    title: 'Tenuta Colline Dorate',
-    location: 'Roma, Lazio',
-    beforeImage: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80',
-    afterImage: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80',
-    investment: '€35M',
-    roi: '33%',
-    timeline: '30 mesi',
-    description:
-      'Sviluppo multi-fase di 12 ville esclusive con paesaggi collinari e servizi premium, ad alto potenziale turistico e residenziale.',
-  },
-] as Project[];
-
-export const projectSection = {
-  badge: 'Portfolio',
-  title: 'Progetti',
-  highlight: 'in evidenza',
+export const seller = {
+  id: 'sell',
+  badge: 'Vendi il tuo immobile',
+  title: 'Ricevi una valutazione entro 24 ore.',
+  subtitle:
+    'Una sezione pensata per generare lead qualificate e trasformare proprietari interessati in nuove opportunita di acquisizione.',
   description:
-    'Esplora i nostri casi trasformativi: dal concept alla riqualificazione, con risultati misurabili in performance e valore patrimoniale.',
-  showcaseCta: {
-    label: 'Richiedi portfolio e documentazione',
-    href: '#contact',
-  },
-};
-
-export const contact = {
-  id: 'contact',
-  title: 'Contattaci',
-  subtitle: 'Parliamo della tua prossima opportunità immobiliare.',
-  description:
-    'Compila il form o contattaci direttamente per una call conoscitiva e una prima valutazione del tuo obiettivo.',
-  ctaPrimary: {
-    label: 'Prenota una call privata',
-    href: '#contact-form',
-  },
-  ctaSecondary: {
-    label: 'Scrivici una email',
-  },
-  details: {
-    email: 'info@leonegroup.it',
-    phone: '+39 02 1234 5678',
-    addressLine1: 'Via Roma, 123',
-    addressLine2: '20121 Milano, Italia',
-  } as ContactInfo,
+    'Valutiamo immobili di grande metratura o con potenziale di riqualificazione, frazionamento e riposizionamento sul mercato. Possiamo intervenire con acquisto diretto, vendita tramite i nostri canali o valorizzazione mirata.',
+  offers: [
+    {
+      title: 'Acquisto diretto',
+      text: 'Quando l immobile rientra nel nostro target, possiamo formulare una proposta di acquisto in tempi rapidi.',
+    },
+    {
+      title: 'Vendita gratuita',
+      text: 'Mettiamo a disposizione i nostri canali e il nostro network per massimizzare la visibilita dell immobile.',
+    },
+    {
+      title: 'Valorizzazione mirata',
+      text: 'Studiamo gli interventi necessari per riallineare il bene al mercato e migliorarne il potenziale economico.',
+    },
+  ],
+  campaignNote:
+    'La pagina e predisposta anche come landing per campagne Ads e sponsorizzate rivolte a proprietari di immobili con ampia metratura.',
   form: {
-    title: 'Richiedi una valutazione iniziale',
+    title: 'Richiedi la tua valutazione',
+    button: 'Invia richiesta di valutazione',
     fields: {
       name: {
         label: 'Nome e cognome',
         placeholder: 'Es. Mario Bianchi',
+        type: 'text',
+        required: true,
       } as FormField,
       email: {
         label: 'Email',
-        placeholder: 'nome@azienda.it',
+        placeholder: 'nome@email.it',
         type: 'email',
         required: true,
       } as FormField,
@@ -242,30 +370,62 @@ export const contact = {
         label: 'Telefono',
         placeholder: '+39 333 1234567',
         type: 'tel',
-      } as FormField,
-      message: {
-        label: 'Messaggio',
-        placeholder: 'Dimmi in breve quale progetto ti interessa.',
-        type: 'textarea',
         required: true,
       } as FormField,
+      squareMeters: {
+        label: 'Metri quadri',
+        placeholder: 'Es. 180',
+        type: 'text',
+        required: true,
+      } as FormField,
+      address: {
+        label: 'Via e numero civico',
+        placeholder: 'Es. Via Roma 25, Milano',
+        type: 'text',
+        required: true,
+      } as FormField,
+      floor: {
+        label: 'Piano',
+        placeholder: 'Es. 3',
+        type: 'text',
+        required: true,
+      } as FormField,
+      condition: {
+        label: 'Stato dell immobile',
+        placeholder: 'Seleziona uno stato',
+        type: 'select',
+        required: true,
+        options: [
+          { label: 'Da ristrutturare', value: 'da-ristrutturare' },
+          { label: 'Buono stato', value: 'buono-stato' },
+        ],
+      } as FormField,
+      notes: {
+        label: 'Note aggiuntive',
+        placeholder: 'Indicaci dettagli utili come presenza di terrazzi, doppia esposizione o altre caratteristiche.',
+        type: 'textarea',
+      } as FormField,
     },
-    button: 'Invia la tua richiesta',
   },
 };
 
-export const socialLinks: SocialLink[] = [
-  { label: 'LinkedIn', shortLabel: 'in', href: 'https://www.linkedin.com' },
-  { label: 'Instagram', shortLabel: 'IG', href: 'https://www.instagram.com' },
-  { label: 'YouTube', shortLabel: 'YT', href: 'https://www.youtube.com' },
-];
+export const contact = {
+  details: {
+    email: 'info@leonegroup.it',
+    phone: '+39 02 1234 5678',
+    addressLine1: 'Milano',
+    addressLine2: 'Ricevimento su appuntamento',
+  } as ContactInfo,
+};
+
+export const socialLinks: SocialLink[] = [];
 
 export const footer = {
   quickLinks: [
     { label: 'Chi Siamo', href: '#about' },
-    { label: 'I Nostri Progetti', href: '#projects' },
-    { label: 'Calcolatore Investimenti', href: '#calculator' },
-    { label: 'Contatti', href: '#contact' },
+    { label: 'Progetti', href: '#projects' },
+    { label: 'Investi con Noi', href: '#invest' },
+    { label: 'Vendi il tuo immobile', href: '#sell' },
   ] as NavItem[],
   legal: [
     { label: 'Privacy Policy', href: '#privacy' },
@@ -277,10 +437,10 @@ export const footer = {
 export const footerInfoSection = {
   privacy: {
     title: 'Privacy Policy',
-    text: 'Le informazioni inserite nei form sono utilizzate esclusivamente per richieste e attività informative relative ai nostri servizi.',
+    text: 'Le informazioni inserite nei form sono utilizzate esclusivamente per ricontattare l utente in relazione ai servizi richiesti.',
   },
   terms: {
     title: 'Termini di Servizio',
-    text: 'I contenuti sono a scopo dimostrativo e possono includere valori indicativi e simulazioni.',
+    text: 'I contenuti di simulazione e le schede progetto hanno finalita illustrative fino al caricamento dei dati operativi definitivi.',
   },
 };
