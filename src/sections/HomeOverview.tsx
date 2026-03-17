@@ -33,7 +33,7 @@ const HomeOverview = () => {
               transition={{ duration: 0.7, delay: index * 0.08 }}
               className="rounded-[2rem] border border-white/10 bg-white/5 p-6 backdrop-blur-xl sm:p-8"
             >
-              <p className="text-xs uppercase tracking-[0.22em] text-gold-300">Pagina dedicata</p>
+              <p className="text-xs uppercase tracking-[0.22em] text-gold-300">Approfondimento</p>
               <h3 className="mt-4 font-display text-2xl font-semibold text-white">{card.title}</h3>
               <p className="mt-4 text-sm leading-relaxed text-charcoal-400">{card.description}</p>
               <div className="mt-8">

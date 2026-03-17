@@ -146,11 +146,11 @@ const Hero = () => {
           >
             <div className="mb-8 flex items-center justify-between gap-4">
               <div>
-                <p className="text-xs uppercase tracking-[0.24em] text-gold-300">Linee guida</p>
-                <h3 className="mt-3 font-display text-2xl font-semibold text-white">Impostazione del sito</h3>
+                <p className="text-xs uppercase tracking-[0.24em] text-gold-300">Perche Leone Group</p>
+                <h3 className="mt-3 font-display text-2xl font-semibold text-white">Il nostro approccio</h3>
               </div>
               <div className="rounded-full border border-gold-500/20 bg-gold-500/10 px-4 py-2 text-xs uppercase tracking-[0.2em] text-gold-300">
-                Confermata
+                Valore concreto
               </div>
             </div>
 
@@ -164,7 +164,7 @@ const Hero = () => {
             </div>
 
             <div className="mt-8 rounded-2xl border border-white/5 bg-charcoal-900/80 p-5">
-              <p className="text-xs uppercase tracking-[0.24em] text-charcoal-500">Posizionamento</p>
+              <p className="text-xs uppercase tracking-[0.24em] text-charcoal-500">Visione</p>
               <p className="mt-3 text-sm leading-relaxed text-charcoal-300">
                 Una narrazione istituzionale, solida e contemporanea, pensata per parlare insieme a proprietari, investitori e partner.
               </p>

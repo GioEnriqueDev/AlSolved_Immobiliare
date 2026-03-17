@@ -12,7 +12,7 @@ const InvestPage = () => {
         description={pageHeaders.invest.description}
         aside={
           <div>
-            <p className="text-xs uppercase tracking-[0.24em] text-gold-300">Per investitori</p>
+            <p className="text-xs uppercase tracking-[0.24em] text-gold-300">Per chi investe</p>
             <div className="mt-5 space-y-4">
               <div className="rounded-2xl border border-white/5 bg-charcoal-900/75 p-4 text-sm leading-relaxed text-charcoal-300">
                 Modello di business spiegato in modo diretto e istituzionale.
@@ -21,7 +21,7 @@ const InvestPage = () => {
                 Simulatore indicativo per una prima lettura del potenziale.
               </div>
               <div className="rounded-2xl border border-white/5 bg-charcoal-900/75 p-4 text-sm leading-relaxed text-charcoal-300">
-                Form dedicato per dossier, contatto e opportunita selezionate.
+                Contatto dedicato per dossier, approfondimenti e opportunita selezionate.
               </div>
             </div>
           </div>

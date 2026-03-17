@@ -12,16 +12,16 @@ const SellPage = () => {
         description={pageHeaders.sell.description}
         aside={
           <div>
-            <p className="text-xs uppercase tracking-[0.24em] text-gold-300">Obiettivo</p>
+            <p className="text-xs uppercase tracking-[0.24em] text-gold-300">Servizio dedicato</p>
             <div className="mt-5 space-y-4">
               <div className="rounded-2xl border border-white/5 bg-charcoal-900/75 p-4 text-sm leading-relaxed text-charcoal-300">
-                Landing pensata per campagne Ads e sponsorizzate mirate.
+                Una valutazione preliminare chiara e riservata.
               </div>
               <div className="rounded-2xl border border-white/5 bg-charcoal-900/75 p-4 text-sm leading-relaxed text-charcoal-300">
                 Form strutturato con i dati corretti per la prima valutazione.
               </div>
               <div className="rounded-2xl border border-white/5 bg-charcoal-900/75 p-4 text-sm leading-relaxed text-charcoal-300">
-                Lead generation orientata a immobili di grande metratura e operazioni di valorizzazione.
+                Supporto dedicato per vendita, valorizzazione o proposta di acquisto.
               </div>
             </div>
           </div>

@@ -64,7 +64,7 @@ export const brand = {
   tagline: 'Sviluppo immobiliare, riqualificazione urbana e valorizzazione di immobili residenziali e direzionali.',
   description:
     'Rigeneriamo immobili datati, sottoutilizzati o non piu in linea con il mercato, trasformandoli in asset moderni, funzionali e ad alto valore aggiunto.',
-  logoSrc: './leone-luxury-logo.png',
+  logoSrc: './leone-group-logo.png',
   logoAlt: 'Logo Leone Group Immobiliare',
   year: new Date().getFullYear(),
 };
@@ -118,36 +118,36 @@ export const hero = {
 };
 
 export const homeOverview = {
-  badge: 'Architettura SEO',
-  title: 'Una home piu essenziale e pagine istituzionali dedicate.',
+  badge: 'Le nostre aree',
+  title: 'Sviluppo, investimento e valorizzazione immobiliare.',
   description:
-    'La struttura e pensata per distribuire i contenuti su piu pagine strategiche: migliore leggibilita, piu profondita editoriale e una base piu solida per il posizionamento organico.',
+    'Leone Group Immobiliare affianca proprietari e investitori con un approccio integrato, orientato alla riqualificazione del patrimonio esistente e alla creazione di nuovo valore.',
   cards: [
     {
       title: 'Chi Siamo',
       description:
-        'Mission, posizionamento, processo operativo e visione della societa in una pagina istituzionale dedicata.',
+        'Scopri la nostra identita, la visione imprenditoriale e il metodo con cui analizziamo e sviluppiamo ogni operazione.',
       href: routes.about,
-      label: 'Vai alla pagina',
+      label: 'Scopri di piu',
     },
     {
       title: 'Progetti',
       description:
-        'Track record, numeri in evidenza, operazioni concluse e in pipeline con un taglio piu credibile e trasparente.',
+        'Una panoramica delle operazioni, dei numeri chiave e dell approccio con cui trasformiamo immobili in nuove opportunita.',
       href: routes.projects,
       label: 'Scopri i progetti',
     },
     {
       title: 'Investi con Noi',
       description:
-        'Modello di business, vantaggi, modalita operative, simulatore e form dedicato per lead di investimento.',
+        'Un area dedicata a chi desidera valutare opportunita strutturate, con informazioni chiare, simulatore indicativo e contatto diretto.',
       href: routes.invest,
-      label: 'Apri la pagina investitori',
+      label: 'Approfondisci',
     },
     {
       title: 'Vendi il tuo immobile',
       description:
-        'Landing dedicata alla lead generation con form strutturato, promessa di risposta rapida e focus sul target immobiliare corretto.',
+        'Un servizio pensato per proprietari che desiderano ricevere una valutazione rapida e capire il percorso migliore per il proprio immobile.',
       href: routes.sell,
       label: 'Richiedi valutazione',
     },
@@ -156,28 +156,28 @@ export const homeOverview = {
 
 export const pageHeaders = {
   about: {
-    badge: 'Pagina istituzionale',
+    badge: 'Leone Group Immobiliare',
     title: 'Chi Siamo',
     description:
-      'Una pagina dedicata a identita, metodo di lavoro, autorevolezza e posizionamento della Leone Group Immobiliare.',
+      'Identita, metodo di lavoro, solidita operativa e visione strategica della Leone Group Immobiliare.',
   },
   projects: {
-    badge: 'Track record',
+    badge: 'Operazioni immobiliari',
     title: 'Progetti',
     description:
-      'Una pagina pensata per mostrare numeri, operazioni, risultati e credibilita del gruppo in modo ordinato e misurabile.',
+      'Una selezione di operazioni, numeri e risultati per raccontare in modo chiaro l approccio e la credibilita del gruppo.',
   },
   invest: {
-    badge: 'Investor relations',
+    badge: 'Investimenti immobiliari',
     title: 'Investi con Noi',
     description:
-      'Una pagina specifica per investitori con business model, vantaggi competitivi, simulatore indicativo e richiesta dossier.',
+      'Un percorso dedicato a chi desidera valutare opportunita immobiliari con un approccio strutturato, trasparente e orientato al risultato.',
   },
   sell: {
-    badge: 'Lead generation',
+    badge: 'Valutazione immobiliare',
     title: 'Vendi il tuo immobile',
     description:
-      'Una landing istituzionale dedicata ai proprietari che desiderano ricevere una valutazione e capire la soluzione piu adatta.',
+      'Una sezione dedicata ai proprietari che desiderano ricevere una prima valutazione e comprendere la soluzione piu adatta al proprio immobile.',
   },
 };
 
@@ -410,7 +410,7 @@ export const seller = {
   badge: 'Vendi il tuo immobile',
   title: 'Ricevi una valutazione entro 24 ore.',
   subtitle:
-    'Una sezione pensata per generare lead qualificate e trasformare proprietari interessati in nuove opportunita di acquisizione.',
+    'Un servizio dedicato ai proprietari che desiderano vendere, valorizzare o comprendere meglio il potenziale del proprio immobile.',
   description:
     'Valutiamo immobili di grande metratura o con potenziale di riqualificazione, frazionamento e riposizionamento sul mercato. Possiamo intervenire con acquisto diretto, vendita tramite i nostri canali o valorizzazione mirata.',
   offers: [
@@ -428,7 +428,7 @@ export const seller = {
     },
   ],
   campaignNote:
-    'La pagina e predisposta anche come landing per campagne Ads e sponsorizzate rivolte a proprietari di immobili con ampia metratura.',
+    'Ogni richiesta viene analizzata con attenzione per offrire una risposta rapida, riservata e coerente con le caratteristiche dell immobile.',
   form: {
     title: 'Richiedi la tua valutazione',
     button: 'Invia richiesta di valutazione',

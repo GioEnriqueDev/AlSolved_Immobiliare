@@ -133,7 +133,7 @@ const ContactSection = () => {
             </div>
 
             <div className="mt-8 rounded-[2rem] border border-white/10 bg-charcoal-900/75 p-6">
-              <p className="text-xs uppercase tracking-[0.22em] text-gold-300">Lead generation</p>
+              <p className="text-xs uppercase tracking-[0.22em] text-gold-300">Il nostro impegno</p>
               <p className="mt-3 text-sm leading-relaxed text-charcoal-400">{seller.campaignNote}</p>
             </div>
 
@@ -209,7 +209,7 @@ const ContactSection = () => {
 
             <div className="mt-6 rounded-3xl border border-white/10 bg-charcoal-900/70 p-5">
               <p className="text-sm leading-relaxed text-charcoal-300">
-                Obiettivo della pagina: intercettare proprietari di immobili di grande metratura, raccogliere lead qualificate e trasformarle in opportunita di acquisizione, vendita o valorizzazione.
+                Compilando il form potremo analizzare il profilo dell immobile e indicarti con chiarezza il percorso piu adatto tra acquisto, vendita o valorizzazione.
               </p>
             </div>
 
