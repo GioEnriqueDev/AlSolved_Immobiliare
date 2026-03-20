@@ -58,8 +58,8 @@ const Navigation = ({ currentPath }: NavigationProps) => {
               aria-label={`Torna alla home di ${brand.name}`}
               whileHover={{ scale: 1.01 }}
             >
-              <div className="rounded-2xl border border-white/10 bg-charcoal-900/90 p-1.5 shadow-glow">
-                <img src={brand.logoSrc} alt={brand.logoAlt} className="h-10 w-auto rounded-xl object-contain sm:h-12" />
+              <div className="rounded-2xl border border-white/10 bg-charcoal-900/90 p-1.5 shadow-glow overflow-hidden">
+                <img src={brand.logoSrc} alt={brand.logoAlt} className="h-10 w-auto rounded-xl object-contain sm:h-12 mix-blend-multiply brightness-[1.1]" />
               </div>
               <div className="hidden sm:block">
                 <p className="font-serif text-lg text-white">{brand.shortName}</p>

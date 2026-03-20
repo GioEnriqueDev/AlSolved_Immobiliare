@@ -75,8 +75,8 @@ const Hero = () => {
               transition={{ duration: 0.8, delay: 0.1 }}
               className="mb-8 flex items-center gap-4"
             >
-              <div className="rounded-[1.75rem] border border-white/10 bg-charcoal-900/90 p-3 shadow-glow">
-                <img src={brand.logoSrc} alt={brand.logoAlt} className="h-16 w-auto rounded-2xl object-contain sm:h-20" />
+              <div className="rounded-[1.75rem] border border-white/10 bg-charcoal-900/90 p-3 shadow-glow overflow-hidden">
+                <img src={brand.logoSrc} alt={brand.logoAlt} className="h-16 w-auto rounded-2xl object-contain sm:h-20 mix-blend-multiply brightness-[1.1]" />
               </div>
               <div>
                 <p className="font-serif text-2xl text-white sm:text-3xl">{hero.brandLine}</p>
