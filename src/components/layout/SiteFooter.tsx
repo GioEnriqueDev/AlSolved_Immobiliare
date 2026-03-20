@@ -8,7 +8,7 @@ const SiteFooter = () => {
           <div className="md:col-span-2">
             <a href="./" className="mb-6 flex w-fit items-center gap-4" aria-label={`Torna alla home di ${brand.name}`}>
               <div className="rounded-2xl border border-white/10 bg-charcoal-900/80 p-2 shadow-glow overflow-hidden">
-                <img src={brand.logoSrc} alt={brand.logoAlt} className="h-14 w-auto rounded-xl object-contain mix-blend-multiply brightness-[1.1]" />
+                <img src={brand.logoSrc} alt={brand.logoAlt} className="h-14 w-auto rounded-xl object-contain" />
               </div>
               <div>
                 <p className="font-serif text-2xl text-white">{brand.shortName}</p>
