@@ -6,10 +6,8 @@ const SiteFooter = () => {
       <div className="mx-auto max-w-7xl">
         <div className="mb-16 grid gap-12 md:grid-cols-4">
           <div className="md:col-span-2">
-            <a href="./" className="mb-6 flex w-fit items-center gap-4" aria-label={`Torna alla home di ${brand.name}`}>
-              <div className="rounded-2xl border border-white/10 bg-charcoal-900/80 p-2 shadow-glow overflow-hidden">
-                <img src={brand.logoSrc} alt={brand.logoAlt} className="h-14 w-auto rounded-xl object-contain" />
-              </div>
+            <a href="./" className="mb-6 flex w-fit items-center gap-6" aria-label={`Torna alla home di ${brand.name}`}>
+              <img src={brand.logoSrc} alt={brand.logoAlt} className="h-24 w-auto object-contain" />
               <div>
                 <p className="font-serif text-2xl text-white">{brand.shortName}</p>
                 <p className="text-sm text-charcoal-400">{brand.tagline}</p>

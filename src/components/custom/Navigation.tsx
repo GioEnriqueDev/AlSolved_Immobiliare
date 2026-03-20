@@ -58,7 +58,7 @@ const Navigation = ({ currentPath }: NavigationProps) => {
               aria-label={`Torna alla home di ${brand.name}`}
               whileHover={{ scale: 1.02 }}
             >
-              <img src={brand.logoSrc} alt={brand.logoAlt} className="h-14 w-auto object-contain sm:h-16" />
+              <img src={brand.logoSrc} alt={brand.logoAlt} className="h-20 w-auto object-contain sm:h-28" />
             </motion.a>
 
             <div className="hidden items-center gap-8 md:flex">
