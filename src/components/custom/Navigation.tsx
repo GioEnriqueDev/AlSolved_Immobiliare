@@ -54,17 +54,11 @@ const Navigation = ({ currentPath }: NavigationProps) => {
           <div className="flex items-center justify-between gap-6">
             <motion.a
               href={routes.home}
-              className="flex items-center gap-3"
+              className="flex items-center"
               aria-label={`Torna alla home di ${brand.name}`}
-              whileHover={{ scale: 1.01 }}
+              whileHover={{ scale: 1.02 }}
             >
-              <div className="rounded-2xl border border-white/10 bg-charcoal-900/90 p-1.5 shadow-glow overflow-hidden">
-                <img src={brand.logoSrc} alt={brand.logoAlt} className="h-10 w-auto rounded-xl object-contain sm:h-12" />
-              </div>
-              <div className="hidden sm:block">
-                <p className="font-serif text-lg text-white">{brand.shortName}</p>
-                <p className="text-xs uppercase tracking-[0.22em] text-charcoal-400">Immobiliare</p>
-              </div>
+              <img src={brand.logoSrc} alt={brand.logoAlt} className="h-14 w-auto object-contain sm:h-16" />
             </motion.a>
 
             <div className="hidden items-center gap-8 md:flex">

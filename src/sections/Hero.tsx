@@ -2,7 +2,7 @@ import { useMemo, useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { ArrowDown, ArrowRight, CheckCircle2 } from 'lucide-react';
 import MagneticButton from '../components/custom/MagneticButton';
-import { brand, hero } from '../data/siteContent';
+import { hero } from '../data/siteContent';
 
 const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -73,15 +73,10 @@ const Hero = () => {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="mb-8 flex items-center gap-4"
+              className="mb-8 flex flex-col items-start gap-1"
             >
-              <div className="rounded-[1.75rem] border border-white/10 bg-charcoal-900/90 p-3 shadow-glow overflow-hidden">
-                <img src={brand.logoSrc} alt={brand.logoAlt} className="h-16 w-auto rounded-2xl object-contain sm:h-20" />
-              </div>
-              <div>
-                <p className="font-serif text-2xl text-white sm:text-3xl">{hero.brandLine}</p>
-                <p className="text-sm uppercase tracking-[0.24em] text-charcoal-400">Investimenti e valorizzazione</p>
-              </div>
+              <p className="font-serif text-2xl text-white sm:text-3xl">{hero.brandLine}</p>
+              <p className="text-sm uppercase tracking-[0.24em] text-charcoal-400">Investimenti e valorizzazione</p>
             </motion.div>
 
             <motion.h1
