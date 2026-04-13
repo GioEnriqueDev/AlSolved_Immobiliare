@@ -57,6 +57,20 @@ export interface OverviewCard {
   label: string;
 }
 
+export interface TransformationProject {
+  id: number;
+  title: string;
+  location: string;
+  status: string;
+  yearLabel: string;
+  assetType: string;
+  summary: string;
+  insight: string;
+  metrics: string[];
+  beforeImage: string;
+  afterImage: string;
+}
+
 export const brand = {
   name: 'Leone Group Immobiliare',
   shortName: 'Leone Group',
@@ -153,6 +167,81 @@ export const homeOverview = {
     },
   ] as OverviewCard[],
 };
+
+export const transformationPortfolio = {
+  badge: 'Portfolio trasformazioni',
+  title: 'Prima e dopo',
+  titleAccent: 'in movimento',
+  description:
+    'Una sezione pensata per mostrare la differenza tra stato iniziale e risultato finale con un confronto visivo immersivo, piu vicino a un experience showcase che a una gallery tradizionale.',
+  stageLabel: 'Scorri o muovi il cursore per confrontare le immagini',
+  cardEyebrow: 'Intervento selezionato',
+  progressBadge: 'Operazione reale',
+  teaserTitle: 'Cantiere attivo',
+  teaserDescription:
+    'Accanto agli interventi conclusi, anticipiamo anche le trasformazioni in corso per dare continuita al racconto del portfolio.',
+  teaserImage: './portfolio/eroi-in-corso.jpeg',
+  teaserImageAlt: 'Cantiere immobiliare in corso Leone Group',
+};
+
+export const transformationProjects: TransformationProject[] = [
+  {
+    id: 1,
+    title: 'Calabritto',
+    location: 'Milano',
+    status: 'Concluso',
+    yearLabel: 'Repositioning residenziale',
+    assetType: 'Frazionamento e restyling',
+    summary:
+      'Riorganizzazione completa degli spazi interni, aggiornamento dei materiali e nuovo posizionamento per un immobile non piu allineato al mercato.',
+    insight: 'Dal taglio datato a una proposta piu pulita, luminosa e pronta alla commercializzazione.',
+    metrics: ['Nuovo layout abitativo', 'Upgrade percezione premium', 'Commercializzazione ottimizzata'],
+    beforeImage: './portfolio/calabritto-prima.jpeg',
+    afterImage: './portfolio/calabritto-dopo.jpeg',
+  },
+  {
+    id: 2,
+    title: 'Graf',
+    location: 'Milano',
+    status: 'Concluso',
+    yearLabel: 'Valorizzazione residenziale',
+    assetType: 'Riqualificazione completa',
+    summary:
+      'Intervento orientato a migliorare leggibilita degli spazi, comfort e attrattivita percepita attraverso una trasformazione netta ma coerente.',
+    insight: 'Il salto non e solo estetico: cambia il posizionamento dell asset e la sua appetibilita commerciale.',
+    metrics: ['Mood contemporaneo', 'Spazi piu leggibili', 'Aumento desiderabilita finale'],
+    beforeImage: './portfolio/graf-prima.jpeg',
+    afterImage: './portfolio/graf-dopo.jpeg',
+  },
+  {
+    id: 3,
+    title: 'Monte Gennaro',
+    location: 'Milano',
+    status: 'Concluso',
+    yearLabel: 'Rigenerazione architettonica',
+    assetType: 'Re-design distributivo',
+    summary:
+      'Ridefinizione dell immobile con un linguaggio piu attuale, interventi puntuali sulla distribuzione e maggiore valorizzazione della luce.',
+    insight: 'Una trasformazione pensata per fare percepire da subito ordine, modernita e nuovo valore.',
+    metrics: ['Spazi razionalizzati', 'Impatto visivo piu forte', 'Migliore leggibilita del prodotto'],
+    beforeImage: './portfolio/monte-gennaro-prima.jpeg',
+    afterImage: './portfolio/monte-gennaro-dopo.jpeg',
+  },
+  {
+    id: 4,
+    title: 'Universita',
+    location: 'Milano',
+    status: 'Concluso',
+    yearLabel: 'Reframe verticale',
+    assetType: 'Upgrade residenziale',
+    summary:
+      'Intervento con forte lavoro sulla percezione dello spazio e sul ribilanciamento tra estetica, funzionalita e identita finale.',
+    insight: 'Il confronto prima/dopo mette in evidenza una trasformazione piu ampia del semplice restyling.',
+    metrics: ['Nuova identita del bene', 'Linguaggio piu pulito', 'Valore percepito piu alto'],
+    beforeImage: './portfolio/universita-prima.jpeg',
+    afterImage: './portfolio/universita-dopo.jpeg',
+  },
+];
 
 export const pageHeaders = {
   about: {
