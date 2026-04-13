@@ -177,7 +177,7 @@ export const transformationPortfolio = {
   titleAccent: 'in movimento',
   description:
     'Una selezione ordinata di interventi conclusi a Roma, pensata per aiutare il cliente a capire subito il risultato della trasformazione e il valore creato.',
-  stageLabel: 'Seleziona un progetto e confronta con calma il prima e il dopo',
+  stageLabel: 'Tieni premuto e scorri per confrontare il prima e il dopo',
   cardEyebrow: 'Progetto selezionato',
   progressBadge: 'Intervento realizzato',
   teaserTitle: 'Cantiere attivo',

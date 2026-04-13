@@ -25,6 +25,7 @@ const TransformationPortfolio = () => {
   const isMobile = useIsMobile();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isScrubbing, setIsScrubbing] = useState(false);
   const revealValue = useMotionValue(DEFAULT_REVEAL);
   const revealSpring = useSpring(revealValue, {
     stiffness: 220,
@@ -69,6 +70,23 @@ const TransformationPortfolio = () => {
     const bounds = currentTarget.getBoundingClientRect();
     const nextValue = ((clientX - bounds.left) / bounds.width) * 100;
     revealValue.set(Math.min(88, Math.max(12, nextValue)));
+  };
+
+  const startScrubbing = (
+    event: React.PointerEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>
+  ) => {
+    setIsPaused(true);
+    setIsScrubbing(true);
+    updateReveal(event.clientX, event.currentTarget);
+  };
+
+  const stopScrubbing = (event?: React.PointerEvent<HTMLDivElement>) => {
+    if (event?.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+
+    setIsScrubbing(false);
+    setIsPaused(false);
   };
 
   const goToPrevious = () => {
@@ -126,13 +144,23 @@ const TransformationPortfolio = () => {
             className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 p-3 shadow-[0_30px_120px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:p-4 xl:p-5"
           >
             <div
-              className="group relative aspect-[4/5] overflow-hidden rounded-[1.6rem] bg-charcoal-900 sm:aspect-[5/4] md:aspect-[16/11] xl:aspect-[16/10]"
-              onMouseMove={(event) => updateReveal(event.clientX, event.currentTarget)}
-              onMouseLeave={() => revealValue.set(DEFAULT_REVEAL)}
-              onPointerDown={(event) => updateReveal(event.clientX, event.currentTarget)}
+              className={`group relative aspect-[4/5] overflow-hidden rounded-[1.6rem] bg-charcoal-900 select-none touch-none sm:aspect-[5/4] md:aspect-[16/11] xl:aspect-[16/10] ${
+                isScrubbing ? 'cursor-grabbing' : 'cursor-grab'
+              }`}
+              onPointerDown={(event) => {
+                event.currentTarget.setPointerCapture(event.pointerId);
+                startScrubbing(event);
+              }}
               onPointerMove={(event) => {
-                if (event.pressure > 0 || event.pointerType === 'mouse') {
+                if (isScrubbing) {
                   updateReveal(event.clientX, event.currentTarget);
+                }
+              }}
+              onPointerUp={stopScrubbing}
+              onPointerCancel={stopScrubbing}
+              onPointerLeave={(event) => {
+                if (isScrubbing && event.pointerType !== 'mouse') {
+                  stopScrubbing(event);
                 }
               }}
             >
@@ -159,7 +187,13 @@ const TransformationPortfolio = () => {
                 className="absolute inset-y-0 z-20 w-px bg-white/90 shadow-[0_0_30px_rgba(255,255,255,0.45)]"
                 style={{ left: revealPercentage }}
               >
-                <div className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-charcoal-950/85 text-white shadow-[0_0_40px_rgba(0,0,0,0.35)] backdrop-blur-xl sm:h-14 sm:w-14">
+                <div
+                  className={`absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border text-white shadow-[0_0_40px_rgba(0,0,0,0.35)] backdrop-blur-xl transition sm:h-14 sm:w-14 ${
+                    isScrubbing
+                      ? 'border-gold-400/60 bg-gold-500/20'
+                      : 'border-white/20 bg-charcoal-950/85'
+                  }`}
+                >
                   <MoveHorizontal className="h-4 w-4 sm:h-5 sm:w-5" />
                 </div>
               </motion.div>
