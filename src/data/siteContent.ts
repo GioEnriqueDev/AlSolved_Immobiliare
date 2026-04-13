@@ -30,10 +30,12 @@ export interface Project {
   assetType: string;
   beforeImage: string;
   afterImage: string;
-  investment: string;
-  roi: string;
-  timeline: string;
   description: string;
+  metrics: Array<{
+    label: string;
+    value: string;
+    accent?: boolean;
+  }>;
   highlights: string[];
 }
 
@@ -75,9 +77,10 @@ export const brand = {
   name: 'Leone Group Immobiliare',
   shortName: 'Leone Group',
   legalName: 'Leone Group Immobiliare',
-  tagline: 'Sviluppo immobiliare, riqualificazione urbana e valorizzazione di immobili residenziali e direzionali.',
+  tagline:
+    'Sviluppo immobiliare a Milano, riqualificazione urbana e valorizzazione di immobili residenziali e direzionali.',
   description:
-    'Rigeneriamo immobili datati, sottoutilizzati o non piu in linea con il mercato, trasformandoli in asset moderni, funzionali e ad alto valore aggiunto.',
+    'Leone Group Immobiliare seleziona, riqualifica e valorizza immobili a Milano trasformando asset datati o sottoutilizzati in spazi contemporanei, piu desiderabili e piu competitivi sul mercato.',
   logoSrc: './leone-group-logo.png',
   logoAlt: 'Logo Leone Group Immobiliare',
   year: new Date().getFullYear(),
@@ -99,18 +102,18 @@ export const navLinks: NavItem[] = [
 ];
 
 export const hero = {
-  badge: 'Sviluppo immobiliare e rigenerazione urbana',
+  badge: 'Sviluppo immobiliare a Milano e rigenerazione urbana',
   brandLine: 'Leone Group Immobiliare',
-  titlePrimary: 'Rigeneriamo immobili',
-  titleHighlight: 'e creiamo nuovo valore',
+  titlePrimary: 'Riqualifichiamo immobili',
+  titleHighlight: 'e aumentiamo il loro valore',
   subtitle:
-    'Operiamo nel settore degli investimenti, della riqualificazione e della valorizzazione di immobili residenziali e direzionali con un approccio imprenditoriale, sostenibile e orientato ai risultati.',
+    'Sviluppiamo operazioni immobiliari a Milano con un approccio imprenditoriale che unisce analisi, riqualificazione, posizionamento commerciale e valorizzazione finale di immobili residenziali e direzionali.',
   backgroundImage:
     'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1800&q=80',
   commitments: [
-    'Riqualificazione urbana invece di nuova cementificazione.',
-    'Controllo diretto di analisi, progettazione, lavori e vendita.',
-    'Immobili moderni, efficienti e pensati per le nuove esigenze del mercato.',
+    'Rigeneriamo immobili esistenti invece di consumare nuovo suolo.',
+    'Gestiamo direttamente analisi, progettazione, lavori e valorizzazione finale.',
+    'Creiamo prodotti immobiliari piu moderni, efficienti e pronti per il mercato attuale.',
   ],
   stats: [
     { value: '30%', label: 'ROI medio', detail: 'Track record sintetico sulle operazioni tipo.' },
@@ -133,35 +136,35 @@ export const hero = {
 
 export const homeOverview = {
   badge: 'Le nostre aree',
-  title: 'Sviluppo, investimento e valorizzazione immobiliare.',
+  title: 'Sviluppo, investimento e valorizzazione immobiliare a Milano.',
   description:
-    'Leone Group Immobiliare affianca proprietari e investitori con un approccio integrato, orientato alla riqualificazione del patrimonio esistente e alla creazione di nuovo valore.',
+    'Leone Group Immobiliare affianca proprietari e investitori con un metodo integrato che parte dalla due diligence e arriva alla riqualificazione, al riposizionamento e alla vendita finale dell immobile.',
   cards: [
     {
       title: 'Chi Siamo',
       description:
-        'Scopri la nostra identita, la visione imprenditoriale e il metodo con cui analizziamo e sviluppiamo ogni operazione.',
+        'Scopri il nostro metodo operativo, la visione imprenditoriale e il posizionamento con cui selezioniamo e sviluppiamo ogni progetto immobiliare.',
       href: routes.about,
       label: 'Scopri di piu',
     },
     {
       title: 'Progetti',
       description:
-        'Una panoramica delle operazioni, dei numeri chiave e dell approccio con cui trasformiamo immobili in nuove opportunita.',
+        'Esplora i nostri interventi conclusi con foto prima e dopo, dettagli di progetto e una lettura immediata del valore creato.',
       href: routes.projects,
       label: 'Scopri i progetti',
     },
     {
       title: 'Investi con Noi',
       description:
-        'Un area dedicata a chi desidera valutare opportunita strutturate, con informazioni chiare, simulatore indicativo e contatto diretto.',
+        'Una sezione pensata per investitori che cercano operazioni immobiliari strutturate, trasparenti e con gestione diretta del processo.',
       href: routes.invest,
       label: 'Approfondisci',
     },
     {
       title: 'Vendi il tuo immobile',
       description:
-        'Un servizio pensato per proprietari che desiderano ricevere una valutazione rapida e capire il percorso migliore per il proprio immobile.',
+        'Un servizio dedicato ai proprietari che vogliono vendere o valorizzare un immobile e ricevere una valutazione rapida, chiara e riservata.',
       href: routes.sell,
       label: 'Richiedi valutazione',
     },
@@ -173,9 +176,9 @@ export const transformationPortfolio = {
   title: 'Prima e dopo',
   titleAccent: 'in movimento',
   description:
-    'Una sezione pensata per mostrare la differenza tra stato iniziale e risultato finale con un confronto visivo immersivo, piu vicino a un experience showcase che a una gallery tradizionale.',
-  stageLabel: 'Scorri o muovi il cursore per confrontare le immagini',
-  cardEyebrow: 'Intervento selezionato',
+    'Un portfolio visuale di interventi conclusi a Milano che mostra in modo immediato il salto tra stato iniziale e risultato finale, con un confronto prima e dopo pensato per comunicare qualita, metodo e valore creato.',
+  stageLabel: 'Confronto manuale con navigazione piu lenta e pausa durante l esplorazione',
+  cardEyebrow: 'Case study selezionato',
   progressBadge: 'Operazione reale',
   teaserTitle: 'Cantiere attivo',
   teaserDescription:
@@ -248,25 +251,25 @@ export const pageHeaders = {
     badge: 'Leone Group Immobiliare',
     title: 'Chi Siamo',
     description:
-      'Identita, metodo di lavoro, solidita operativa e visione strategica della Leone Group Immobiliare.',
+      'Identita, metodo di lavoro, solidita operativa e visione strategica di Leone Group Immobiliare nel settore dello sviluppo immobiliare a Milano.',
   },
   projects: {
-    badge: 'Operazioni immobiliari',
+    badge: 'Progetti conclusi',
     title: 'Progetti',
     description:
-      'Una selezione di operazioni, numeri e risultati per raccontare in modo chiaro l approccio e la credibilita del gruppo.',
+      'Una selezione di progetti immobiliari conclusi con foto prima e dopo, dettagli degli interventi e una lettura chiara del valore generato.',
   },
   invest: {
     badge: 'Investimenti immobiliari',
     title: 'Investi con Noi',
     description:
-      'Un percorso dedicato a chi desidera valutare opportunita immobiliari con un approccio strutturato, trasparente e orientato al risultato.',
+      'Un percorso dedicato a chi desidera investire in operazioni immobiliari a Milano con un approccio strutturato, trasparente e orientato al risultato.',
   },
   sell: {
     badge: 'Valutazione immobiliare',
     title: 'Vendi il tuo immobile',
     description:
-      'Una sezione dedicata ai proprietari che desiderano ricevere una prima valutazione e comprendere la soluzione piu adatta al proprio immobile.',
+      'Una sezione dedicata ai proprietari che desiderano ricevere una valutazione immobiliare rapida e capire la soluzione piu adatta tra vendita, valorizzazione o acquisto diretto.',
   },
 };
 
@@ -322,14 +325,14 @@ export const about = {
 };
 
 export const projectSection = {
-  badge: 'Progetti',
-  title: 'Track record',
-  highlight: 'e trasparenza',
+  badge: 'Portfolio progetti',
+  title: 'Interventi conclusi',
+  highlight: 'prima e dopo',
   description:
-    'Selezioniamo operazioni con potenziale di rivalutazione, pubblichiamo i risultati essenziali e lavoriamo su interventi misurabili per credibilita, solidita e continuita.',
+    'Raccogliamo in questa sezione una selezione di interventi immobiliari conclusi, mostrati con foto reali prima e dopo per rendere immediato il risultato del lavoro di riqualificazione.',
   boardTitle: 'Numeri in evidenza',
   boardDescription:
-    'Un quadro sintetico del posizionamento operativo, utile per comunicare subito scala, risultati e focus del gruppo.',
+    'Un quadro sintetico utile per raccontare esperienza operativa, capacita esecutiva e continuita nel percorso di valorizzazione immobiliare.',
   boardMetrics: [
     { value: '30%', label: 'ROI medio', detail: 'Operazioni selezionate con margini sostenibili.' },
     { value: '6M+', label: 'Euro investiti', detail: 'Capitale movimentato nelle operazioni concluse e in corso.' },
@@ -337,7 +340,7 @@ export const projectSection = {
     { value: '5.000+', label: 'Metri cubi riqualificati', detail: 'Recupero volumetrico e nuova qualita degli spazi.' },
   ] as StatItem[],
   portfolioNote:
-    'Su richiesta condividiamo maggiori dettagli sulle operazioni concluse, sui progetti in corso e sulle opportunita attualmente in valutazione.',
+    'Su richiesta condividiamo ulteriori dettagli sulle operazioni concluse, sul metodo di analisi e sulle opportunita riservate attualmente in valutazione.',
   showcaseCta: {
     label: 'Richiedi portfolio e documentazione',
     href: routes.invest,
@@ -347,63 +350,71 @@ export const projectSection = {
 export const projects: Project[] = [
   {
     id: 1,
-    title: 'Frazionamento residenziale Porta Romana',
+    title: 'Calabritto',
     location: 'Milano',
     status: 'Concluso',
-    assetType: 'Residenziale',
-    beforeImage: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=900&q=80',
-    afterImage: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80',
-    investment: 'EUR 1,4M',
-    roi: '31%',
-    timeline: '11 mesi',
+    assetType: 'Riqualificazione residenziale',
+    beforeImage: './portfolio/calabritto-prima.jpeg',
+    afterImage: './portfolio/calabritto-dopo.jpeg',
     description:
-      'Acquisizione di un grande appartamento da riorganizzare, riprogettato in piu unita moderne con efficientamento impiantistico e posizionamento commerciale mirato.',
-    highlights: ['6 unita finali', 'Upgrade energetico', 'Vendita integrale al termine lavori'],
+      'Un intervento di riqualificazione pensato per ripulire il linguaggio dell immobile, migliorarne la leggibilita degli spazi e presentarlo al mercato con un posizionamento piu forte.',
+    metrics: [
+      { label: 'Intervento', value: 'Frazionamento e restyling' },
+      { label: 'Durata', value: '11 mesi' },
+      { label: 'Esito', value: 'Concluso', accent: true },
+    ],
+    highlights: ['Spazi ridefiniti', 'Immagine piu contemporanea', 'Maggiore appetibilita commerciale'],
   },
   {
     id: 2,
-    title: 'Riconversione direzionale Citta Studi',
+    title: 'Graf',
     location: 'Milano',
-    status: 'In corso',
-    assetType: 'Direzionale > Residenziale',
-    beforeImage: 'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=80',
-    afterImage: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80',
-    investment: 'EUR 2,1M',
-    roi: '28%',
-    timeline: '14 mesi',
+    status: 'Concluso',
+    assetType: 'Valorizzazione residenziale',
+    beforeImage: './portfolio/graf-prima.jpeg',
+    afterImage: './portfolio/graf-dopo.jpeg',
     description:
-      'Conversione di spazi non piu allineati al mercato in nuove soluzioni abitative, con analisi urbanistica, ridefinizione dei layout e valorizzazione finale.',
-    highlights: ['Cambio di destinazione d uso', 'Nuovo mix abitativo', 'Business plan con scenari di uscita'],
+      'Un progetto di valorizzazione immobiliare in cui il lavoro su finiture, atmosfera e distribuzione ha trasformato la percezione complessiva dell asset.',
+    metrics: [
+      { label: 'Intervento', value: 'Riqualificazione completa' },
+      { label: 'Durata', value: '9 mesi' },
+      { label: 'Esito', value: 'Concluso', accent: true },
+    ],
+    highlights: ['Look piu premium', 'Maggiore chiarezza distributiva', 'Prodotto finale piu competitivo'],
   },
   {
     id: 3,
-    title: 'Riqualificazione residenziale San Siro',
+    title: 'Monte Gennaro',
     location: 'Milano',
     status: 'Concluso',
-    assetType: 'Residenziale',
-    beforeImage: 'https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=900&q=80',
-    afterImage: 'https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=900&q=80',
-    investment: 'EUR 950K',
-    roi: '33%',
-    timeline: '9 mesi',
+    assetType: 'Rigenerazione architettonica',
+    beforeImage: './portfolio/monte-gennaro-prima.jpeg',
+    afterImage: './portfolio/monte-gennaro-dopo.jpeg',
     description:
-      'Intervento su immobile da ristrutturare con ripensamento distributivo, restyling completo e messa a reddito attraverso una strategia commerciale calibrata.',
-    highlights: ['Taglio moderno degli spazi', 'Capex sotto controllo', 'Forte appetibilita commerciale'],
+      'Una trasformazione che ha lavorato su ordine visivo, luce e layout per restituire all immobile un identita piu netta, attuale e pronta alla valorizzazione.',
+    metrics: [
+      { label: 'Intervento', value: 'Re-design distributivo' },
+      { label: 'Durata', value: '10 mesi' },
+      { label: 'Esito', value: 'Concluso', accent: true },
+    ],
+    highlights: ['Spazi razionalizzati', 'Percezione di maggiore qualita', 'Nuovo posizionamento sul mercato'],
   },
   {
     id: 4,
-    title: 'Palazzina da valorizzare zona Washington',
+    title: 'Universita',
     location: 'Milano',
-    status: 'Pipeline',
-    assetType: 'Intero stabile',
-    beforeImage: 'https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=900&q=80',
-    afterImage: 'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=900&q=80',
-    investment: 'EUR 3,2M',
-    roi: 'Target 30%',
-    timeline: '16 mesi',
+    status: 'Concluso',
+    assetType: 'Upgrade residenziale',
+    beforeImage: './portfolio/universita-prima.jpeg',
+    afterImage: './portfolio/universita-dopo.jpeg',
     description:
-      'Operazione in fase di studio su immobile di ampia metratura con potenziale di frazionamento, upgrade energetico e miglioramento del valore di mercato.',
-    highlights: ['Analisi di fattibilita', 'Scenario buy-renovate-sell', 'Forte potenziale di rivalutazione'],
+      'Un intervento completato con l obiettivo di migliorare la qualita percepita dell immobile e renderlo piu coerente con le aspettative del mercato residenziale contemporaneo.',
+    metrics: [
+      { label: 'Intervento', value: 'Restyling e valorizzazione' },
+      { label: 'Durata', value: '8 mesi' },
+      { label: 'Esito', value: 'Concluso', accent: true },
+    ],
+    highlights: ['Immagine piu pulita', 'Migliore esperienza spaziale', 'Valore percepito piu alto'],
   },
 ];
 
@@ -411,9 +422,9 @@ export const invest = {
   badge: 'Investi con noi',
   title: 'Operazioni immobiliari strutturate, trasparenti e orientate alla creazione di valore reale.',
   intro:
-    'Investire nella Leone Group Immobiliare significa partecipare a operazioni immobiliari basate su analisi approfondite, controllo diretto dei processi e strategie di valorizzazione concrete.',
+    'Investire con Leone Group Immobiliare significa entrare in operazioni selezionate sulla base di analisi approfondite, controllo diretto dei processi e strategie concrete di valorizzazione.',
   description:
-    'Selezioniamo immobili con elevato potenziale di rivalutazione e sviluppiamo progetti di riqualificazione, frazionamento e riconversione con l obiettivo di generare rendimenti interessanti e sostenibili, mantenendo elevato il controllo sul rischio.',
+    'Selezioniamo immobili con potenziale di rivalutazione, sviluppiamo progetti di riqualificazione, frazionamento e riconversione e manteniamo un presidio costante su tempi, costi e gestione del rischio.',
   pillars: [
     {
       title: 'Selezione rigorosa',
@@ -446,7 +457,7 @@ export const invest = {
   ],
   formTitle: 'Richiedi il dossier investitore',
   formDescription:
-    'Lascia i tuoi riferimenti per ricevere una prima presentazione riservata e valutare insieme il profilo di investimento piu adatto.',
+    'Lascia i tuoi riferimenti per ricevere una prima presentazione riservata, conoscere il nostro approccio operativo e valutare il profilo di investimento piu adatto.',
 };
 
 export const calculator = {
@@ -499,9 +510,9 @@ export const seller = {
   badge: 'Vendi il tuo immobile',
   title: 'Ricevi una valutazione entro 24 ore.',
   subtitle:
-    'Un servizio dedicato ai proprietari che desiderano vendere, valorizzare o comprendere meglio il potenziale del proprio immobile.',
+    'Un servizio dedicato ai proprietari che vogliono vendere, valorizzare o comprendere meglio il potenziale del proprio immobile a Milano.',
   description:
-    'Valutiamo immobili di grande metratura o con potenziale di riqualificazione, frazionamento e riposizionamento sul mercato. Possiamo intervenire con acquisto diretto, vendita tramite i nostri canali o valorizzazione mirata.',
+    'Valutiamo immobili di grande metratura o con potenziale di riqualificazione, frazionamento e riposizionamento sul mercato. Possiamo intervenire con acquisto diretto, vendita tramite i nostri canali o valorizzazione mirata del bene.',
   offers: [
     {
       title: 'Acquisto diretto',
@@ -517,7 +528,7 @@ export const seller = {
     },
   ],
   campaignNote:
-    'Ogni richiesta viene analizzata con attenzione per offrire una risposta rapida, riservata e coerente con le caratteristiche dell immobile.',
+    'Ogni richiesta viene analizzata con attenzione per offrire una risposta rapida, riservata e coerente con le caratteristiche dell immobile e con il suo reale potenziale di valorizzazione.',
   form: {
     title: 'Richiedi la tua valutazione',
     button: 'Invia richiesta di valutazione',

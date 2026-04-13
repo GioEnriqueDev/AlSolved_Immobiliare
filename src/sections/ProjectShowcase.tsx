@@ -4,6 +4,12 @@ import MagneticButton from '../components/custom/MagneticButton';
 import { projectSection, projects } from '../data/siteContent';
 
 const ProjectShowcase = () => {
+  const getMetricIcon = (label: string, accent?: boolean) => {
+    if (accent) return TrendingUp;
+    if (label.toLowerCase().includes('durata')) return CalendarRange;
+    return Building2;
+  };
+
   return (
     <section className="relative bg-charcoal-950 px-6 py-24 sm:px-12 lg:px-24">
       <div className="absolute inset-0">
@@ -37,7 +43,7 @@ const ProjectShowcase = () => {
           <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
               <p className="text-xs uppercase tracking-[0.24em] text-gold-300">{projectSection.boardTitle}</p>
-              <h3 className="mt-3 font-display text-3xl font-semibold text-white">Tabella numerica in evidenza</h3>
+              <h3 className="mt-3 font-display text-3xl font-semibold text-white">Track record operativo</h3>
             </div>
             <p className="max-w-2xl text-sm leading-relaxed text-charcoal-400">{projectSection.boardDescription}</p>
           </div>
@@ -115,29 +121,21 @@ const ProjectShowcase = () => {
                 <p className="mt-5 text-sm leading-relaxed text-charcoal-300">{project.description}</p>
 
                 <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                  <div className="rounded-2xl border border-white/5 bg-charcoal-900/75 p-4">
-                    <div className="mb-2 flex items-center gap-2 text-charcoal-500">
-                      <Building2 className="h-4 w-4 text-gold-400" />
-                      <span className="text-xs uppercase tracking-[0.18em]">Investimento</span>
-                    </div>
-                    <div className="text-xl font-display font-bold text-white">{project.investment}</div>
-                  </div>
+                  {project.metrics.map((metric) => {
+                    const Icon = getMetricIcon(metric.label, metric.accent);
 
-                  <div className="rounded-2xl border border-white/5 bg-charcoal-900/75 p-4">
-                    <div className="mb-2 flex items-center gap-2 text-charcoal-500">
-                      <TrendingUp className="h-4 w-4 text-gold-400" />
-                      <span className="text-xs uppercase tracking-[0.18em]">ROI</span>
-                    </div>
-                    <div className="text-xl font-display font-bold text-gold-400">{project.roi}</div>
-                  </div>
-
-                  <div className="rounded-2xl border border-white/5 bg-charcoal-900/75 p-4">
-                    <div className="mb-2 flex items-center gap-2 text-charcoal-500">
-                      <CalendarRange className="h-4 w-4 text-gold-400" />
-                      <span className="text-xs uppercase tracking-[0.18em]">Durata</span>
-                    </div>
-                    <div className="text-xl font-display font-bold text-white">{project.timeline}</div>
-                  </div>
+                    return (
+                      <div key={`${project.id}-${metric.label}`} className="rounded-2xl border border-white/5 bg-charcoal-900/75 p-4">
+                        <div className="mb-2 flex items-center gap-2 text-charcoal-500">
+                          <Icon className="h-4 w-4 text-gold-400" />
+                          <span className="text-xs uppercase tracking-[0.18em]">{metric.label}</span>
+                        </div>
+                        <div className={`text-xl font-display font-bold ${metric.accent ? 'text-gold-400' : 'text-white'}`}>
+                          {metric.value}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
 
                 <div className="mt-6 flex flex-wrap gap-2">

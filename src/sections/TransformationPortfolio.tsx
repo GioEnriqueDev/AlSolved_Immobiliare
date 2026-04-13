@@ -7,18 +7,24 @@ import {
   useSpring,
   useTransform,
 } from 'framer-motion';
-import { ArrowUpRight, MoveHorizontal, Sparkles } from 'lucide-react';
 import {
-  transformationPortfolio,
-  transformationProjects,
-} from '../data/siteContent';
+  ArrowLeft,
+  ArrowRight,
+  ArrowUpRight,
+  MoveHorizontal,
+  Sparkles,
+} from 'lucide-react';
+import { transformationPortfolio, transformationProjects } from '../data/siteContent';
+import { useIsMobile } from '../hooks/use-mobile';
 
-const AUTOPLAY_DELAY = 5200;
+const AUTOPLAY_DELAY = 9500;
 const DEFAULT_REVEAL = 56;
 
 const TransformationPortfolio = () => {
   const prefersReducedMotion = useReducedMotion();
+  const isMobile = useIsMobile();
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const revealValue = useMotionValue(DEFAULT_REVEAL);
   const revealSpring = useSpring(revealValue, {
     stiffness: 220,
@@ -35,7 +41,7 @@ const TransformationPortfolio = () => {
   const activeProject = transformationProjects[activeIndex];
 
   useEffect(() => {
-    if (prefersReducedMotion || transformationProjects.length < 2) {
+    if (prefersReducedMotion || isMobile || isPaused || transformationProjects.length < 2) {
       return;
     }
 
@@ -44,14 +50,14 @@ const TransformationPortfolio = () => {
     }, AUTOPLAY_DELAY);
 
     return () => window.clearInterval(timer);
-  }, [prefersReducedMotion]);
+  }, [isMobile, isPaused, prefersReducedMotion]);
 
   useEffect(() => {
     const controls = animate(
       revealValue,
-      prefersReducedMotion ? DEFAULT_REVEAL : [38, 72, DEFAULT_REVEAL],
+      prefersReducedMotion ? DEFAULT_REVEAL : [42, 68, DEFAULT_REVEAL],
       {
-        duration: prefersReducedMotion ? 0 : 0.9,
+        duration: prefersReducedMotion ? 0 : 1,
         ease: 'easeInOut',
       }
     );
@@ -63,6 +69,16 @@ const TransformationPortfolio = () => {
     const bounds = currentTarget.getBoundingClientRect();
     const nextValue = ((clientX - bounds.left) / bounds.width) * 100;
     revealValue.set(Math.min(88, Math.max(12, nextValue)));
+  };
+
+  const goToPrevious = () => {
+    setActiveIndex((current) =>
+      current === 0 ? transformationProjects.length - 1 : current - 1
+    );
+  };
+
+  const goToNext = () => {
+    setActiveIndex((current) => (current + 1) % transformationProjects.length);
   };
 
   return (
@@ -97,7 +113,11 @@ const TransformationPortfolio = () => {
           </p>
         </motion.div>
 
-        <div className="grid gap-8 xl:grid-cols-[1.2fr,0.8fr]">
+        <div
+          className="grid gap-8 xl:grid-cols-[1.2fr,0.8fr]"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
           <motion.div
             initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -123,10 +143,7 @@ const TransformationPortfolio = () => {
                 loading="lazy"
               />
 
-              <motion.div
-                className="absolute inset-0 overflow-hidden"
-                style={{ clipPath: afterClipPath }}
-              >
+              <motion.div className="absolute inset-0 overflow-hidden" style={{ clipPath: afterClipPath }}>
                 <img
                   src={activeProject.afterImage}
                   alt={`${activeProject.title} dopo l intervento`}
@@ -162,7 +179,7 @@ const TransformationPortfolio = () => {
                   {activeProject.title}
                 </h3>
                 <p className="mt-2 text-sm text-charcoal-300">
-                  {activeProject.location} · {activeProject.assetType}
+                  {activeProject.location} / {activeProject.assetType}
                 </p>
               </div>
 
@@ -170,26 +187,38 @@ const TransformationPortfolio = () => {
                 <p className="text-xs uppercase tracking-[0.22em] text-charcoal-400">
                   {transformationPortfolio.progressBadge}
                 </p>
-                <p className="mt-2 text-lg font-semibold text-white">
-                  {activeProject.status}
-                </p>
-                <p className="mt-1 text-sm text-charcoal-400">
-                  {activeProject.yearLabel}
-                </p>
+                <p className="mt-2 text-lg font-semibold text-white">{activeProject.status}</p>
+                <p className="mt-1 text-sm text-charcoal-400">{activeProject.yearLabel}</p>
               </div>
             </div>
 
-            <div className="mt-4 flex items-center justify-between gap-4 rounded-[1.5rem] border border-white/10 bg-charcoal-950/75 px-5 py-4">
-              <div>
+            <div className="mt-4 flex flex-col gap-4 rounded-[1.5rem] border border-white/10 bg-charcoal-950/75 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="max-w-2xl">
                 <p className="text-xs uppercase tracking-[0.22em] text-gold-300">
                   {transformationPortfolio.stageLabel}
                 </p>
-                <p className="mt-2 text-sm text-charcoal-400">
-                  {activeProject.insight}
-                </p>
+                <p className="mt-2 text-sm text-charcoal-400">{activeProject.insight}</p>
               </div>
-              <div className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-gold-300 sm:flex">
-                <ArrowUpRight className="h-4 w-4" />
+              <div className="flex items-center gap-3 self-start sm:self-auto">
+                <button
+                  type="button"
+                  onClick={goToPrevious}
+                  className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white transition hover:border-gold-500/30 hover:bg-white/10"
+                  aria-label="Mostra il progetto precedente"
+                >
+                  <ArrowLeft className="h-4 w-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={goToNext}
+                  className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white transition hover:border-gold-500/30 hover:bg-white/10"
+                  aria-label="Mostra il progetto successivo"
+                >
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+                <div className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-gold-300 sm:flex">
+                  <ArrowUpRight className="h-4 w-4" />
+                </div>
               </div>
             </div>
           </motion.div>
@@ -257,12 +286,8 @@ const TransformationPortfolio = () => {
                         <p className="text-xs uppercase tracking-[0.2em] text-gold-300">
                           {project.status}
                         </p>
-                        <h4 className="mt-3 text-lg font-semibold text-white">
-                          {project.title}
-                        </h4>
-                        <p className="mt-2 text-sm text-charcoal-400">
-                          {project.assetType}
-                        </p>
+                        <h4 className="mt-3 text-lg font-semibold text-white">{project.title}</h4>
+                        <p className="mt-2 text-sm text-charcoal-400">{project.assetType}</p>
                       </div>
                       <div className="rounded-full border border-white/10 bg-charcoal-950/60 px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-charcoal-300">
                         {project.location}
@@ -271,16 +296,20 @@ const TransformationPortfolio = () => {
 
                     <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-white/10">
                       {isActive ? (
-                        <motion.div
-                          key={`${project.id}-${activeIndex}`}
-                          className="h-full rounded-full bg-gradient-to-r from-gold-300 via-gold-400 to-gold-600"
-                          initial={{ width: '0%' }}
-                          animate={{ width: '100%' }}
-                          transition={{
-                            duration: prefersReducedMotion ? 0 : AUTOPLAY_DELAY / 1000,
-                            ease: 'linear',
-                          }}
-                        />
+                        !prefersReducedMotion && !isMobile && !isPaused ? (
+                          <motion.div
+                            key={`${project.id}-${activeIndex}`}
+                            className="h-full rounded-full bg-gradient-to-r from-gold-300 via-gold-400 to-gold-600"
+                            initial={{ width: '0%' }}
+                            animate={{ width: '100%' }}
+                            transition={{
+                              duration: AUTOPLAY_DELAY / 1000,
+                              ease: 'linear',
+                            }}
+                          />
+                        ) : (
+                          <div className="h-full w-full rounded-full bg-gradient-to-r from-gold-300/80 via-gold-400/80 to-gold-600/80" />
+                        )
                       ) : (
                         <div className="h-full w-0" />
                       )}

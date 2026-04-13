@@ -15,13 +15,13 @@ const ProjectsPage = () => {
             <p className="text-xs uppercase tracking-[0.24em] text-gold-300">Valori distintivi</p>
             <div className="mt-5 space-y-4">
               <div className="rounded-2xl border border-white/5 bg-charcoal-900/75 p-4 text-sm leading-relaxed text-charcoal-300">
-                Numeri chiari, risultati leggibili e impostazione professionale.
+                Foto reali prima e dopo per leggere subito la qualita della trasformazione.
               </div>
               <div className="rounded-2xl border border-white/5 bg-charcoal-900/75 p-4 text-sm leading-relaxed text-charcoal-300">
-                Operazioni concluse, in corso e in pipeline presentate con coerenza.
+                Solo interventi conclusi, selezionati per raccontare metodo, visione e risultato finale.
               </div>
               <div className="rounded-2xl border border-white/5 bg-charcoal-900/75 p-4 text-sm leading-relaxed text-charcoal-300">
-                Focus su credibilita, trasparenza e track record.
+                Un portfolio piu visitabile e piu credibile, costruito su case study reali.
               </div>
             </div>
           </div>
