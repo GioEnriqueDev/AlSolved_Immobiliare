@@ -8,9 +8,9 @@ const CursorGlow = () => {
   const y = useSpring(0, springConfig);
 
   useEffect(() => {
-    // Check if device has coarse pointer (touch)
     const hasTouch = window.matchMedia('(pointer: coarse)').matches;
-    if (hasTouch) return;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (hasTouch || prefersReducedMotion) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       x.set(e.clientX);
@@ -24,15 +24,19 @@ const CursorGlow = () => {
     };
   }, [x, y]);
 
-  // Don't render on touch devices
-  if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
+  // Don't render on touch devices or when motion should be reduced.
+  if (
+    typeof window !== 'undefined' &&
+    (window.matchMedia('(pointer: coarse)').matches ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+  ) {
     return null;
   }
 
   return (
     <motion.div
       ref={cursorRef}
-      className="pointer-events-none fixed w-[400px] h-[400px] rounded-full z-[9999] mix-blend-screen"
+      className="pointer-events-none fixed z-[9999] h-[320px] w-[320px] rounded-full mix-blend-screen xl:h-[400px] xl:w-[400px]"
       style={{
         x,
         y,

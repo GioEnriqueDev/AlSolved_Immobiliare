@@ -49,8 +49,15 @@ const MagneticButton = (props: MagneticButtonProps) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const anchorRef = useRef<HTMLAnchorElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const isTouchDevice =
+    typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
+  const prefersReducedMotion =
+    typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const disableMagnetism = isTouchDevice || prefersReducedMotion;
 
   const handleMouseMove = (event: MouseEvent<HTMLElement>) => {
+    if (disableMagnetism) return;
+
     const ref = event.currentTarget;
     if (!ref) return;
 
@@ -65,16 +72,19 @@ const MagneticButton = (props: MagneticButtonProps) => {
   };
 
   const handleMouseLeave = () => {
+    if (disableMagnetism) return;
     setPosition({ x: 0, y: 0 });
   };
 
   const sharedMotionProps = {
     className: `relative overflow-hidden ${className}`,
-    onMouseMove: handleMouseMove,
-    onMouseLeave: handleMouseLeave,
-    animate: { x: position.x, y: position.y },
-    transition: { type: 'spring' as const, stiffness: 350, damping: 15, mass: 0.5 },
-    whileHover: { scale: 1.02 },
+    onMouseMove: disableMagnetism ? undefined : handleMouseMove,
+    onMouseLeave: disableMagnetism ? undefined : handleMouseLeave,
+    animate: disableMagnetism ? undefined : { x: position.x, y: position.y },
+    transition: disableMagnetism
+      ? { duration: 0.2 }
+      : { type: 'spring' as const, stiffness: 350, damping: 15, mass: 0.5 },
+    whileHover: disableMagnetism ? undefined : { scale: 1.02 },
     whileTap: { scale: 0.98 },
   };
 

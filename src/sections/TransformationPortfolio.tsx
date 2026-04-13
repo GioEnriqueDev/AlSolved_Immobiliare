@@ -82,7 +82,7 @@ const TransformationPortfolio = () => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-charcoal-950 px-6 py-28 sm:px-12 lg:px-24">
+    <section className="relative overflow-hidden bg-charcoal-950 px-6 py-24 sm:px-12 lg:px-24">
       <div className="absolute inset-0">
         <div className="absolute left-[-6rem] top-20 h-72 w-72 rounded-full bg-gold-500/10 blur-[140px]" />
         <div className="absolute right-[-8rem] top-1/3 h-[28rem] w-[28rem] rounded-full bg-gold-500/10 blur-[180px]" />
@@ -95,7 +95,7 @@ const TransformationPortfolio = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.8 }}
-          className="mb-14 max-w-4xl"
+          className="mb-10 max-w-4xl sm:mb-12"
         >
           <div className="inline-flex items-center gap-2 rounded-full border border-gold-500/20 bg-gold-500/10 px-5 py-2">
             <Sparkles className="h-4 w-4 text-gold-300" />
@@ -104,17 +104,17 @@ const TransformationPortfolio = () => {
             </span>
           </div>
 
-          <h2 className="mt-6 font-display text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+          <h2 className="mt-5 font-display text-3xl font-bold leading-tight text-white sm:mt-6 sm:text-5xl lg:text-6xl">
             {transformationPortfolio.title}{' '}
             <span className="text-gradient">{transformationPortfolio.titleAccent}</span>
           </h2>
-          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-charcoal-300">
+          <p className="mt-5 max-w-3xl text-base leading-relaxed text-charcoal-300 sm:mt-6 sm:text-lg">
             {transformationPortfolio.description}
           </p>
         </motion.div>
 
         <div
-          className="grid gap-8 xl:grid-cols-[1.2fr,0.8fr]"
+          className="grid gap-8 xl:grid-cols-[1.15fr,0.85fr] xl:items-start"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
@@ -123,10 +123,10 @@ const TransformationPortfolio = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.85 }}
-            className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 p-3 shadow-[0_30px_120px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:p-4"
+            className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 p-3 shadow-[0_30px_120px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:p-4 xl:p-5"
           >
             <div
-              className="group relative aspect-[4/3] overflow-hidden rounded-[1.6rem] bg-charcoal-900"
+              className="group relative aspect-[4/5] overflow-hidden rounded-[1.6rem] bg-charcoal-900 sm:aspect-[5/4] md:aspect-[16/11] xl:aspect-[16/10]"
               onMouseMove={(event) => updateReveal(event.clientX, event.currentTarget)}
               onMouseLeave={() => revealValue.set(DEFAULT_REVEAL)}
               onPointerDown={(event) => updateReveal(event.clientX, event.currentTarget)}
@@ -159,23 +159,23 @@ const TransformationPortfolio = () => {
                 className="absolute inset-y-0 z-20 w-px bg-white/90 shadow-[0_0_30px_rgba(255,255,255,0.45)]"
                 style={{ left: revealPercentage }}
               >
-                <div className="absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-charcoal-950/85 text-white shadow-[0_0_40px_rgba(0,0,0,0.35)] backdrop-blur-xl">
-                  <MoveHorizontal className="h-5 w-5" />
+                <div className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-charcoal-950/85 text-white shadow-[0_0_40px_rgba(0,0,0,0.35)] backdrop-blur-xl sm:h-14 sm:w-14">
+                  <MoveHorizontal className="h-4 w-4 sm:h-5 sm:w-5" />
                 </div>
               </motion.div>
 
-              <div className="absolute left-5 top-5 rounded-full border border-white/10 bg-charcoal-950/70 px-4 py-2 text-xs uppercase tracking-[0.22em] text-white backdrop-blur-xl">
+              <div className="absolute left-3 top-3 rounded-full border border-white/10 bg-charcoal-950/70 px-3 py-1.5 text-[11px] uppercase tracking-[0.18em] text-white backdrop-blur-xl sm:left-5 sm:top-5 sm:px-4 sm:py-2 sm:text-xs sm:tracking-[0.22em]">
                 Prima
               </div>
-              <div className="absolute right-5 top-5 rounded-full border border-gold-500/20 bg-gold-500/15 px-4 py-2 text-xs uppercase tracking-[0.22em] text-gold-100 backdrop-blur-xl">
+              <div className="absolute right-3 top-3 rounded-full border border-gold-500/20 bg-gold-500/15 px-3 py-1.5 text-[11px] uppercase tracking-[0.18em] text-gold-100 backdrop-blur-xl sm:right-5 sm:top-5 sm:px-4 sm:py-2 sm:text-xs sm:tracking-[0.22em]">
                 Dopo
               </div>
 
-              <div className="absolute bottom-5 left-5 max-w-xs rounded-[1.5rem] border border-white/10 bg-charcoal-950/75 p-4 backdrop-blur-xl">
+              <div className="absolute inset-x-3 bottom-3 rounded-[1.5rem] border border-white/10 bg-charcoal-950/75 p-4 backdrop-blur-xl sm:inset-x-auto sm:bottom-5 sm:left-5 sm:max-w-sm sm:p-5">
                 <p className="text-xs uppercase tracking-[0.22em] text-gold-300">
                   {transformationPortfolio.cardEyebrow}
                 </p>
-                <h3 className="mt-3 font-display text-2xl font-semibold text-white">
+                <h3 className="mt-3 font-display text-2xl font-semibold text-white sm:text-3xl">
                   {activeProject.title}
                 </h3>
                 <p className="mt-2 text-sm text-charcoal-300">
@@ -183,7 +183,7 @@ const TransformationPortfolio = () => {
                 </p>
               </div>
 
-              <div className="absolute bottom-5 right-5 hidden rounded-[1.5rem] border border-white/10 bg-white/5 p-4 text-right backdrop-blur-xl sm:block">
+              <div className="absolute bottom-5 right-5 hidden min-w-[12rem] rounded-[1.5rem] border border-white/10 bg-white/5 p-4 text-right backdrop-blur-xl lg:block">
                 <p className="text-xs uppercase tracking-[0.22em] text-charcoal-400">
                   {transformationPortfolio.progressBadge}
                 </p>
@@ -192,8 +192,8 @@ const TransformationPortfolio = () => {
               </div>
             </div>
 
-            <div className="mt-4 flex flex-col gap-4 rounded-[1.5rem] border border-white/10 bg-charcoal-950/75 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
-              <div className="max-w-2xl">
+            <div className="mt-4 flex flex-col gap-4 rounded-[1.5rem] border border-white/10 bg-charcoal-950/75 px-4 py-4 sm:px-5 lg:flex-row lg:items-center lg:justify-between">
+              <div className="max-w-3xl">
                 <p className="text-xs uppercase tracking-[0.22em] text-gold-300">
                   {transformationPortfolio.stageLabel}
                 </p>
@@ -216,21 +216,21 @@ const TransformationPortfolio = () => {
                 >
                   <ArrowRight className="h-4 w-4" />
                 </button>
-                <div className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-gold-300 sm:flex">
+                <div className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-gold-300 lg:flex">
                   <ArrowUpRight className="h-4 w-4" />
                 </div>
               </div>
             </div>
           </motion.div>
 
-          <div className="space-y-6">
+          <div className="space-y-5 xl:pt-1">
             <motion.article
               key={activeProject.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.8, delay: 0.05 }}
-              className="rounded-[2rem] border border-white/10 bg-black/20 p-6 backdrop-blur-xl sm:p-7"
+              className="rounded-[2rem] border border-white/10 bg-black/20 p-6 backdrop-blur-xl sm:p-7 xl:p-8"
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -246,7 +246,7 @@ const TransformationPortfolio = () => {
                 </div>
               </div>
 
-              <p className="mt-5 text-sm leading-relaxed text-charcoal-300">
+              <p className="mt-5 text-base leading-relaxed text-charcoal-300">
                 {activeProject.summary}
               </p>
 
@@ -254,7 +254,7 @@ const TransformationPortfolio = () => {
                 {activeProject.metrics.map((metric) => (
                   <div
                     key={metric}
-                    className="rounded-2xl border border-white/5 bg-white/5 px-4 py-3 text-sm text-charcoal-200"
+                    className="rounded-2xl border border-white/5 bg-white/5 px-4 py-3 text-sm leading-relaxed text-charcoal-200"
                   >
                     {metric}
                   </div>
@@ -275,7 +275,7 @@ const TransformationPortfolio = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: '-60px' }}
                     transition={{ duration: 0.65, delay: index * 0.08 }}
-                    className={`relative overflow-hidden rounded-[1.6rem] border p-4 text-left transition-all duration-300 ${
+                    className={`relative overflow-hidden rounded-[1.6rem] border px-4 py-4 text-left transition-all duration-300 sm:px-5 sm:py-5 ${
                       isActive
                         ? 'border-gold-500/30 bg-gold-500/10 shadow-glow'
                         : 'border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/[0.08]'
@@ -286,8 +286,8 @@ const TransformationPortfolio = () => {
                         <p className="text-xs uppercase tracking-[0.2em] text-gold-300">
                           {project.status}
                         </p>
-                        <h4 className="mt-3 text-lg font-semibold text-white">{project.title}</h4>
-                        <p className="mt-2 text-sm text-charcoal-400">{project.assetType}</p>
+                        <h4 className="mt-3 text-lg font-semibold text-white sm:text-xl">{project.title}</h4>
+                        <p className="mt-2 text-sm leading-relaxed text-charcoal-400">{project.assetType}</p>
                       </div>
                       <div className="rounded-full border border-white/10 bg-charcoal-950/60 px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-charcoal-300">
                         {project.location}
@@ -318,33 +318,6 @@ const TransformationPortfolio = () => {
                 );
               })}
             </div>
-
-            <motion.article
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.75, delay: 0.15 }}
-              className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/5"
-            >
-              <div className="relative h-52 overflow-hidden">
-                <img
-                  src={transformationPortfolio.teaserImage}
-                  alt={transformationPortfolio.teaserImageAlt}
-                  className="h-full w-full object-cover"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/35 to-transparent" />
-                <div className="absolute left-5 top-5 rounded-full border border-gold-500/20 bg-gold-500/15 px-4 py-2 text-xs uppercase tracking-[0.22em] text-gold-100">
-                  {transformationPortfolio.teaserTitle}
-                </div>
-              </div>
-
-              <div className="p-6">
-                <p className="text-sm leading-relaxed text-charcoal-300">
-                  {transformationPortfolio.teaserDescription}
-                </p>
-              </div>
-            </motion.article>
           </div>
         </div>
       </div>

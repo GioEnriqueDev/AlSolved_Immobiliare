@@ -15,13 +15,13 @@ const InvestPage = () => {
             <p className="text-xs uppercase tracking-[0.24em] text-gold-300">Per chi investe</p>
             <div className="mt-5 space-y-4">
               <div className="rounded-2xl border border-white/5 bg-charcoal-900/75 p-4 text-sm leading-relaxed text-charcoal-300">
-                Modello di business spiegato in modo diretto e istituzionale.
+                Un approccio spiegato in modo chiaro, diretto e comprensibile.
               </div>
               <div className="rounded-2xl border border-white/5 bg-charcoal-900/75 p-4 text-sm leading-relaxed text-charcoal-300">
-                Simulatore indicativo per una prima lettura del potenziale.
+                Uno strumento semplice per farsi un idea del potenziale dell investimento.
               </div>
               <div className="rounded-2xl border border-white/5 bg-charcoal-900/75 p-4 text-sm leading-relaxed text-charcoal-300">
-                Contatto dedicato per dossier, approfondimenti e opportunita selezionate.
+                Un contatto diretto per ricevere informazioni, materiali e approfondimenti.
               </div>
             </div>
           </div>

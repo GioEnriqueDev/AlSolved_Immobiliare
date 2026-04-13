@@ -211,6 +211,17 @@ html.lenis, html.lenis body {
   transition: opacity 0.3s ease;
 }
 
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .cursor-glow,
+  .noise::after {
+    display: none !important;
+  }
+}
+
 /* Slider styling */
 input[type="range"] {
   -webkit-appearance: none;

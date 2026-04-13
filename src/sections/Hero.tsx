@@ -55,35 +55,35 @@ const Hero = () => {
       </div>
 
       <motion.div
-        className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-6 pb-16 pt-28 sm:px-12 lg:px-24"
+        className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-6 pb-12 pt-24 sm:px-12 sm:pb-16 sm:pt-28 lg:px-24"
         style={{ opacity: springOpacity }}
       >
-        <div className="grid items-center gap-12 lg:grid-cols-[1.1fr,0.9fr]">
+        <div className="grid items-center gap-10 lg:grid-cols-[1.1fr,0.9fr] lg:gap-12">
           <div>
             <motion.div
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
-              className="mb-8 inline-flex items-center gap-2 rounded-full border border-gold-500/20 bg-white/5 px-5 py-2"
+              className="mb-6 inline-flex max-w-full items-center gap-2 rounded-full border border-gold-500/20 bg-white/5 px-4 py-2 sm:mb-8 sm:px-5"
             >
-              <span className="text-xs uppercase tracking-[0.28em] text-gold-300">{hero.badge}</span>
+              <span className="text-[11px] uppercase tracking-[0.18em] text-gold-300 sm:text-xs sm:tracking-[0.28em]">{hero.badge}</span>
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="mb-8 flex flex-col items-start gap-1"
+              className="mb-6 flex flex-col items-start gap-1 sm:mb-8"
             >
-              <p className="font-serif text-2xl text-white sm:text-3xl">{hero.brandLine}</p>
-              <p className="text-sm uppercase tracking-[0.24em] text-charcoal-400">Investimenti e valorizzazione</p>
+              <p className="font-serif text-xl text-white sm:text-3xl">{hero.brandLine}</p>
+              <p className="text-xs uppercase tracking-[0.18em] text-charcoal-400 sm:text-sm sm:tracking-[0.24em]">Investimenti e valorizzazione</p>
             </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 32 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="mb-4 max-w-4xl font-display text-5xl font-bold leading-[0.96] tracking-tight text-white sm:text-6xl lg:text-7xl"
+              className="mb-3 max-w-4xl font-display text-4xl font-bold leading-[0.96] tracking-tight text-white sm:mb-4 sm:text-6xl lg:text-7xl"
             >
               {hero.titlePrimary}
             </motion.h1>
@@ -92,7 +92,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 32 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="mb-8 max-w-4xl font-display text-5xl font-bold leading-[0.96] tracking-tight sm:text-6xl lg:text-7xl"
+              className="mb-6 max-w-4xl font-display text-4xl font-bold leading-[0.96] tracking-tight sm:mb-8 sm:text-6xl lg:text-7xl"
             >
               <span className="text-gradient">{hero.titleHighlight}</span>
             </motion.h2>
@@ -101,7 +101,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="mb-10 max-w-2xl text-base leading-relaxed text-charcoal-300 sm:text-lg"
+              className="mb-8 max-w-2xl text-sm leading-relaxed text-charcoal-300 sm:mb-10 sm:text-lg"
             >
               {hero.subtitle}
             </motion.p>
@@ -110,11 +110,11 @@ const Hero = () => {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="flex flex-col items-start gap-4 sm:flex-row"
+              className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-start sm:gap-4"
             >
               <MagneticButton
                 href={hero.ctas.primary.href}
-                className="group rounded-full bg-gold-500 px-8 py-4 font-semibold text-charcoal-950 transition-all duration-300 hover:shadow-glow-lg"
+                className="group w-full rounded-full bg-gold-500 px-6 py-4 text-center font-semibold text-charcoal-950 transition-all duration-300 hover:shadow-glow-lg sm:w-auto sm:px-8"
                 aria-label={hero.ctas.primary.label}
               >
                 <span className="flex items-center gap-2">
@@ -125,7 +125,7 @@ const Hero = () => {
 
               <MagneticButton
                 href={hero.ctas.secondary.href}
-                className="rounded-full border border-white/10 bg-white/5 px-8 py-4 font-medium text-white transition-all duration-300 hover:bg-white/10"
+                className="w-full rounded-full border border-white/10 bg-white/5 px-6 py-4 text-center font-medium text-white transition-all duration-300 hover:bg-white/10 sm:w-auto sm:px-8"
                 aria-label={hero.ctas.secondary.label}
               >
                 {hero.ctas.secondary.label}
@@ -137,21 +137,21 @@ const Hero = () => {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.35 }}
-            className="rounded-[2rem] border border-white/10 bg-black/25 p-8 backdrop-blur-xl"
+            className="rounded-[2rem] border border-white/10 bg-black/25 p-6 backdrop-blur-xl sm:p-8"
           >
-            <div className="mb-8 flex items-center justify-between gap-4">
+            <div className="mb-6 flex flex-col items-start gap-3 sm:mb-8 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
               <div>
                 <p className="text-xs uppercase tracking-[0.24em] text-gold-300">Perche Leone Group</p>
                 <h3 className="mt-3 font-display text-2xl font-semibold text-white">Il nostro approccio</h3>
               </div>
-              <div className="rounded-full border border-gold-500/20 bg-gold-500/10 px-4 py-2 text-xs uppercase tracking-[0.2em] text-gold-300">
+              <div className="rounded-full border border-gold-500/20 bg-gold-500/10 px-4 py-2 text-[11px] uppercase tracking-[0.16em] text-gold-300 sm:text-xs sm:tracking-[0.2em]">
                 Valore concreto
               </div>
             </div>
 
             <div className="space-y-4">
               {hero.commitments.map((commitment) => (
-                <div key={commitment} className="flex gap-4 rounded-2xl border border-white/5 bg-white/5 p-4">
+                <div key={commitment} className="flex gap-3 rounded-2xl border border-white/5 bg-white/5 p-4 sm:gap-4">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-gold-400" />
                   <p className="text-sm leading-relaxed text-charcoal-200">{commitment}</p>
                 </div>
@@ -171,7 +171,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
-          className="mt-14 grid gap-4 md:grid-cols-2 xl:grid-cols-4"
+          className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
         >
           {hero.stats.map((stat) => (
             <div key={stat.label} className="rounded-3xl border border-white/10 bg-black/30 p-6 backdrop-blur-xl">
@@ -187,7 +187,7 @@ const Hero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 1 }}
-        className="absolute bottom-6 left-1/2 z-20 -translate-x-1/2"
+        className="absolute bottom-4 left-1/2 z-20 hidden -translate-x-1/2 sm:block"
       >
         <motion.div
           animate={prefersReducedMotion ? { y: 0 } : { y: [0, 8, 0] }}

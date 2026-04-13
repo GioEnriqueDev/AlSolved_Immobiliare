@@ -8,8 +8,8 @@ const HomePage = () => {
   return (
     <SiteShell currentPath={routes.home}>
       <Hero />
-      <TransformationPortfolio />
       <HomeOverview />
+      <TransformationPortfolio />
     </SiteShell>
   );
 };

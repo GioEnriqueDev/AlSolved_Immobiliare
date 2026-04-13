@@ -46,8 +46,8 @@ const Navigation = ({ currentPath }: NavigationProps) => {
         transition={{ duration: 0.8, delay: 0.4 }}
         className={`fixed left-0 right-0 top-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? 'border-b border-white/5 bg-charcoal-950/85 py-4 backdrop-blur-xl'
-            : 'bg-transparent py-6'
+            ? 'border-b border-white/5 bg-charcoal-950/85 py-3 backdrop-blur-xl sm:py-4'
+            : 'bg-transparent py-4 sm:py-6'
         }`}
       >
         <div className="mx-auto max-w-7xl px-6 sm:px-12 lg:px-24">
@@ -58,7 +58,7 @@ const Navigation = ({ currentPath }: NavigationProps) => {
               aria-label={`Torna alla home di ${brand.name}`}
               whileHover={{ scale: 1.02 }}
             >
-              <img src={brand.logoSrc} alt={brand.logoAlt} className="h-20 w-auto object-contain sm:h-28" />
+              <img src={brand.logoSrc} alt={brand.logoAlt} className="h-14 w-auto object-contain sm:h-28" />
             </motion.a>
 
             <div className="hidden items-center gap-8 md:flex">
@@ -94,7 +94,7 @@ const Navigation = ({ currentPath }: NavigationProps) => {
 
             <button
               type="button"
-              className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 md:hidden"
+              className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 md:hidden"
               aria-expanded={isMobileMenuOpen}
               aria-controls={mobileMenuId}
               aria-label={isMobileMenuOpen ? 'Chiudi menu navigazione' : 'Apri menu navigazione'}
@@ -119,7 +119,7 @@ const Navigation = ({ currentPath }: NavigationProps) => {
             aria-modal="true"
           >
             <div className="absolute inset-0 bg-charcoal-950/95 backdrop-blur-xl" />
-            <div className="relative flex h-full flex-col items-center justify-center gap-8 px-6 text-center">
+            <div className="relative flex h-full flex-col items-center justify-center gap-6 px-6 pb-8 pt-24 text-center">
               {navLinks.map((link, index) => (
                 <motion.a
                   key={link.label}
@@ -128,7 +128,7 @@ const Navigation = ({ currentPath }: NavigationProps) => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.08 }}
                   aria-label={`Vai a ${link.label}`}
-                  className="font-display text-2xl text-white"
+                  className="font-display text-xl text-white sm:text-2xl"
                   onClick={closeMenu}
                 >
                   {link.label}
@@ -137,7 +137,7 @@ const Navigation = ({ currentPath }: NavigationProps) => {
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
                 <MagneticButton
                   href={routes.sell}
-                  className="rounded-full bg-gold-500 px-8 py-3 font-semibold text-charcoal-950"
+                  className="w-full rounded-full bg-gold-500 px-8 py-3 text-center font-semibold text-charcoal-950"
                   aria-label="Vai alla sezione per vendere il tuo immobile"
                   onClick={closeMenu}
                 >

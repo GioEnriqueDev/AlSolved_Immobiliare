@@ -104,12 +104,12 @@ const ContactSection = () => {
         <div className="grid gap-12 xl:grid-cols-[0.92fr,1.08fr]">
           <div>
             <p className="mb-4 text-xs uppercase tracking-[0.26em] text-gold-300">{seller.badge}</p>
-            <h2 className="font-display text-4xl font-bold text-white sm:text-5xl">{seller.title}</h2>
-            <p className="mt-6 text-lg leading-relaxed text-charcoal-300">{seller.subtitle}</p>
+            <h2 className="font-display text-3xl font-bold text-white sm:text-5xl">{seller.title}</h2>
+            <p className="mt-5 text-base leading-relaxed text-charcoal-300 sm:mt-6 sm:text-lg">{seller.subtitle}</p>
             <p className="mt-4 text-base leading-relaxed text-charcoal-400">{seller.description}</p>
 
             <div className="mt-8 rounded-[2rem] border border-gold-500/20 bg-gold-500/10 p-6">
-              <div className="flex items-center gap-3">
+              <div className="flex items-start gap-3 sm:items-center">
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gold-500 text-charcoal-950">
                   <Clock3 className="h-5 w-5" />
                 </div>
@@ -146,7 +146,7 @@ const ContactSection = () => {
                 <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
                   <Phone className="h-4 w-4" />
                 </span>
-                <span>{contact.details.phone}</span>
+                <span className="break-all sm:break-normal">{contact.details.phone}</span>
               </a>
 
               <a
@@ -157,7 +157,7 @@ const ContactSection = () => {
                 <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
                   <Mail className="h-4 w-4" />
                 </span>
-                <span>{contact.details.email}</span>
+                <span className="break-all sm:break-normal">{contact.details.email}</span>
               </a>
 
               <p className="flex items-start gap-3 text-charcoal-200">
@@ -187,7 +187,7 @@ const ContactSection = () => {
               </div>
               <MagneticButton
                 href={routes.home}
-                className="inline-flex rounded-full border border-white/10 bg-black/30 px-5 py-2.5 text-sm text-white"
+                className="inline-flex w-full rounded-full border border-white/10 bg-black/30 px-5 py-2.5 text-center text-sm text-white sm:w-auto"
                 aria-label="Torna all inizio della pagina"
               >
                 Torna su

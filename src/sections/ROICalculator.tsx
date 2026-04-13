@@ -12,10 +12,12 @@ import {
 } from 'lucide-react';
 import MagneticButton from '../components/custom/MagneticButton';
 import { calculator, invest } from '../data/siteContent';
+import { useIsMobile } from '../hooks/use-mobile';
 
 const ROICalculator = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: '-100px' });
+  const isMobile = useIsMobile();
 
   const [investment, setInvestment] = useState(500000);
   const [years, setYears] = useState(4);
@@ -116,8 +118,8 @@ const ROICalculator = () => {
           className="mb-14 max-w-4xl"
         >
           <p className="mb-4 text-xs uppercase tracking-[0.26em] text-gold-300">{invest.badge}</p>
-          <h2 className="font-display text-4xl font-bold text-white sm:text-5xl">{invest.title}</h2>
-          <p className="mt-6 text-lg leading-relaxed text-charcoal-300">{invest.intro}</p>
+          <h2 className="font-display text-3xl font-bold text-white sm:text-5xl">{invest.title}</h2>
+          <p className="mt-5 text-base leading-relaxed text-charcoal-300 sm:mt-6 sm:text-lg">{invest.intro}</p>
           <p className="mt-4 text-base leading-relaxed text-charcoal-400">{invest.description}</p>
         </motion.div>
 
@@ -191,7 +193,7 @@ const ROICalculator = () => {
                   <TrendingUp className="h-4 w-4 text-gold-400" />
                   <span className="text-xs uppercase tracking-[0.2em] text-gold-300">{calculator.badge}</span>
                 </div>
-                <h3 className="mt-6 font-display text-3xl font-bold text-white sm:text-4xl">
+                <h3 className="mt-6 font-display text-2xl font-bold text-white sm:text-4xl">
                   {calculator.title} <span className="text-gradient">{calculator.titleAccent}</span>
                 </h3>
                 <p className="mt-4 text-base leading-relaxed text-charcoal-300">{calculator.description}</p>
@@ -201,7 +203,7 @@ const ROICalculator = () => {
 
               <div className="grid gap-5">
                 <div className="rounded-3xl border border-white/10 bg-charcoal-900/70 p-5">
-                  <div className="mb-4 flex items-center justify-between gap-4">
+                  <div className="mb-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div className="flex items-center gap-3">
                       <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gold-500/15">
                         <Euro className="h-5 w-5 text-gold-400" />
@@ -213,7 +215,7 @@ const ROICalculator = () => {
                         <p className="text-sm text-charcoal-400">{calculator.labels.amount.description}</p>
                       </div>
                     </div>
-                    <motion.span className="text-2xl font-display font-bold text-gold-400">{formattedInvestment}</motion.span>
+                    <motion.span className="text-xl font-display font-bold text-gold-400 sm:text-2xl">{formattedInvestment}</motion.span>
                   </div>
                   <input
                     id="investment"
@@ -233,7 +235,7 @@ const ROICalculator = () => {
                 </div>
 
                 <div className="rounded-3xl border border-white/10 bg-charcoal-900/70 p-5">
-                  <div className="mb-4 flex items-center justify-between gap-4">
+                  <div className="mb-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div className="flex items-center gap-3">
                       <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gold-500/15">
                         <Calendar className="h-5 w-5 text-gold-400" />
@@ -245,7 +247,7 @@ const ROICalculator = () => {
                         <p className="text-sm text-charcoal-400">{calculator.labels.years.description}</p>
                       </div>
                     </div>
-                    <span className="text-2xl font-display font-bold text-gold-400">{years} anni</span>
+                    <span className="text-xl font-display font-bold text-gold-400 sm:text-2xl">{years} anni</span>
                   </div>
                   <input
                     id="years"
@@ -265,7 +267,7 @@ const ROICalculator = () => {
                 </div>
 
                 <div className="rounded-3xl border border-white/10 bg-charcoal-900/70 p-5">
-                  <div className="mb-4 flex items-center justify-between gap-4">
+                  <div className="mb-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div className="flex items-center gap-3">
                       <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gold-500/15">
                         <Percent className="h-5 w-5 text-gold-400" />
@@ -277,7 +279,7 @@ const ROICalculator = () => {
                         <p className="text-sm text-charcoal-400">{calculator.labels.roi.description}</p>
                       </div>
                     </div>
-                    <span className="text-2xl font-display font-bold text-gold-400">{roiRate}%</span>
+                    <span className="text-xl font-display font-bold text-gold-400 sm:text-2xl">{roiRate}%</span>
                   </div>
                   <input
                     id="roi"
@@ -315,7 +317,7 @@ const ROICalculator = () => {
               </div>
 
               <div className="mt-6 rounded-3xl border border-white/10 bg-charcoal-900/75 p-5">
-                <div className="mb-6 flex items-center justify-between gap-4">
+                <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <h4 className="text-lg font-medium text-white">Proiezione di crescita</h4>
                   <div className="flex items-center gap-2 text-sm text-charcoal-400">
                     <div className="h-3 w-3 rounded-full bg-gold-500" />
@@ -323,7 +325,7 @@ const ROICalculator = () => {
                   </div>
                 </div>
 
-                <div className="relative h-64 w-full">
+                <div className="relative h-56 w-full sm:h-64">
                   <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="h-full w-full">
                     <defs>
                       <linearGradient id="investChartGradient" x1="0" y1="0" x2="0" y2="1">
@@ -383,9 +385,14 @@ const ROICalculator = () => {
                     })}
                   </svg>
 
-                  <div className="absolute bottom-0 left-0 right-0 flex justify-between text-xs text-charcoal-500">
-                    {chartData.map((point) => (
-                      <span key={point.year}>{`Anno ${point.year}`}</span>
+                  <div className="absolute bottom-0 left-0 right-0 flex justify-between text-[11px] text-charcoal-500 sm:text-xs">
+                    {chartData.map((point, index) => (
+                      <span
+                        key={point.year}
+                        className={isMobile && index !== 0 && index !== chartData.length - 1 && index % 2 !== 0 ? 'hidden' : ''}
+                      >
+                        {`Anno ${point.year}`}
+                      </span>
                     ))}
                   </div>
                 </div>

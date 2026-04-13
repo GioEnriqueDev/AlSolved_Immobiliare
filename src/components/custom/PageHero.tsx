@@ -10,7 +10,7 @@ interface PageHeroProps {
 
 const PageHero = ({ badge, title, description, aside }: PageHeroProps) => {
   return (
-    <section className="relative overflow-hidden bg-charcoal-950 px-6 pb-16 pt-32 sm:px-12 lg:px-24">
+    <section className="relative overflow-hidden bg-charcoal-950 px-6 pb-14 pt-24 sm:px-12 sm:pb-16 sm:pt-32 lg:px-24">
       <div className="absolute inset-0">
         <div className="absolute left-0 top-24 h-80 w-80 rounded-full bg-gold-500/6 blur-[150px]" />
         <div className="absolute right-0 top-10 h-[24rem] w-[24rem] rounded-full bg-gold-500/5 blur-[180px]" />
@@ -22,9 +22,9 @@ const PageHero = ({ badge, title, description, aside }: PageHeroProps) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <p className="mb-4 text-xs uppercase tracking-[0.28em] text-gold-300">{badge}</p>
-          <h1 className="max-w-4xl font-display text-5xl font-bold leading-[0.96] text-white sm:text-6xl">{title}</h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-charcoal-300">{description}</p>
+          <p className="mb-4 text-[11px] uppercase tracking-[0.18em] text-gold-300 sm:text-xs sm:tracking-[0.28em]">{badge}</p>
+          <h1 className="max-w-4xl font-display text-4xl font-bold leading-[0.96] text-white sm:text-6xl">{title}</h1>
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-charcoal-300 sm:mt-6 sm:text-lg">{description}</p>
         </motion.div>
 
         {aside && (

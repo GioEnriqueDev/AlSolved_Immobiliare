@@ -18,10 +18,10 @@ const ProjectsPage = () => {
                 Foto reali prima e dopo per leggere subito la qualita della trasformazione.
               </div>
               <div className="rounded-2xl border border-white/5 bg-charcoal-900/75 p-4 text-sm leading-relaxed text-charcoal-300">
-                Solo interventi conclusi, selezionati per raccontare metodo, visione e risultato finale.
+                Solo progetti conclusi, scelti per mostrare con chiarezza il risultato finale.
               </div>
               <div className="rounded-2xl border border-white/5 bg-charcoal-900/75 p-4 text-sm leading-relaxed text-charcoal-300">
-                Un portfolio piu visitabile e piu credibile, costruito su case study reali.
+                Una raccolta ordinata e facile da leggere, pensata per aiutarti a capire subito il nostro lavoro.
               </div>
             </div>
           </div>
