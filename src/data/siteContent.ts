@@ -269,8 +269,8 @@ export const transformationProjects: TransformationProject[] = [
       'Intervento in corso di frazionamento e riqualificazione di un intero attico, con ridefinizione degli spazi per creare due unità abitative distinte. Il progetto punta a soluzioni moderne, funzionali e luminose, valorizzando al massimo le caratteristiche dell’immobile.',
     insight: 'In corso di realizzazione. Trasformazione di un intero piano attico in due unità esclusive.',
     metrics: ['Superficie 165 mq', '2 nuovi appartamenti', 'In corso'],
-    beforeImage: './portfolio/talenti-prima.jpeg',
-    afterImage: './portfolio/talenti-prima.jpeg',
+    beforeImage: './portfolio/eroi-in-corso.jpeg',
+    afterImage: './portfolio/eroi-in-corso.jpeg',
   },
 ];
 
@@ -467,8 +467,8 @@ export const projects: Project[] = [
     location: 'Roma',
     status: 'In corso',
     assetType: 'Riqualificazione e frazionamento',
-    beforeImage: './portfolio/talenti-prima.jpeg',
-    afterImage: './portfolio/talenti-prima.jpeg',
+    beforeImage: './portfolio/eroi-in-corso.jpeg',
+    afterImage: './portfolio/eroi-in-corso.jpeg',
     description:
       'Intervento in corso di frazionamento e riqualificazione di un intero attico, con ridefinizione degli spazi per creare due unità abitative distinte. Il progetto punta a soluzioni moderne, funzionali e luminose, valorizzando al massimo le caratteristiche dell’immobile.',
     metrics: [
