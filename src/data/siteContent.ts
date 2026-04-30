@@ -244,6 +244,34 @@ export const transformationProjects: TransformationProject[] = [
     beforeImage: './portfolio/universita-prima.jpeg',
     afterImage: './portfolio/universita-dopo.jpeg',
   },
+  {
+    id: 5,
+    title: 'Piazzale degli Eroi',
+    location: 'Roma',
+    status: 'In corso',
+    yearLabel: 'Cantiere attivo',
+    assetType: 'Riqualificazione e frazionamento',
+    summary:
+      'Intervento in corso di riqualificazione con frazionamento di un’unità esistente, finalizzato a una nuova organizzazione degli spazi interni. Il progetto prevede la realizzazione di ambienti abitativi moderni, con particolare attenzione a distribuzione, luminosità e vivibilità.',
+    insight: 'In corso di realizzazione. Il progetto punta a massimizzare luminosità e vivibilità.',
+    metrics: ['Superficie 170 mq', '3 nuovi appartamenti', 'In corso'],
+    beforeImage: './portfolio/eroi-in-corso.jpeg',
+    afterImage: './portfolio/eroi-in-corso.jpeg',
+  },
+  {
+    id: 6,
+    title: 'Attico Talenti',
+    location: 'Roma',
+    status: 'In corso',
+    yearLabel: 'Cantiere attivo',
+    assetType: 'Riqualificazione e frazionamento',
+    summary:
+      'Intervento in corso di frazionamento e riqualificazione di un intero attico, con ridefinizione degli spazi per creare due unità abitative distinte. Il progetto punta a soluzioni moderne, funzionali e luminose, valorizzando al massimo le caratteristiche dell’immobile.',
+    insight: 'In corso di realizzazione. Trasformazione di un intero piano attico in due unità esclusive.',
+    metrics: ['Superficie 165 mq', '2 nuovi appartamenti', 'In corso'],
+    beforeImage: './portfolio/talenti-prima.jpeg',
+    afterImage: './portfolio/talenti-prima.jpeg',
+  },
 ];
 
 export const pageHeaders = {
@@ -439,8 +467,8 @@ export const projects: Project[] = [
     location: 'Roma',
     status: 'In corso',
     assetType: 'Riqualificazione e frazionamento',
-    beforeImage: './portfolio/eroi-in-corso.jpeg',
-    afterImage: './portfolio/eroi-in-corso.jpeg',
+    beforeImage: './portfolio/talenti-prima.jpeg',
+    afterImage: './portfolio/talenti-prima.jpeg',
     description:
       'Intervento in corso di frazionamento e riqualificazione di un intero attico, con ridefinizione degli spazi per creare due unità abitative distinte. Il progetto punta a soluzioni moderne, funzionali e luminose, valorizzando al massimo le caratteristiche dell’immobile.',
     metrics: [
