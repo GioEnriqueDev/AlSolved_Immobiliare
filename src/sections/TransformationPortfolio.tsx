@@ -23,6 +23,10 @@ const DEFAULT_REVEAL = 56;
 const TransformationPortfolio = () => {
   const prefersReducedMotion = useReducedMotion();
   const isMobile = useIsMobile();
+  
+  // Filtriamo solo i progetti conclusi per la Home
+  const projectsToShow = transformationProjects.filter(p => p.status === 'Concluso');
+  
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isScrubbing, setIsScrubbing] = useState(false);
@@ -39,19 +43,19 @@ const TransformationPortfolio = () => {
     (value) => `inset(0 ${100 - value}% 0 0 round 2rem)`
   );
 
-  const activeProject = transformationProjects[activeIndex];
+  const activeProject = projectsToShow[activeIndex];
 
   useEffect(() => {
-    if (prefersReducedMotion || isMobile || isPaused || transformationProjects.length < 2) {
+    if (prefersReducedMotion || isMobile || isPaused || projectsToShow.length < 2) {
       return;
     }
 
     const timer = window.setInterval(() => {
-      setActiveIndex((current) => (current + 1) % transformationProjects.length);
+      setActiveIndex((current) => (current + 1) % projectsToShow.length);
     }, AUTOPLAY_DELAY);
 
     return () => window.clearInterval(timer);
-  }, [isMobile, isPaused, prefersReducedMotion]);
+  }, [isMobile, isPaused, prefersReducedMotion, projectsToShow.length]);
 
   useEffect(() => {
     const controls = animate(
@@ -91,12 +95,12 @@ const TransformationPortfolio = () => {
 
   const goToPrevious = () => {
     setActiveIndex((current) =>
-      current === 0 ? transformationProjects.length - 1 : current - 1
+      current === 0 ? projectsToShow.length - 1 : current - 1
     );
   };
 
   const goToNext = () => {
-    setActiveIndex((current) => (current + 1) % transformationProjects.length);
+    setActiveIndex((current) => (current + 1) % projectsToShow.length);
   };
 
   return (
