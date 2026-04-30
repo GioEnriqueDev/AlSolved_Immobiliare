@@ -1,6 +1,6 @@
 import { useMemo, useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion';
-import { ArrowDown, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowDown, ArrowRight } from 'lucide-react';
 import MagneticButton from '../components/custom/MagneticButton';
 import { hero } from '../data/siteContent';
 
