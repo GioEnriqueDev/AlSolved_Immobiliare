@@ -172,12 +172,56 @@ const TransformationPortfolio = () => {
               />
 
               <motion.div className="absolute inset-0 overflow-hidden" style={{ clipPath: afterClipPath }}>
-                <img
-                  src={activeProject.afterImage}
-                  alt={`${activeProject.title} dopo l intervento`}
-                  className="h-full w-full object-cover"
-                  loading="lazy"
-                />
+                {activeProject.status === 'In corso' ? (
+                  <div className="relative h-full w-full bg-charcoal-900">
+                    <img
+                      src={activeProject.beforeImage}
+                      alt={`${activeProject.title} in corso`}
+                      className="h-full w-full object-cover opacity-40 blur-sm"
+                    />
+                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40">
+                      <motion.div
+                        animate={{
+                          scale: [1, 1.1, 1],
+                          opacity: [0.7, 1, 0.7],
+                        }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: 'easeInOut',
+                        }}
+                        className="relative flex h-32 w-32 items-center justify-center rounded-full border border-gold-500/30 bg-gold-500/10"
+                      >
+                        <div className="absolute inset-0 rounded-full border border-gold-500/20 shadow-[0_0_50px_rgba(212,175,55,0.2)]" />
+                        <Sparkles className="h-10 w-10 text-gold-400" />
+                      </motion.div>
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="mt-6 text-center"
+                      >
+                        <p className="text-sm uppercase tracking-[0.4em] text-gold-300">In Progress</p>
+                        <div className="mt-2 flex gap-1 justify-center">
+                          {[0, 1, 2].map((i) => (
+                            <motion.div
+                              key={i}
+                              animate={{ opacity: [0.3, 1, 0.3] }}
+                              transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
+                              className="h-1 w-1 rounded-full bg-gold-400"
+                            />
+                          ))}
+                        </div>
+                      </motion.div>
+                    </div>
+                  </div>
+                ) : (
+                  <img
+                    src={activeProject.afterImage}
+                    alt={`${activeProject.title} dopo l intervento`}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                )}
               </motion.div>
 
               <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-charcoal-950/35 to-transparent" />
