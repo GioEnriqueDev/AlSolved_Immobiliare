@@ -132,7 +132,7 @@ const TransformationPortfolio = () => {
         </motion.div>
 
         <div
-          className="grid gap-12 xl:grid-cols-[1.3fr,0.7fr] xl:items-center"
+          className="grid gap-10 xl:grid-cols-[1.25fr,0.75fr] xl:items-center"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
@@ -141,10 +141,10 @@ const TransformationPortfolio = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-            className="relative overflow-hidden rounded-[2.5rem] border border-white/5 bg-white/5 p-2 shadow-2xl backdrop-blur-3xl sm:p-3"
+            className="relative overflow-hidden rounded-[2rem] border border-white/5 bg-white/5 p-1.5 shadow-2xl backdrop-blur-3xl sm:p-2.5"
           >
             <div
-              className={`group relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-charcoal-900 select-none touch-none sm:aspect-[16/10] ${
+              className={`group relative aspect-[4/5] overflow-hidden rounded-[1.6rem] bg-charcoal-900 select-none touch-none sm:aspect-[16/9] ${
                 isScrubbing ? 'cursor-grabbing' : 'cursor-grab'
               }`}
               onPointerDown={(event) => {
@@ -172,32 +172,31 @@ const TransformationPortfolio = () => {
                     <img
                       src={activeProject.beforeImage}
                       alt={activeProject.title}
-                      className="h-full w-full object-cover opacity-30 blur-md scale-110"
+                      className="h-full w-full object-cover opacity-20 blur-md scale-110"
                     />
                     <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60">
                       <motion.div
                         animate={{
-                          scale: [1, 1.15, 1],
-                          opacity: [0.5, 0.9, 0.5],
-                          rotate: [0, 5, -5, 0],
+                          scale: [1, 1.1, 1],
+                          opacity: [0.4, 0.8, 0.4],
                         }}
                         transition={{
-                          duration: 5,
+                          duration: 4,
                           repeat: Infinity,
                           ease: 'easeInOut',
                         }}
-                        className="relative flex h-40 w-40 items-center justify-center rounded-full border border-gold-500/40 bg-gold-500/5"
+                        className="relative flex h-32 w-32 items-center justify-center rounded-full border border-gold-500/30 bg-gold-500/5"
                       >
-                        <div className="absolute inset-0 rounded-full border border-gold-500/20 shadow-[0_0_80px_rgba(212,175,55,0.15)] animate-pulse" />
-                        <Sparkles className="h-12 w-12 text-gold-400 drop-shadow-[0_0_15px_rgba(212,175,55,0.5)]" />
+                        <div className="absolute inset-0 rounded-full border border-gold-500/20 shadow-[0_0_60px_rgba(212,175,55,0.1)]" />
+                        <Sparkles className="h-10 w-10 text-gold-400 drop-shadow-[0_0_10px_rgba(212,175,55,0.4)]" />
                       </motion.div>
                       <motion.div
-                        initial={{ opacity: 0, y: 15 }}
+                        initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="mt-8 text-center"
+                        className="mt-6 text-center"
                       >
-                        <p className="text-sm font-light uppercase tracking-[0.6em] text-gold-300 drop-shadow-sm">Future Creation</p>
-                        <p className="mt-2 text-xs uppercase tracking-[0.3em] text-gold-500/60 font-medium">Work in Progress</p>
+                        <p className="text-[10px] font-medium uppercase tracking-[0.5em] text-gold-300">Future Creation</p>
+                        <p className="mt-1.5 text-[9px] uppercase tracking-[0.2em] text-gold-500/50">Work in Progress</p>
                       </motion.div>
                     </div>
                   </div>
@@ -212,93 +211,93 @@ const TransformationPortfolio = () => {
               </motion.div>
 
               <motion.div
-                className="absolute inset-y-0 z-30 w-px bg-white/60 shadow-[0_0_40px_rgba(255,255,255,0.5)]"
+                className="absolute inset-y-0 z-30 w-px bg-white/50 shadow-[0_0_30px_rgba(255,255,255,0.4)]"
                 style={{ left: revealPercentage }}
               >
                 <div
-                  className={`absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-charcoal-950/90 text-white shadow-2xl backdrop-blur-2xl transition-all duration-300 ${
+                  className={`absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-charcoal-950/90 text-white shadow-xl backdrop-blur-2xl transition-all duration-300 ${
                     isScrubbing ? 'scale-110 border-gold-400/50' : 'hover:scale-105'
                   }`}
                 >
-                  <MoveHorizontal className="h-5 w-5" />
+                  <MoveHorizontal className="h-4 w-4" />
                 </div>
               </motion.div>
 
-              <div className="absolute left-6 top-6 z-40 rounded-full border border-white/10 bg-charcoal-950/60 px-5 py-2.5 text-[10px] uppercase tracking-[0.3em] text-white backdrop-blur-md">
+              <div className="absolute left-5 top-5 z-40 rounded-full border border-white/10 bg-charcoal-950/60 px-4 py-2 text-[9px] uppercase tracking-[0.3em] text-white backdrop-blur-md">
                 Legacy
               </div>
-              <div className="absolute right-6 top-6 z-40 rounded-full border border-gold-500/20 bg-gold-500/10 px-5 py-2.5 text-[10px] uppercase tracking-[0.3em] text-gold-200 backdrop-blur-md">
+              <div className="absolute right-5 top-5 z-40 rounded-full border border-gold-500/20 bg-gold-500/10 px-4 py-2 text-[9px] uppercase tracking-[0.3em] text-gold-200 backdrop-blur-md">
                 Vision
               </div>
 
-              <div className="absolute inset-x-6 bottom-6 z-40 rounded-[2rem] border border-white/5 bg-charcoal-950/50 p-6 backdrop-blur-2xl sm:max-w-md">
-                <h3 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              <div className="absolute inset-x-5 bottom-5 z-40 rounded-[1.5rem] border border-white/5 bg-charcoal-950/50 p-5 backdrop-blur-2xl sm:max-w-sm">
+                <h3 className="font-display text-2xl font-bold tracking-tight text-white sm:text-3xl">
                   {activeProject.title}
                 </h3>
-                <div className="mt-3 flex items-center gap-3">
-                  <span className="h-px w-8 bg-gold-500/50" />
-                  <p className="text-sm font-medium tracking-wide text-charcoal-200">
+                <div className="mt-2 flex items-center gap-2.5">
+                  <span className="h-px w-6 bg-gold-500/40" />
+                  <p className="text-xs font-medium tracking-wide text-charcoal-200">
                     {activeProject.location} — {activeProject.assetType}
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-6 flex items-center justify-between px-2">
-              <div className="flex items-center gap-4">
+            <div className="mt-5 flex items-center justify-between px-1">
+              <div className="flex items-center gap-3">
                 <button
                   type="button"
                   onClick={goToPrevious}
-                  className="flex h-12 w-12 items-center justify-center rounded-full border border-white/5 bg-white/5 text-white transition-all hover:border-gold-500/30 hover:bg-gold-500/10"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/5 bg-white/5 text-white transition-all hover:border-gold-500/30 hover:bg-gold-500/10"
                 >
-                  <ArrowLeft className="h-5 w-5" />
+                  <ArrowLeft className="h-4 w-4" />
                 </button>
                 <button
                   type="button"
                   onClick={goToNext}
-                  className="flex h-12 w-12 items-center justify-center rounded-full border border-white/5 bg-white/5 text-white transition-all hover:border-gold-500/30 hover:bg-gold-500/10"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/5 bg-white/5 text-white transition-all hover:border-gold-500/30 hover:bg-gold-500/10"
                 >
-                  <ArrowRight className="h-5 w-5" />
+                  <ArrowRight className="h-4 w-4" />
                 </button>
               </div>
-              <div className="flex h-12 w-12 items-center justify-center rounded-full border border-white/5 bg-white/5 text-gold-400">
-                <ArrowUpRight className="h-5 w-5" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/5 bg-white/5 text-gold-400">
+                <ArrowUpRight className="h-4 w-4" />
               </div>
             </div>
           </motion.div>
 
-          <div className="space-y-6">
+          <div className="space-y-5">
             <motion.article
               key={activeProject.id}
-              initial={{ opacity: 0, x: 40 }}
+              initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-              className="rounded-[2.5rem] border border-white/5 bg-black/40 p-8 backdrop-blur-2xl sm:p-10"
+              className="rounded-[2rem] border border-white/5 bg-black/40 p-7 backdrop-blur-2xl sm:p-9"
             >
-              <div className="space-y-6">
+              <div className="space-y-5">
                 <div>
-                  <span className={`inline-block rounded-full px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.25em] ${
+                  <span className={`inline-block rounded-full px-3 py-1 text-[9px] font-bold uppercase tracking-[0.2em] ${
                     activeProject.status === 'Concluso' ? 'bg-gold-500/10 text-gold-400 border border-gold-500/20' : 'bg-white/5 text-charcoal-400 border border-white/10'
                   }`}>
                     {activeProject.status}
                   </span>
-                  <h3 className="mt-6 font-display text-4xl font-bold leading-tight text-white">
+                  <h3 className="mt-4 font-display text-3xl font-bold leading-tight text-white">
                     {activeProject.title}
                   </h3>
                 </div>
 
-                <p className="text-lg leading-relaxed text-charcoal-300">
+                <p className="text-base leading-relaxed text-charcoal-300">
                   {activeProject.summary}
                 </p>
 
-                <div className="grid gap-4 pt-4">
+                <div className="grid gap-3 pt-2">
                   {activeProject.metrics.map((metric) => (
                     <div
                       key={metric}
-                      className="flex items-center gap-4 rounded-2xl border border-white/5 bg-white/5 px-6 py-4 text-base font-medium text-charcoal-200 transition-colors hover:bg-white/10"
+                      className="flex items-center gap-3 rounded-xl border border-white/5 bg-white/5 px-5 py-3.5 text-sm font-medium text-charcoal-200 transition-colors hover:bg-white/10"
                     >
-                      <div className="h-1.5 w-1.5 rounded-full bg-gold-500 shadow-[0_0_8px_rgba(212,175,55,0.8)]" />
+                      <div className="h-1 w-1 rounded-full bg-gold-500 shadow-[0_0_6px_rgba(212,175,55,0.6)]" />
                       {metric}
                     </div>
                   ))}

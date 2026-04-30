@@ -55,36 +55,36 @@ const Hero = () => {
       </div>
 
       <motion.div
-        className="relative z-10 mx-auto flex min-h-screen max-w-5xl flex-col justify-center px-6 pb-20 pt-32 text-center sm:px-12 sm:pb-24 sm:pt-40 lg:px-24"
+        className="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col justify-center px-6 pb-20 pt-32 text-center sm:px-12 sm:pb-24 sm:pt-40 lg:px-24"
         style={{ opacity: springOpacity }}
       >
-        <div className="flex flex-col items-center gap-10 sm:gap-12">
+        <div className="flex flex-col items-center gap-8 sm:gap-10">
           <div className="w-full">
             <motion.div
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
-              className="mb-8 inline-flex max-w-full items-center gap-2 rounded-full border border-gold-500/20 bg-white/5 px-6 py-2.5 sm:mb-12 sm:px-7"
+              className="mb-8 inline-flex max-w-full items-center gap-2 rounded-full border border-gold-500/20 bg-white/5 px-5 py-2 sm:mb-10 sm:px-6"
             >
-              <span className="text-[11px] uppercase tracking-[0.25em] text-gold-300 sm:text-xs sm:tracking-[0.35em]">{hero.badge}</span>
+              <span className="text-[10px] uppercase tracking-[0.3em] text-gold-300 sm:text-xs sm:tracking-[0.4em]">{hero.badge}</span>
             </motion.div>
             
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="mb-8 flex flex-col items-center gap-2 sm:mb-10"
+              className="mb-6 flex flex-col items-center gap-2 sm:mb-8"
             >
-              <p className="font-serif text-2xl text-white sm:text-4xl">{hero.brandLine}</p>
-              <div className="h-px w-12 bg-gold-500/40" />
-              <p className="text-xs uppercase tracking-[0.25em] text-charcoal-400 sm:text-sm sm:tracking-[0.3em]">Investimenti e valorizzazione</p>
+              <p className="font-serif text-xl text-white sm:text-3xl">{hero.brandLine}</p>
+              <div className="h-px w-10 bg-gold-500/30" />
+              <p className="text-[10px] uppercase tracking-[0.3em] text-charcoal-400 sm:text-xs sm:tracking-[0.35em]">Investimenti e valorizzazione</p>
             </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 32 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="mb-4 font-display text-5xl font-bold leading-[0.9] tracking-tight text-white sm:mb-6 sm:text-7xl lg:text-8xl"
+              className="mb-2 font-display text-4xl font-bold leading-[1.1] tracking-tight text-white sm:mb-4 sm:text-6xl lg:text-7xl"
             >
               {hero.titlePrimary}
             </motion.h1>
@@ -93,7 +93,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 32 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="mb-10 font-display text-5xl font-bold leading-[0.9] tracking-tight sm:mb-12 sm:text-7xl lg:text-8xl"
+              className="mb-10 font-display text-4xl font-bold leading-[1.1] tracking-tight sm:mb-12 sm:text-6xl lg:text-7xl"
             >
               <span className="text-gradient">{hero.titleHighlight}</span>
             </motion.h2>
@@ -102,7 +102,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="mx-auto mb-12 max-w-3xl text-base leading-relaxed text-charcoal-300 sm:mb-16 sm:text-xl"
+              className="mx-auto mb-10 max-w-2xl text-base leading-relaxed text-charcoal-300 sm:mb-12 sm:text-lg"
             >
               {hero.subtitle}
             </motion.p>
@@ -115,7 +115,7 @@ const Hero = () => {
             >
               <MagneticButton
                 href={hero.ctas.primary.href}
-                className="group w-full rounded-full bg-gold-500 px-8 py-5 text-center font-bold text-charcoal-950 transition-all duration-300 hover:shadow-glow-xl sm:w-auto sm:px-12"
+                className="group w-full rounded-full bg-gold-500 px-8 py-4 text-center font-bold text-charcoal-950 transition-all duration-300 hover:shadow-glow-xl sm:w-auto sm:px-10"
                 aria-label={hero.ctas.primary.label}
               >
                 <span className="flex items-center gap-2">
@@ -126,7 +126,7 @@ const Hero = () => {
 
               <MagneticButton
                 href={hero.ctas.secondary.href}
-                className="w-full rounded-full border border-white/20 bg-white/5 px-8 py-5 text-center font-semibold text-white transition-all duration-300 hover:bg-white/10 sm:w-auto sm:px-12"
+                className="w-full rounded-full border border-white/20 bg-white/5 px-8 py-4 text-center font-semibold text-white transition-all duration-300 hover:bg-white/10 sm:w-auto sm:px-10"
                 aria-label={hero.ctas.secondary.label}
               >
                 {hero.ctas.secondary.label}
