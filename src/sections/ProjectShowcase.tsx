@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Building2, CalendarRange, MapPin, TrendingUp } from 'lucide-react';
+import { ArrowRight, Building2, CalendarRange, MapPin, Sparkles, TrendingUp } from 'lucide-react';
 import MagneticButton from '../components/custom/MagneticButton';
 import { projectSection, projects } from '../data/siteContent';
 
@@ -76,27 +76,59 @@ const ProjectShowcase = () => {
               transition={{ duration: 1, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
               className="group overflow-hidden rounded-[2.5rem] border border-white/5 bg-white/5 xl:grid xl:grid-cols-[1.2fr,0.8fr] transition-all duration-700 hover:border-white/10 hover:bg-white/[0.08]"
             >
-              <div className="grid gap-3 border-b border-white/5 bg-charcoal-900/40 p-4 sm:grid-cols-2 xl:border-b-0 xl:border-r xl:p-6">
+              <div className={`grid gap-3 border-b border-white/5 bg-charcoal-900/40 p-4 xl:border-b-0 xl:border-r xl:p-6 ${project.status === 'In corso' ? 'grid-cols-1' : 'sm:grid-cols-2'}`}>
                 <div className="relative overflow-hidden rounded-[1.5rem]">
                   <img
                     src={project.beforeImage}
                     alt={project.title}
-                    className="h-64 w-full object-cover sm:h-80 xl:h-full xl:min-h-[30rem] transition-transform duration-1000 group-hover:scale-110"
+                    className={`h-64 w-full object-cover xl:h-full xl:min-h-[30rem] transition-transform duration-1000 group-hover:scale-110 ${project.status === 'In corso' ? 'opacity-40 blur-sm scale-110' : ''}`}
                   />
-                  <span className="absolute left-4 top-4 rounded-full border border-white/10 bg-black/50 px-4 py-2 text-[9px] font-bold uppercase tracking-[0.3em] text-white backdrop-blur-md">
-                    Legacy
-                  </span>
+                  
+                  {project.status === 'In corso' ? (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40">
+                      <motion.div
+                        animate={{
+                          scale: [1, 1.1, 1],
+                          opacity: [0.4, 0.8, 0.4],
+                        }}
+                        transition={{
+                          duration: 4,
+                          repeat: Infinity,
+                          ease: 'easeInOut',
+                        }}
+                        className="relative flex h-32 w-32 items-center justify-center rounded-full border border-gold-500/30 bg-gold-500/5"
+                      >
+                        <div className="absolute inset-0 rounded-full border border-gold-500/20 shadow-[0_0_60px_rgba(212,175,55,0.1)]" />
+                        <Sparkles className="h-10 w-10 text-gold-400 drop-shadow-[0_0_10px_rgba(212,175,55,0.4)]" />
+                      </motion.div>
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="mt-6 text-center"
+                      >
+                        <p className="text-[10px] font-bold uppercase tracking-[0.6em] text-gold-300">Future Creation</p>
+                        <p className="mt-1.5 text-[9px] uppercase tracking-[0.2em] text-gold-500/40">Cantiere Attivo</p>
+                      </motion.div>
+                    </div>
+                  ) : (
+                    <span className="absolute left-4 top-4 rounded-full border border-white/10 bg-black/50 px-4 py-2 text-[9px] font-bold uppercase tracking-[0.3em] text-white backdrop-blur-md">
+                      Legacy
+                    </span>
+                  )}
                 </div>
-                <div className="relative overflow-hidden rounded-[1.5rem]">
-                  <img
-                    src={project.afterImage}
-                    alt={project.title}
-                    className="h-64 w-full object-cover sm:h-80 xl:h-full xl:min-h-[30rem] transition-transform duration-1000 group-hover:scale-110"
-                  />
-                  <span className="absolute left-4 top-4 rounded-full border border-gold-500/20 bg-gold-500/10 px-4 py-2 text-[9px] font-bold uppercase tracking-[0.3em] text-gold-200 backdrop-blur-md">
-                    Vision
-                  </span>
-                </div>
+
+                {project.status !== 'In corso' && (
+                  <div className="relative overflow-hidden rounded-[1.5rem]">
+                    <img
+                      src={project.afterImage}
+                      alt={project.title}
+                      className="h-64 w-full object-cover sm:h-80 xl:h-full xl:min-h-[30rem] transition-transform duration-1000 group-hover:scale-110"
+                    />
+                    <span className="absolute left-4 top-4 rounded-full border border-gold-500/20 bg-gold-500/10 px-4 py-2 text-[9px] font-bold uppercase tracking-[0.3em] text-gold-200 backdrop-blur-md">
+                      Vision
+                    </span>
+                  </div>
+                )}
               </div>
 
               <div className="p-8 sm:p-10 xl:flex xl:flex-col xl:justify-between xl:p-14">
