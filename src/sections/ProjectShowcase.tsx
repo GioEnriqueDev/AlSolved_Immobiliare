@@ -174,8 +174,6 @@ const ProjectShowcase = () => {
         </motion.div>
       </div>
     </section>
-      </div>
-    </section>
   );
 };
 
