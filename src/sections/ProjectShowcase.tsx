@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Building2, CalendarRange, MapPin, Sparkles, TrendingUp, Euro } from 'lucide-react';
+import { ArrowRight, Building2, CalendarRange, MapPin, TrendingUp, Euro } from 'lucide-react';
 import MagneticButton from '../components/custom/MagneticButton';
 import BeforeAfterSlider from '../components/custom/BeforeAfterSlider';
 import { projectSection, projects } from '../data/siteContent';

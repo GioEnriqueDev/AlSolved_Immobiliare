@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react';
-import { ArrowRight, Clock3, Mail, MapPin, Phone } from 'lucide-react';
+import { ArrowRight, Clock3, Mail, MapPin } from 'lucide-react';
 import { contact, routes, seller, type FormField } from '../data/siteContent';
 import MagneticButton from '../components/custom/MagneticButton';
 

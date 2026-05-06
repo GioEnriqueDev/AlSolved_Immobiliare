@@ -14,7 +14,7 @@ import {
   MoveHorizontal,
   Sparkles,
 } from 'lucide-react';
-import { transformationPortfolio, transformationProjects } from '../data/siteContent';
+import { transformationPortfolio, transformationProjects, routes } from '../data/siteContent';
 import { useIsMobile } from '../hooks/use-mobile';
 
 const AUTOPLAY_DELAY = 9500;
