@@ -264,9 +264,13 @@ const TransformationPortfolio = () => {
                   <ArrowRight className="h-4 w-4" />
                 </button>
               </div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/5 bg-white/5 text-gold-400">
+              <a
+                href={`${routes.projects}#project-${activeProject.id}`}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/5 bg-white/5 text-gold-400 transition-all hover:border-gold-500/30 hover:bg-gold-500/10"
+                aria-label={`Vedi dettagli del progetto ${activeProject.title}`}
+              >
                 <ArrowUpRight className="h-4 w-4" />
-              </div>
+              </a>
             </div>
           </motion.div>
 

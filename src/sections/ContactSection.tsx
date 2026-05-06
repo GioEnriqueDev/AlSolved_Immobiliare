@@ -139,17 +139,6 @@ const ContactSection = () => {
 
             <div className="mt-8 space-y-4">
               <a
-                href={`tel:${contact.details.phone.replace(/\s+/g, '')}`}
-                className="flex items-center gap-3 text-charcoal-200 transition-colors hover:text-white"
-                aria-label={`Chiama ${contact.details.phone}`}
-              >
-                <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
-                  <Phone className="h-4 w-4" />
-                </span>
-                <span className="break-all sm:break-normal">{contact.details.phone}</span>
-              </a>
-
-              <a
                 href={`mailto:${contact.details.email}`}
                 className="flex items-center gap-3 text-charcoal-200 transition-colors hover:text-white"
                 aria-label={`Scrivi a ${contact.details.email}`}

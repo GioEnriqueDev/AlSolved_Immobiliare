@@ -20,6 +20,7 @@ export default defineConfig({
         projects: path.resolve(__dirname, 'progetti.html'),
         invest: path.resolve(__dirname, 'investi-con-noi.html'),
         sell: path.resolve(__dirname, 'vendi-il-tuo-immobile.html'),
+        privacy: path.resolve(__dirname, 'privacy-policy.html'),
       },
       output: {
         manualChunks: {

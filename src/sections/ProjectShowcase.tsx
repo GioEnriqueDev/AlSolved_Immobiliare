@@ -1,12 +1,28 @@
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Building2, CalendarRange, MapPin, Sparkles, TrendingUp } from 'lucide-react';
+import { ArrowRight, Building2, CalendarRange, MapPin, Sparkles, TrendingUp, Euro } from 'lucide-react';
 import MagneticButton from '../components/custom/MagneticButton';
+import BeforeAfterSlider from '../components/custom/BeforeAfterSlider';
 import { projectSection, projects } from '../data/siteContent';
 
 const ProjectShowcase = () => {
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const targetId = hash.replace('#', '');
+      const element = document.getElementById(targetId);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 500);
+      }
+    }
+  }, []);
+
   const getMetricIcon = (label: string, accent?: boolean) => {
     if (accent) return TrendingUp;
     if (label.toLowerCase().includes('durata')) return CalendarRange;
+    if (label.toLowerCase().includes('investimento')) return Euro;
     return Building2;
   };
 
@@ -66,75 +82,34 @@ const ProjectShowcase = () => {
           </div>
         </motion.div>
 
-        <div className="grid gap-12 sm:gap-16">
+        <div className="grid gap-12 sm:gap-24">
           {projects.map((project, index) => (
             <motion.article
               key={project.id}
+              id={`project-${project.id}`}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 1, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="group overflow-hidden rounded-[2.5rem] border border-white/5 bg-white/5 xl:grid xl:grid-cols-[1.2fr,0.8fr] transition-all duration-700 hover:border-white/10 hover:bg-white/[0.08]"
+              className="group overflow-hidden rounded-[2.5rem] border border-white/5 bg-white/5 xl:grid xl:grid-cols-[1fr,1fr] transition-all duration-700 hover:border-white/10 hover:bg-white/[0.08] scroll-mt-24"
             >
-              <div className={`grid gap-3 border-b border-white/5 bg-charcoal-900/40 p-4 xl:border-b-0 xl:border-r xl:p-6 ${project.status === 'In corso' ? 'grid-cols-1' : 'sm:grid-cols-2'}`}>
-                <div className="relative overflow-hidden rounded-[1.5rem]">
-                  <img
-                    src={project.beforeImage}
-                    alt={project.title}
-                    className={`h-64 w-full object-cover xl:h-full xl:min-h-[30rem] transition-transform duration-1000 group-hover:scale-110 ${project.status === 'In corso' ? 'opacity-40 blur-sm scale-110' : ''}`}
-                  />
-                  
-                  {project.status === 'In corso' ? (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40">
-                      <motion.div
-                        animate={{
-                          scale: [1, 1.1, 1],
-                          opacity: [0.4, 0.8, 0.4],
-                        }}
-                        transition={{
-                          duration: 4,
-                          repeat: Infinity,
-                          ease: 'easeInOut',
-                        }}
-                        className="relative flex h-32 w-32 items-center justify-center rounded-full border border-gold-500/30 bg-gold-500/5"
-                      >
-                        <div className="absolute inset-0 rounded-full border border-gold-500/20 shadow-[0_0_60px_rgba(212,175,55,0.1)]" />
-                        <Sparkles className="h-10 w-10 text-gold-400 drop-shadow-[0_0_10px_rgba(212,175,55,0.4)]" />
-                      </motion.div>
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="mt-6 text-center"
-                      >
-                        <p className="text-[10px] font-bold uppercase tracking-[0.6em] text-gold-300">Future Creation</p>
-                        <p className="mt-1.5 text-[9px] uppercase tracking-[0.2em] text-gold-500/40">Cantiere Attivo</p>
-                      </motion.div>
-                    </div>
-                  ) : (
-                    <span className="absolute left-4 top-4 rounded-full border border-white/10 bg-black/50 px-4 py-2 text-[9px] font-bold uppercase tracking-[0.3em] text-white backdrop-blur-md">
-                      Legacy
-                    </span>
-                  )}
-                </div>
-
-                {project.status !== 'In corso' && (
-                  <div className="relative overflow-hidden rounded-[1.5rem]">
-                    <img
-                      src={project.afterImage}
-                      alt={project.title}
-                      className="h-64 w-full object-cover sm:h-80 xl:h-full xl:min-h-[30rem] transition-transform duration-1000 group-hover:scale-110"
-                    />
-                    <span className="absolute left-4 top-4 rounded-full border border-gold-500/20 bg-gold-500/10 px-4 py-2 text-[9px] font-bold uppercase tracking-[0.3em] text-gold-200 backdrop-blur-md">
-                      Vision
-                    </span>
-                  </div>
-                )}
+              <div className="p-4 sm:p-6 xl:p-8">
+                <BeforeAfterSlider
+                  beforeImage={project.beforeImage}
+                  afterImage={project.afterImage}
+                  title={project.title}
+                  status={project.status}
+                  aspectRatio="aspect-square"
+                  className="xl:aspect-auto xl:h-full"
+                />
               </div>
 
-              <div className="p-8 sm:p-10 xl:flex xl:flex-col xl:justify-between xl:p-14">
+              <div className="p-8 sm:p-10 xl:flex xl:flex-col xl:justify-center xl:p-14">
                 <div>
                   <div className="mb-6 flex flex-wrap items-center gap-3">
-                    <span className="rounded-full border border-gold-500/10 bg-gold-500/5 px-4 py-1.5 text-[9px] font-bold uppercase tracking-[0.25em] text-gold-400">
+                    <span className={`rounded-full px-4 py-1.5 text-[9px] font-bold uppercase tracking-[0.25em] ${
+                      project.status === 'Concluso' ? 'bg-gold-500/10 text-gold-400 border border-gold-500/20' : 'bg-white/5 text-charcoal-400 border border-white/10'
+                    }`}>
                       {project.status}
                     </span>
                     <span className="rounded-full border border-white/5 bg-white/5 px-4 py-1.5 text-[9px] font-bold uppercase tracking-[0.25em] text-charcoal-400">
@@ -142,7 +117,7 @@ const ProjectShowcase = () => {
                     </span>
                   </div>
 
-                  <h3 className="font-display text-3xl font-bold leading-tight text-white sm:text-4xl">{project.title}</h3>
+                  <h3 className="font-display text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">{project.title}</h3>
 
                   <div className="mt-4 flex items-center gap-3 text-sm font-medium text-charcoal-400">
                     <MapPin className="h-4 w-4 text-gold-500" />
@@ -151,7 +126,7 @@ const ProjectShowcase = () => {
 
                   <p className="mt-8 text-lg leading-relaxed text-charcoal-300 xl:max-w-xl">{project.description}</p>
 
-                  <div className="mt-10 grid gap-4 sm:grid-cols-3">
+                  <div className="mt-10 grid grid-cols-2 gap-4">
                     {project.metrics.map((metric) => {
                       const Icon = getMetricIcon(metric.label, metric.accent);
 

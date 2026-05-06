@@ -34,17 +34,12 @@ const SiteFooter = () => {
             <h4 className="mb-6 text-white">Contatti</h4>
             <ul className="space-y-3 text-charcoal-400">
               <li>
-                <a href={`mailto:${contact.details.email}`} aria-label={`Scrivi a ${contact.details.email}`}>
+                <a href={`mailto:${contact.details.email}`} aria-label={`Scrivi a ${contact.details.email}`} className="transition-colors hover:text-white">
                   {contact.details.email}
                 </a>
               </li>
               <li>
-                <a href={`tel:${contact.details.phone.replace(/\s+/g, '')}`} aria-label={`Chiama ${contact.details.phone}`}>
-                  {contact.details.phone}
-                </a>
-              </li>
-              <li>
-                {contact.details.addressLine1}
+                {brand.address}
                 <br />
                 {contact.details.addressLine2}
               </li>
@@ -52,16 +47,28 @@ const SiteFooter = () => {
           </div>
         </div>
 
-        <div className="flex flex-col items-start justify-between gap-4 border-t border-white/5 pt-8 md:flex-row md:items-center">
-          <p className="text-sm text-charcoal-500">
-            &copy; {brand.year} {brand.legalName}. {footer.footerCopy}
-          </p>
-          <div className="flex gap-6 text-sm text-charcoal-500">
-            {footer.legal.map((link) => (
-              <a key={link.label} href={link.href} className="transition-colors hover:text-white" aria-label={`Leggi ${link.label}`}>
-                {link.label}
-              </a>
-            ))}
+        <div className="flex flex-col items-start justify-between gap-6 border-t border-white/5 pt-8 md:flex-row md:items-center">
+          <div className="space-y-1">
+            <p className="text-sm text-charcoal-500">
+              &copy; {brand.year} {brand.legalName}. {footer.footerCopy}
+            </p>
+            <p className="text-[10px] text-charcoal-600">
+              {brand.vat} — {brand.address}
+            </p>
+          </div>
+          
+          <div className="flex flex-col items-start gap-6 md:flex-row md:items-center">
+            <div className="flex gap-6 text-sm text-charcoal-500">
+              {footer.legal.map((link) => (
+                <a key={link.label} href={link.href} className="transition-colors hover:text-white" aria-label={`Leggi ${link.label}`}>
+                  {link.label}
+                </a>
+              ))}
+            </div>
+            <div className="h-px w-8 bg-white/5 hidden md:block" />
+            <p className="text-[10px] uppercase tracking-widest text-charcoal-600">
+              Created by <span className="text-charcoal-400">Alsolved</span>
+            </p>
           </div>
         </div>
       </div>

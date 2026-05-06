@@ -78,12 +78,14 @@ export const brand = {
   shortName: 'Leone Group',
   legalName: 'Leone Group Immobiliare',
   tagline:
-    'Sviluppo immobiliare a Roma per trasformare immobili datati in spazi piu belli, piu attuali e piu richiesti dal mercato.',
+    'Sviluppo immobiliare a Roma per trasformare immobili datati in spazi più belli, più attuali e più richiesti dal mercato.',
   description:
     'Selezioniamo, ripensiamo e valorizziamo immobili a Roma con un approccio che unisce visione, cura progettuale e attenzione al risultato finale.',
   logoSrc: './leone-group-logo.png',
   logoAlt: 'Logo Leone Group Immobiliare',
   year: new Date().getFullYear(),
+  vat: 'P.IVA 12345678901', // Placeholder, user should update
+  address: 'Via dei Gracchi 278, 00192 Roma (RM)',
 };
 
 export const routes = {
@@ -92,6 +94,7 @@ export const routes = {
   projects: './progetti.html',
   invest: './investi-con-noi.html',
   sell: './vendi-il-tuo-immobile.html',
+  privacy: './privacy-policy.html',
 };
 
 export const navLinks: NavItem[] = [
@@ -105,20 +108,20 @@ export const hero = {
   badge: 'Sviluppo immobiliare a Roma e rigenerazione urbana',
   brandLine: 'Leone Group Immobiliare',
   titlePrimary: 'Trasformiamo immobili',
-  titleHighlight: 'in opportunita ad alto valore',
+  titleHighlight: 'in opportunità ad alto valore',
   subtitle:
-    'Operiamo a Roma su immobili residenziali e direzionali con un metodo chiaro: analizziamo il potenziale, ripensiamo gli spazi e realizziamo trasformazioni capaci di aumentare attrattiva, qualita percepita e valore finale.',
+    'Operiamo a Roma su immobili residenziali e direzionali con un metodo chiaro: analizziamo il potenziale, ripensiamo gli spazi e realizziamo trasformazioni capaci di aumentare attrattiva, qualità percepita e valore finale.',
   backgroundImage:
     'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1800&q=80',
   commitments: [
     'Rigeneriamo immobili esistenti invece di consumare nuovo suolo.',
     'Seguiamo internamente analisi, progetto, lavori e strategia di uscita.',
-    'Creiamo prodotti immobiliari piu forti sul mercato, piu credibili e piu desiderabili.',
+    'Creiamo prodotti immobiliari più forti sul mercato, più credibili e più desiderabili.',
   ],
   stats: [
     { value: '30%', label: 'ROI medio', detail: 'Media indicativa delle operazioni completate.' },
     { value: '6M+', label: 'Euro investiti', detail: 'Capitale attivato in operazioni di sviluppo.' },
-    { value: '50+', label: 'Appartamenti realizzati', detail: 'Unita create o riqualificate.' },
+    { value: '50+', label: 'Appartamenti realizzati', detail: 'Unità create o riqualificate.' },
     { value: '5.000+', label: 'Metri cubi riqualificati', detail: 'Volumi recuperati e ripensati.' },
   ] as StatItem[],
   ctas: {
@@ -136,21 +139,21 @@ export const hero = {
 
 export const homeOverview = {
   badge: 'Le nostre aree',
-  title: 'Diamo nuova forza a immobili, capitali e opportunita immobiliari a Roma.',
+  title: 'Diamo nuova forza a immobili, capitali e opportunità immobiliari a Roma.',
   description:
-    'Affianchiamo proprietari e investitori con un percorso semplice e concreto: partiamo dal potenziale dell immobile, ne miglioriamo qualita e appeal e lo riportiamo sul mercato con piu forza.',
+    'Affianchiamo proprietari e investitori con un percorso semplice e concreto: partiamo dal potenziale dell\'immobile, ne miglioriamo qualità e appeal e lo riportiamo sul mercato con più forza.',
   cards: [
     {
       title: 'Chi Siamo',
       description:
         'Scopri il metodo, la visione e la struttura operativa con cui trasformiamo ogni operazione in un progetto leggibile, controllato e orientato al risultato.',
       href: routes.about,
-      label: 'Scopri di piu',
+      label: 'Scopri di più',
     },
     {
       title: 'Progetti',
       description:
-        'Guarda i nostri interventi conclusi con foto prima e dopo e scopri come cambia la percezione di un immobile quando il progetto e costruito bene.',
+        'Guarda i nostri interventi conclusi con foto prima e dopo e scopri come cambia la percezione di un immobile quando il progetto è costruito bene.',
       href: routes.projects,
       label: 'Scopri i progetti',
     },
@@ -164,7 +167,7 @@ export const homeOverview = {
     {
       title: 'Vendi il tuo immobile',
       description:
-        'Un servizio per proprietari che vogliono capire subito come vendere meglio, valorizzare di piu o ricevere una proposta concreta.',
+        'Un servizio per proprietari che vogliono capire subito come vendere meglio, valorizzare di più o ricevere una proposta concreta.',
       href: routes.sell,
       label: 'Richiedi valutazione',
     },
@@ -182,7 +185,7 @@ export const transformationPortfolio = {
   progressBadge: 'Intervento realizzato',
   teaserTitle: 'Cantiere attivo',
   teaserDescription:
-    'Accanto agli interventi completati, mostriamo anche una lavorazione in corso per raccontare continuita, ritmo operativo e pipeline reale.',
+    'Accanto agli interventi completati, mostriamo anche una lavorazione in corso per raccontare continuità, ritmo operativo e pipeline reale.',
   teaserImage: './portfolio/eroi-in-corso.jpeg',
   teaserImageAlt: 'Cantiere immobiliare in corso Leone Group',
 };
@@ -211,7 +214,7 @@ export const transformationProjects: TransformationProject[] = [
     assetType: 'Trasformazione integrale',
     summary:
       'Intervento di trasformazione integrale di una palazzina su due livelli, con passaggio da commerciale a residenziale. Il progetto ha completamente ridefinito gli spazi, dando nuova identità all’immobile attraverso la realizzazione di unità abitative contemporanee e ben organizzate.',
-    insight: 'Il risultato finale rende l immobile più chiaro, più elegante e immediatamente più convincente.',
+    insight: 'Il risultato finale rende l\'immobile più chiaro, più elegante e immediatamente più convincente.',
     metrics: ['Superficie 350 mq', 'Cambio destinazione d’uso', 'ROI 53%'],
     beforeImage: './portfolio/calabritto-prima.jpeg',
     afterImage: './portfolio/calabritto-dopo.jpeg',
@@ -232,7 +235,7 @@ export const transformationProjects: TransformationProject[] = [
   },
   {
     id: 3,
-    title: 'Monte Gennaro',
+    title: 'Piazza Monte Gennaro',
     location: 'Roma',
     status: 'Concluso',
     yearLabel: 'Riconversione residenziale',
@@ -240,7 +243,7 @@ export const transformationProjects: TransformationProject[] = [
     summary:
       'Intervento di trasformazione di un immobile direzionale in residenziale, nato dalla riconversione di spazi non più in linea con le esigenze attuali. Il progetto ha previsto un’attenta analisi urbanistica e una completa ridefinizione degli ambienti, dando vita a soluzioni abitative moderne e funzionali.',
     insight: 'Il prima e dopo racconta un salto netto verso una casa più attuale e più desiderabile.',
-    metrics: ['Supericie 280 mq', 'Cambio destinazione d’uso', 'ROI 50%'],
+    metrics: ['Superficie 280 mq', 'Cambio destinazione d’uso', 'ROI 50%'],
     beforeImage: './portfolio/monte-gennaro-prima.jpeg',
     afterImage: './portfolio/monte-gennaro-dopo.jpeg',
   },
@@ -279,7 +282,7 @@ export const pageHeaders = {
     badge: 'Leone Group Immobiliare',
     title: 'Chi Siamo',
     description:
-      'Identita, metodo di lavoro, solidita operativa e visione strategica di Leone Group Immobiliare nel settore dello sviluppo immobiliare a Roma.',
+      'Identità, metodo di lavoro, solidità operativa e visione strategica di Leone Group Immobiliare nel settore dello sviluppo immobiliare a Roma.',
   },
   projects: {
     badge: 'Progetti conclusi',
@@ -297,19 +300,19 @@ export const pageHeaders = {
     badge: 'Valutazione immobiliare',
     title: 'Vendi il tuo immobile',
     description:
-      'Una sezione dedicata ai proprietari che desiderano ricevere una valutazione immobiliare rapida e capire la soluzione piu adatta tra vendita, valorizzazione o acquisto diretto.',
+      'Una sezione dedicata ai proprietari che desiderano ricevere una valutazione immobiliare rapida e capire la soluzione più adatta tra vendita, valorizzazione o acquisto diretto.',
   },
 };
 
 export const about = {
   eyebrow: 'Chi siamo',
-  title: 'Una societa di sviluppo immobiliare che trasforma il patrimonio esistente in valore concreto.',
+  title: 'Una società di sviluppo immobiliare che trasforma il patrimonio esistente in valore concreto.',
   intro:
     'Leone Group Immobiliare opera nel settore degli investimenti, della riqualificazione e della valorizzazione di immobili residenziali e direzionali.',
   body: [
-    'Il nostro focus e rigenerare immobili datati, sottoutilizzati o non piu in linea con le esigenze attuali del mercato, trasformandoli in abitazioni moderne, funzionali e di design.',
-    'Crediamo in un modello di crescita sostenibile e intelligente che metta al centro la riqualificazione urbana anziche il consumo di nuovo suolo. Per questo sviluppiamo interventi mirati di ristrutturazione, frazionamento, cambio di destinazione d uso e ripensamento degli spazi.',
-    'Ogni operazione nasce da un attenta analisi tecnica, economica e urbanistica e si sviluppa attraverso un processo integrato che ci consente di controllare qualita, tempi e costi, garantendo risultati concreti per chi abita e per chi investe.',
+    'Il nostro focus è rigenerare immobili datati, sottoutilizzati o non più in linea con le esigenze attuali del mercato, trasformandoli in abitazioni moderne, funzionali e di design.',
+    'Crediamo in un modello di crescita sostenibile e intelligente che metta al centro la riqualificazione urbana anziché il consumo di nuovo suolo. Per questo sviluppiamo interventi mirati di ristrutturazione, frazionamento, cambio di destinazione d\'uso e ripensamento degli spazi.',
+    'Ogni operazione nasce da un\'attenta analisi tecnica, economica e urbanistica e si sviluppa attraverso un processo integrato che ci consente di controllare qualità, tempi e costi, garantendo risultati concreti per chi abita e per chi investe.',
   ],
   pillars: [
     {
@@ -318,7 +321,7 @@ export const about = {
     },
     {
       title: 'Posizionamento',
-      text: 'Lavoriamo su residenziale e direzionale con operazioni selettive, orientate alla valorizzazione e alla liquidita finale.',
+      text: 'Lavoriamo su residenziale e direzionale con operazioni selettive, orientate alla valorizzazione e alla liquidità finale.',
     },
     {
       title: 'Controllo',
@@ -340,7 +343,7 @@ export const about = {
     {
       step: '03',
       title: 'Esecuzione interna',
-      text: 'Coordiniamo sviluppo, riqualificazione e valorizzazione con controllo costante su tempi, qualita e budget.',
+      text: 'Coordiniamo sviluppo, riqualificazione e valorizzazione con controllo costante su tempi, qualità e budget.',
     },
     {
       step: '04',
@@ -349,7 +352,7 @@ export const about = {
     },
   ],
   closing:
-    'Il nostro obiettivo e migliorare la qualita della vita di chi abita gli spazi che realizziamo e generare valore solido per chi investe.',
+    'Il nostro obiettivo è migliorare la qualità della vita di chi abita gli spazi che realizziamo e generare valore solido per chi investe.',
 };
 
 export const projectSection = {
@@ -357,18 +360,18 @@ export const projectSection = {
   title: 'Interventi conclusi',
   highlight: 'prima e dopo',
   description:
-    'Ogni progetto racconta una trasformazione reale a Roma: partiamo da un immobile con potenziale inespresso e lo restituiamo al mercato con una nuova identita, piu forte e piu attrattiva.',
+    'Ogni progetto racconta una trasformazione reale a Roma: partiamo da un immobile con potenziale inespresso e lo restituiamo al mercato con una nuova identità, più forte e più attrattiva.',
   boardTitle: 'Alcuni numeri',
   boardDescription:
-    'Un quadro sintetico che aiuta a leggere esperienza, continuita operativa e capacita di trasformare immobili con criterio.',
+    'Un quadro sintetico che aiuta a leggere esperienza, continuità operativa e capacità di trasformare immobili con criterio.',
   boardMetrics: [
     { value: '30%', label: 'ROI medio', detail: 'Operazioni selezionate con margini sostenibili.' },
     { value: '6M+', label: 'Euro investiti', detail: 'Capitale movimentato nelle operazioni concluse e in corso.' },
     { value: '50+', label: 'Appartamenti realizzati', detail: 'Rigenerazioni, frazionamenti e riconversioni concluse.' },
-    { value: '5.000+', label: 'Metri cubi riqualificati', detail: 'Recupero volumetrico e nuova qualita degli spazi.' },
+    { value: '5.000+', label: 'Metri cubi riqualificati', detail: 'Recupero volumetrico e nuova qualità degli spazi.' },
   ] as StatItem[],
   portfolioNote:
-    'Su richiesta condividiamo approfondimenti sui progetti conclusi, sul nostro metodo di analisi e sulle opportunita attualmente in valutazione.',
+    'Su richiesta condividiamo approfondimenti sui progetti conclusi, sul nostro metodo di analisi e sulle opportunità attualmente in valutazione.',
   showcaseCta: {
     label: 'Richiedi maggiori informazioni',
     href: routes.invest,
@@ -390,8 +393,9 @@ export const projects: Project[] = [
       { label: 'Superficie', value: '350 mq' },
       { label: 'Durata', value: '11 mesi' },
       { label: 'ROI', value: '53%', accent: true },
+      { label: 'Investimento', value: '420.000 €' },
     ],
-    highlights: ['Cambio destinazione d’uso', 'Realizzati 4 nuovi appartamenti', 'Investimento 420.000€'],
+    highlights: ['Cambio destinazione d’uso', 'Realizzati 4 nuovi appartamenti', 'Finiture di pregio'],
   },
   {
     id: 2,
@@ -407,12 +411,13 @@ export const projects: Project[] = [
       { label: 'Superficie', value: '170 mq' },
       { label: 'Durata', value: '8 mesi' },
       { label: 'ROI', value: '30%', accent: true },
+      { label: 'Investimento', value: '510.000 €' },
     ],
-    highlights: ['3 nuovi appartamenti realizzati', 'Comfort e funzionalità', 'Investimento 510.000€'],
+    highlights: ['3 nuovi appartamenti realizzati', 'Comfort e funzionalità', 'Ottimizzazione spazi'],
   },
   {
     id: 3,
-    title: 'Monte Gennaro',
+    title: 'Piazza Monte Gennaro',
     location: 'Roma',
     status: 'Concluso',
     assetType: 'Riconversione residenziale',
@@ -424,8 +429,9 @@ export const projects: Project[] = [
       { label: 'Superficie', value: '280 mq' },
       { label: 'Durata', value: '11 mesi' },
       { label: 'ROI', value: '50%', accent: true },
+      { label: 'Investimento', value: '820.000 €' },
     ],
-    highlights: ['Cambio destinazione d’uso', '4 nuovi appartamenti', 'Investimento 820.000€'],
+    highlights: ['Cambio destinazione d’uso', '4 nuovi appartamenti', 'Riqualificazione energetica'],
   },
   {
     id: 4,
@@ -441,8 +447,9 @@ export const projects: Project[] = [
       { label: 'Superficie', value: '250 mq' },
       { label: 'Durata', value: '9 mesi' },
       { label: 'ROI', value: '30%', accent: true },
+      { label: 'Investimento', value: '1.020.000 €' },
     ],
-    highlights: ['4 nuovi appartamenti realizzati', 'Massimizzazione del valore', 'Investimento 1.020.000 €'],
+    highlights: ['4 nuovi appartamenti realizzati', 'Massimizzazione del valore', 'Design contemporaneo'],
   },
   {
     id: 5,
@@ -458,6 +465,7 @@ export const projects: Project[] = [
       { label: 'Superficie', value: '170 mq' },
       { label: 'Durata', value: '8 mesi' },
       { label: 'Investimento', value: '760.000 €', accent: true },
+      { label: 'Unità', value: '3 Appartamenti' },
     ],
     highlights: ['3 nuovi appartamenti', 'Nuova organizzazione spazi', 'Focus luminosità e vivibilità'],
   },
@@ -467,14 +475,15 @@ export const projects: Project[] = [
     location: 'Roma',
     status: 'In corso',
     assetType: 'Riqualificazione e frazionamento',
-    beforeImage: './portfolio/eroi-in-corso.jpeg',
-    afterImage: './portfolio/eroi-in-corso.jpeg',
+    beforeImage: './portfolio/talenti-prima.jpeg',
+    afterImage: './portfolio/talenti-prima.jpeg',
     description:
       'Intervento in corso di frazionamento e riqualificazione di un intero attico, con ridefinizione degli spazi per creare due unità abitative distinte. Il progetto punta a soluzioni moderne, funzionali e luminose, valorizzando al massimo le caratteristiche dell’immobile.',
     metrics: [
       { label: 'Superficie', value: '165 mq' },
       { label: 'Durata', value: '8 mesi' },
-      { label: 'Costo', value: '530.000 €', accent: true },
+      { label: 'Investimento', value: '530.000 €', accent: true },
+      { label: 'Unità', value: '2 Appartamenti' },
     ],
     highlights: ['Frazionamento intero attico', '2 nuovi appartamenti', 'Valorizzazione caratteristiche originali'],
   },
@@ -486,40 +495,40 @@ export const invest = {
   intro:
     'Investire con Leone Group Immobiliare significa accedere a operazioni selezionate con criterio, seguite con attenzione e costruite per generare valore reale.',
   description:
-    'Selezioniamo immobili con potenziale di rivalutazione, sviluppiamo progetti di riqualificazione, frazionamento e riconversione e presidiamo ogni fase per ridurre dispersioni e aumentare la qualita dell esecuzione.',
+    'Selezioniamo immobili con potenziale di rivalutazione, sviluppiamo progetti di riqualificazione, frazionamento e riconversione e presidiamo ogni fase per ridurre dispersioni e aumentare la qualità dell\'esecuzione.',
   pillars: [
     {
       title: 'Selezione rigorosa',
-      text: 'Ogni operazione nasce da un analisi tecnica, urbanistica ed economico-finanziaria approfondita.',
+      text: 'Ogni operazione nasce da un\'analisi tecnica, urbanistica ed economico-finanziaria approfondita.',
     },
     {
       title: 'Gestione chiavi in mano',
       text: 'Seguiamo acquisizione, progettazione, lavori e vendita finale per una governance completa.',
     },
     {
-      title: 'Misurabilita',
-      text: 'L investitore valuta tempi, costi, margini attesi e scenari con documentazione chiara e leggibile.',
+      title: 'Misurabilità',
+      text: 'L\'investitore valuta tempi, costi, margini attesi e scenari con documentazione chiara e leggibile.',
     },
   ],
-  operatingTitle: 'Modalita operative',
+  operatingTitle: 'Modalità operative',
   operatingSteps: [
-    'Analisi dell immobile e studio di fattibilita tecnica e urbanistica.',
+    'Analisi dell\'immobile e studio di fattibilità tecnica e urbanistica.',
     'Predisposizione di business plan dettagliato, cronoprogramma e conto economico previsionale.',
     'Gestione interna del progetto dalla fase di acquisizione fino alla vendita finale.',
-    'Report periodici sull andamento dell operazione con aggiornamenti su tempi, costi e stato avanzamento.',
+    'Report periodici sull\'andamento dell\'operazione con aggiornamenti su tempi, costi e stato avanzamento.',
   ],
   advantagesTitle: 'Vantaggi per chi investe',
   advantages: [
-    'Accesso a opportunita selezionate normalmente riservate a operatori del settore.',
+    'Accesso a opportunità selezionate normalmente riservate a operatori del settore.',
     'Gestione completa senza impegno operativo diretto.',
     'Business plan chiari, dettagliati e verificabili.',
-    'Controllo diretto di tempi, costi e qualita esecutiva.',
+    'Controllo diretto di tempi, costi e qualità esecutiva.',
     'Allineamento di interessi grazie alla partecipazione diretta del gruppo nelle operazioni.',
-    'Esperienza concreta e relazioni costruite su trasparenza, affidabilita e risultati.',
+    'Esperienza concreta e relazioni costruite su trasparenza, affidabilità e risultati.',
   ],
   formTitle: 'Richiedi il dossier investitore',
   formDescription:
-    'Lascia i tuoi riferimenti per ricevere una prima presentazione riservata, conoscere il nostro approccio operativo e valutare il profilo di investimento piu adatto.',
+    'Lascia i tuoi riferimenti per ricevere una prima presentazione riservata, conoscere il nostro approccio operativo e valutare il profilo di investimento più adatto.',
 };
 
 export const calculator = {
@@ -527,7 +536,7 @@ export const calculator = {
   title: 'Simula',
   titleAccent: 'il potenziale',
   description:
-    'Uno strumento indicativo per visualizzare come puo evolvere un investimento immobiliare strutturato nel tempo.',
+    'Uno strumento indicativo per visualizzare come può evolvere un investimento immobiliare strutturato nel tempo.',
   subtitle:
     'Modifica capitale, durata e ROI atteso per confrontare scenari diversi e preparare una prima valutazione.',
   guidance:
@@ -545,7 +554,7 @@ export const calculator = {
     },
     years: {
       label: 'Orizzonte temporale',
-      description: 'Durata stimata dell investimento',
+      description: 'Durata stimata dell\'investimento',
       minLabel: '1 anno',
       maxLabel: '10 anni',
       format: {
@@ -572,17 +581,17 @@ export const seller = {
   badge: 'Vendi il tuo immobile',
   title: 'Ricevi una valutazione entro 24 ore.',
   subtitle:
-    'Un servizio dedicato ai proprietari che vogliono capire velocemente come vendere meglio, valorizzare di piu o attivare una trattativa concreta sul proprio immobile a Roma.',
+    'Un servizio dedicato ai proprietari che vogliono capire velocemente come vendere meglio, valorizzare di più o attivare una trattativa concreta sul proprio immobile a Roma.',
   description:
     'Analizziamo immobili di grande metratura o con potenziale di riqualificazione, frazionamento e riposizionamento sul mercato. A seconda del caso possiamo proporre acquisto diretto, vendita tramite i nostri canali o un percorso di valorizzazione mirata.',
   offers: [
     {
       title: 'Acquisto diretto',
-      text: 'Quando l immobile rientra nel nostro target, possiamo formulare una proposta di acquisto in tempi rapidi.',
+      text: 'Quando l\'immobile rientra nel nostro target, possiamo formulare una proposta di acquisto in tempi rapidi.',
     },
     {
       title: 'Vendita gratuita',
-      text: 'Mettiamo a disposizione i nostri canali e il nostro network per massimizzare la visibilita dell immobile.',
+      text: 'Mettiamo a disposizione i nostri canali e il nostro network per massimizzare la visibilità dell\'immobile.',
     },
     {
       title: 'Valorizzazione mirata',
@@ -590,7 +599,7 @@ export const seller = {
     },
   ],
   campaignNote:
-    'Ogni richiesta viene analizzata con attenzione per offrire una risposta rapida, riservata e coerente con le caratteristiche dell immobile e con il suo reale potenziale di valorizzazione.',
+    'Ogni richiesta viene analizzata con attenzione per offrire una risposta rapida, riservata e coerente con le caratteristiche dell\'immobile e con il suo reale potenziale di valorizzazione.',
   form: {
     title: 'Richiedi la tua valutazione',
     button: 'Invia richiesta di valutazione',
@@ -632,7 +641,7 @@ export const seller = {
         required: true,
       } as FormField,
       condition: {
-        label: 'Stato dell immobile',
+        label: 'Stato dell\'immobile',
         placeholder: 'Seleziona uno stato',
         type: 'select',
         required: true,
@@ -652,8 +661,8 @@ export const seller = {
 
 export const contact = {
   details: {
-    email: 'info@leonegroup.it',
-    phone: '+39 02 1234 5678',
+    email: 'info@leonegroupimmobiliare.it',
+    phone: '',
     addressLine1: 'Roma',
     addressLine2: 'Ricevimento su appuntamento',
   } as ContactInfo,
@@ -670,7 +679,7 @@ export const footer = {
     { label: 'Vendi il tuo immobile', href: routes.sell },
   ] as NavItem[],
   legal: [
-    { label: 'Privacy Policy', href: '#privacy' },
+    { label: 'Privacy Policy', href: routes.privacy },
     { label: 'Termini di Servizio', href: '#terms' },
   ],
   footerCopy: 'Tutti i diritti riservati.',
@@ -679,10 +688,10 @@ export const footer = {
 export const footerInfoSection = {
   privacy: {
     title: 'Privacy Policy',
-    text: 'Le informazioni inserite nei form sono utilizzate esclusivamente per ricontattare l utente in relazione ai servizi richiesti.',
+    text: 'Le informazioni inserite nei form sono utilizzate esclusivamente per ricontattare l\'utente in relazione ai servizi richiesti.',
   },
   terms: {
     title: 'Termini di Servizio',
-    text: 'I contenuti di simulazione e le schede progetto hanno finalita illustrative fino al caricamento dei dati operativi definitivi.',
+    text: 'I contenuti di simulazione e le schede progetto hanno finalità illustrative fino al caricamento dei dati operativi definitivi.',
   },
 };
