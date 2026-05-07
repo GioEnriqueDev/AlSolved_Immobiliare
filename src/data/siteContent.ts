@@ -74,18 +74,19 @@ export interface TransformationProject {
 }
 
 export const brand = {
-  name: 'Leone Group Immobiliare',
-  shortName: 'Leone Group',
-  legalName: 'Leone Group Immobiliare',
+  name: 'Leone Immobiliare 2023 S.R.L.',
+  shortName: 'Leone Immobiliare',
+  legalName: 'LEONE IMMOBILIARE 2023 S.R.L.',
   tagline:
     'Sviluppo immobiliare a Roma per trasformare immobili datati in spazi più belli, più attuali e più richiesti dal mercato.',
   description:
     'Selezioniamo, ripensiamo e valorizziamo immobili a Roma con un approccio che unisce visione, cura progettuale e attenzione al risultato finale.',
   logoSrc: './leone-group-logo.png',
-  logoAlt: 'Logo Leone Group Immobiliare',
+  logoAlt: 'Logo Leone Immobiliare',
   year: new Date().getFullYear(),
-  vat: 'P.IVA 12345678901', // Placeholder, user should update
-  address: 'Via dei Gracchi 278, 00192 Roma (RM)',
+  vat: 'P.IVA 17104261007',
+  cf: 'CF 17104261007',
+  address: 'via sepino 136, 00132 ROMA (RM), Italia',
 };
 
 export const routes = {
@@ -545,31 +546,31 @@ export const calculator = {
     amount: {
       label: 'Importo investibile',
       description: 'Capitale iniziale disponibile',
-      minLabel: 'EUR 100K',
-      maxLabel: 'EUR 2M',
+      minLabel: 'EUR 10K',
+      maxLabel: 'EUR 500K',
       format: {
-        min: 100000,
-        max: 2000000,
+        min: 10000,
+        max: 500000,
       },
     },
     years: {
       label: 'Orizzonte temporale',
       description: 'Durata stimata dell\'investimento',
-      minLabel: '1 anno',
-      maxLabel: '10 anni',
+      minLabel: '6 mesi',
+      maxLabel: '5 anni',
       format: {
-        min: 1,
-        max: 10,
+        min: 0.5,
+        max: 5,
       },
     },
     roi: {
       label: 'ROI previsto',
       description: 'Rendimento medio annuo stimato',
       minLabel: '10%',
-      maxLabel: '40%',
+      maxLabel: '20%',
       format: {
         min: 10,
-        max: 40,
+        max: 20,
       },
     },
   },

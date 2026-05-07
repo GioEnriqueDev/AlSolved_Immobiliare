@@ -222,7 +222,7 @@ const ROICalculator = () => {
                     type="range"
                     min={calculator.labels.amount.format.min}
                     max={calculator.labels.amount.format.max}
-                    step="50000"
+                    step="10000"
                     value={investment}
                     onChange={(event) => setInvestment(Number(event.target.value))}
                     className="w-full"
@@ -247,14 +247,16 @@ const ROICalculator = () => {
                         <p className="text-sm text-charcoal-400">{calculator.labels.years.description}</p>
                       </div>
                     </div>
-                    <span className="text-xl font-display font-bold text-gold-400 sm:text-2xl">{years} anni</span>
+                    <span className="text-xl font-display font-bold text-gold-400 sm:text-2xl">
+                      {years === 0.5 ? '6 mesi' : `${years} ${years === 1 ? 'anno' : 'anni'}`}
+                    </span>
                   </div>
                   <input
                     id="years"
                     type="range"
                     min={calculator.labels.years.format.min}
                     max={calculator.labels.years.format.max}
-                    step="1"
+                    step="0.5"
                     value={years}
                     onChange={(event) => setYears(Number(event.target.value))}
                     className="w-full"
@@ -286,7 +288,7 @@ const ROICalculator = () => {
                     type="range"
                     min={calculator.labels.roi.format.min}
                     max={calculator.labels.roi.format.max}
-                    step="2"
+                    step="1"
                     value={roiRate}
                     onChange={(event) => setRoiRate(Number(event.target.value))}
                     className="w-full"
@@ -391,7 +393,7 @@ const ROICalculator = () => {
                         key={point.year}
                         className={isMobile && index !== 0 && index !== chartData.length - 1 && index % 2 !== 0 ? 'hidden' : ''}
                       >
-                        {`Anno ${point.year}`}
+                        {point.year === 0.5 ? '6 mesi' : `Anno ${point.year}`}
                       </span>
                     ))}
                   </div>

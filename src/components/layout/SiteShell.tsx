@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import useLenis from '../../hooks/useLenis';
 import CursorGlow from '../custom/CursorGlow';
 import Navigation from '../custom/Navigation';
+import PrivacyBanner from '../custom/PrivacyBanner';
 import SiteFooter from './SiteFooter';
 
 interface SiteShellProps {
@@ -18,6 +19,7 @@ const SiteShell = ({ children, currentPath }: SiteShellProps) => {
       <Navigation currentPath={currentPath} />
       <main className="relative">{children}</main>
       <SiteFooter />
+      <PrivacyBanner />
     </div>
   );
 };

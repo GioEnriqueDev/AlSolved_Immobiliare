@@ -53,7 +53,7 @@ const SiteFooter = () => {
               &copy; {brand.year} {brand.legalName}. {footer.footerCopy}
             </p>
             <p className="text-[10px] text-charcoal-600">
-              {brand.vat} — {brand.address}
+              {brand.vat} — {brand.cf} — {brand.address}
             </p>
           </div>
           
