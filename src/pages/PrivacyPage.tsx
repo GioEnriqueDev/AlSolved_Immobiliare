@@ -19,7 +19,7 @@ const PrivacyPage = () => {
               <p className="text-charcoal-300 leading-relaxed">
                 Il Titolare del trattamento è <strong>{brand.legalName}</strong>, con sede legale in {brand.address}. 
                 Per qualsiasi richiesta relativa alla privacy è possibile contattare il Titolare all'indirizzo email: 
-                <a href="mailto:info@leonegroupimmobiliare.it" className="text-gold-400 hover:text-gold-300 ml-1">info@leonegroupimmobiliare.it</a>.
+                <a href="mailto:leonegroupimmobiliare@gmail.com" className="text-gold-400 hover:text-gold-300 ml-1">leonegroupimmobiliare@gmail.com</a>.
               </p>
             </div>
 
@@ -59,7 +59,7 @@ const PrivacyPage = () => {
             <div className="rounded-[2.5rem] border border-white/5 bg-white/5 p-8 sm:p-12">
               <h2 className="font-display text-2xl font-bold text-white mb-6">5. Diritti dell'Interessato</h2>
               <p className="text-charcoal-300 leading-relaxed">
-                Ai sensi del GDPR, l'utente ha il diritto di accedere ai propri dati, richiederne la rettifica, la cancellazione o la limitazione del trattamento. Può inoltre opporsi al trattamento e richiedere la portabilità dei dati. Le richieste vanno indirizzate a <span className="text-gold-400">info@leonegroupimmobiliare.it</span>.
+                Ai sensi del GDPR, l'utente ha il diritto di accedere ai propri dati, richiederne la rettifica, la cancellazione o la limitazione del trattamento. Può inoltre opporsi al trattamento e richiedere la portabilità dei dati. Le richieste vanno indirizzate a <span className="text-gold-400">leonegroupimmobiliare@gmail.com</span>.
               </p>
             </div>
             

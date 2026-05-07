@@ -662,7 +662,7 @@ export const seller = {
 
 export const contact = {
   details: {
-    email: 'info@leonegroupimmobiliare.it',
+    email: 'leonegroupimmobiliare@gmail.com',
     phone: '',
     addressLine1: 'Roma',
     addressLine2: 'Ricevimento su appuntamento',
