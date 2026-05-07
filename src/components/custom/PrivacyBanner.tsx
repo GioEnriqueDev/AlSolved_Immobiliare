@@ -46,7 +46,7 @@ const PrivacyBanner = () => {
                   </p>
                 </div>
               </div>
-              <div className="flex shrink-0 items-center gap-3">
+              <div className="flex shrink-0 flex-wrap items-center gap-3">
                 <button
                   onClick={handleAccept}
                   className="rounded-xl bg-gold-500 px-6 py-2.5 text-sm font-bold text-charcoal-950 transition hover:bg-gold-400 hover:shadow-glow"
@@ -55,7 +55,13 @@ const PrivacyBanner = () => {
                 </button>
                 <button
                   onClick={() => setIsVisible(false)}
-                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-charcoal-400 transition hover:bg-white/10 hover:text-white"
+                  className="rounded-xl border border-white/10 bg-white/5 px-6 py-2.5 text-sm font-medium text-charcoal-300 transition hover:bg-white/10 hover:text-white"
+                >
+                  Rifiuta
+                </button>
+                <button
+                  onClick={() => setIsVisible(false)}
+                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-charcoal-400 transition hover:bg-white/10 hover:text-white md:hidden"
                   aria-label="Chiudi"
                 >
                   <X className="h-5 w-5" />

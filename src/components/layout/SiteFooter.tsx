@@ -67,7 +67,7 @@ const SiteFooter = () => {
             </div>
             <div className="h-px w-8 bg-white/5 hidden md:block" />
             <p className="text-[10px] uppercase tracking-widest text-charcoal-600">
-              Created by <span className="text-charcoal-400">Alsolved</span>
+              Created by <a href="https://alsolved.com" target="_blank" rel="noopener noreferrer" className="text-charcoal-400 transition-colors hover:text-gold-400">Alsolved</a>
             </p>
           </div>
         </div>
