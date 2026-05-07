@@ -19,9 +19,9 @@ const ROICalculator = () => {
   const isInView = useInView(containerRef, { once: true, margin: '-100px' });
   const isMobile = useIsMobile();
 
-  const [investment, setInvestment] = useState(500000);
-  const [years, setYears] = useState(4);
-  const [roiRate, setRoiRate] = useState(30);
+  const [investment, setInvestment] = useState(100000);
+  const [years, setYears] = useState(2);
+  const [roiRate, setRoiRate] = useState(15);
   const [investorForm, setInvestorForm] = useState({
     name: '',
     email: '',
