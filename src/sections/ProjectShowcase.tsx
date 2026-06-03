@@ -57,7 +57,7 @@ const ProjectShowcase = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-24 rounded-[3rem] border border-white/5 bg-white/5 p-8 backdrop-blur-3xl sm:p-12"
+          className="mb-24 rounded-[3rem] border border-white/5 bg-charcoal-900/90 p-8 sm:bg-white/5 sm:backdrop-blur-3xl sm:p-12"
         >
           <div className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-center gap-4">
@@ -168,7 +168,7 @@ const ProjectShowcase = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-20 flex flex-col gap-8 rounded-[2.5rem] border border-white/5 bg-white/5 p-10 backdrop-blur-2xl sm:flex-row sm:items-center sm:justify-between sm:p-14"
+          className="mt-20 flex flex-col gap-8 rounded-[2.5rem] border border-white/5 bg-charcoal-900/90 p-10 sm:bg-white/5 sm:backdrop-blur-2xl sm:flex-row sm:items-center sm:justify-between sm:p-14"
         >
           <div className="max-w-2xl">
             <p className="text-lg leading-relaxed text-charcoal-300">{projectSection.portfolioNote}</p>

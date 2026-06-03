@@ -187,7 +187,7 @@ export const transformationPortfolio = {
   teaserTitle: 'Cantiere attivo',
   teaserDescription:
     'Accanto agli interventi completati, mostriamo anche una lavorazione in corso per raccontare continuità, ritmo operativo e pipeline reale.',
-  teaserImage: './portfolio/eroi-in-corso.jpeg',
+  teaserImage: './portfolio/eroi-in-corso.webp',
   teaserImageAlt: 'Cantiere immobiliare in corso Leone Group',
 };
 
@@ -203,8 +203,8 @@ export const transformationProjects: TransformationProject[] = [
       'Intervento in corso di frazionamento e riqualificazione di un intero attico, con ridefinizione degli spazi per creare due unità abitative distinte. Il progetto punta a soluzioni moderne, funzionali e luminose, valorizzando al massimo le caratteristiche dell’immobile.',
     insight: 'In corso di realizzazione. Trasformazione di un intero piano attico in due unità esclusive.',
     metrics: ['Superficie 165 mq', '2 nuovi appartamenti', 'In corso'],
-    beforeImage: '/portfolio/talenti-prima.jpeg',
-    afterImage: '/portfolio/talenti-prima.jpeg',
+    beforeImage: '/portfolio/talenti-prima.webp',
+    afterImage: '/portfolio/talenti-prima.webp',
   },
   {
     id: 1,
@@ -217,8 +217,8 @@ export const transformationProjects: TransformationProject[] = [
       'Intervento di trasformazione integrale di una palazzina su due livelli, con passaggio da commerciale a residenziale. Il progetto ha completamente ridefinito gli spazi, dando nuova identità all’immobile attraverso la realizzazione di unità abitative contemporanee e ben organizzate.',
     insight: 'Il risultato finale rende l\'immobile più chiaro, più elegante e immediatamente più convincente.',
     metrics: ['Superficie 350 mq', 'Cambio destinazione d’uso', 'ROI 53%'],
-    beforeImage: './portfolio/calabritto-prima.jpeg',
-    afterImage: './portfolio/calabritto-dopo.jpeg',
+    beforeImage: './portfolio/calabritto-prima.webp',
+    afterImage: './portfolio/calabritto-dopo.webp',
   },
   {
     id: 2,
@@ -231,8 +231,8 @@ export const transformationProjects: TransformationProject[] = [
       'Intervento di riqualificazione con frazionamento di un’unità esistente, volto a ripensare completamente la distribuzione degli spazi. Il progetto ha portato alla realizzazione di nuove soluzioni abitative moderne, curate nei dettagli e progettate per garantire comfort e funzionalità.',
     insight: 'Quando il progetto è coerente, la differenza non si vede soltanto: si sente subito.',
     metrics: ['Superficie 170 mq', '3 nuovi appartamenti', 'ROI 30%'],
-    beforeImage: './portfolio/graf-prima.jpeg',
-    afterImage: './portfolio/graf-dopo.jpeg',
+    beforeImage: './portfolio/graf-prima.webp',
+    afterImage: './portfolio/graf-dopo.webp',
   },
   {
     id: 3,
@@ -245,8 +245,8 @@ export const transformationProjects: TransformationProject[] = [
       'Intervento di trasformazione di un immobile direzionale in residenziale, nato dalla riconversione di spazi non più in linea con le esigenze attuali. Il progetto ha previsto un’attenta analisi urbanistica e una completa ridefinizione degli ambienti, dando vita a soluzioni abitative moderne e funzionali.',
     insight: 'Il prima e dopo racconta un salto netto verso una casa più attuale e più desiderabile.',
     metrics: ['Superficie 280 mq', 'Cambio destinazione d’uso', 'ROI 50%'],
-    beforeImage: './portfolio/monte-gennaro-prima.jpeg',
-    afterImage: './portfolio/monte-gennaro-dopo.jpeg',
+    beforeImage: './portfolio/monte-gennaro-prima.webp',
+    afterImage: './portfolio/monte-gennaro-dopo.webp',
   },
   {
     id: 4,
@@ -259,8 +259,8 @@ export const transformationProjects: TransformationProject[] = [
       'Progetto di trasformazione e valorizzazione immobiliare attraverso un intervento mirato di frazionamento e riqualificazione. Gli spazi sono stati ripensati per ottenere unità abitative moderne, efficienti e in linea con la domanda di mercato, massimizzando il valore complessivo dell’operazione.',
     insight: 'Qui il valore si legge nella pulizia del risultato e nella forza della nuova identità della casa.',
     metrics: ['Superficie 250 mq', '4 nuovi appartamenti', 'ROI 30%'],
-    beforeImage: './portfolio/universita-prima.jpeg',
-    afterImage: './portfolio/universita-dopo.jpeg',
+    beforeImage: './portfolio/universita-prima.webp',
+    afterImage: './portfolio/universita-dopo.webp',
   },
   {
     id: 5,
@@ -273,8 +273,8 @@ export const transformationProjects: TransformationProject[] = [
       'Intervento in corso di riqualificazione con frazionamento di un’unità esistente, finalizzato a una nuova organizzazione degli spazi interni. Il progetto prevede la realizzazione di ambienti abitativi moderni, con particolare attenzione a distribuzione, luminosità e vivibilità.',
     insight: 'In corso di realizzazione. Il progetto punta a massimizzare luminosità e vivibilità.',
     metrics: ['Superficie 170 mq', '3 nuovi appartamenti', 'In corso'],
-    beforeImage: './portfolio/eroi-in-corso.jpeg',
-    afterImage: './portfolio/eroi-in-corso.jpeg',
+    beforeImage: './portfolio/eroi-in-corso.webp',
+    afterImage: './portfolio/eroi-in-corso.webp',
   },
 ];
 
@@ -386,8 +386,8 @@ export const projects: Project[] = [
     location: 'Roma',
     status: 'Concluso',
     assetType: 'Conversione Commerciale a Residenziale',
-    beforeImage: './portfolio/calabritto-prima.jpeg',
-    afterImage: './portfolio/calabritto-dopo.jpeg',
+    beforeImage: './portfolio/calabritto-prima.webp',
+    afterImage: './portfolio/calabritto-dopo.webp',
     description:
       'Intervento di trasformazione integrale di una palazzina su due livelli, con passaggio da commerciale a residenziale. Il progetto ha completamente ridefinito gli spazi, dando nuova identità all’immobile attraverso la realizzazione di unità abitative contemporanee e ben organizzate.',
     metrics: [
@@ -404,8 +404,8 @@ export const projects: Project[] = [
     location: 'Roma',
     status: 'Concluso',
     assetType: 'Riqualificazione e Frazionamento',
-    beforeImage: './portfolio/graf-prima.jpeg',
-    afterImage: './portfolio/graf-dopo.jpeg',
+    beforeImage: './portfolio/graf-prima.webp',
+    afterImage: './portfolio/graf-dopo.webp',
     description:
       'Intervento di riqualificazione con frazionamento di un’unità esistente, volto a ripensare completamente la distribuzione degli spazi. Il progetto ha portato alla realizzazione di nuove soluzioni abitative moderne, curate nei dettagli e progettate per garantire comfort e funzionalità.',
     metrics: [
@@ -422,8 +422,8 @@ export const projects: Project[] = [
     location: 'Roma',
     status: 'Concluso',
     assetType: 'Riconversione residenziale',
-    beforeImage: './portfolio/monte-gennaro-prima.jpeg',
-    afterImage: './portfolio/monte-gennaro-dopo.jpeg',
+    beforeImage: './portfolio/monte-gennaro-prima.webp',
+    afterImage: './portfolio/monte-gennaro-dopo.webp',
     description:
       'Intervento di trasformazione di un immobile direzionale in residenziale, nato dalla riconversione di spazi non più in linea con le esigenze attuali. Il progetto ha previsto un’attenta analisi urbanistica e una completa ridefinizione degli ambienti, dando vita a soluzioni abitative moderne e funzionali.',
     metrics: [
@@ -440,8 +440,8 @@ export const projects: Project[] = [
     location: 'Roma',
     status: 'Concluso',
     assetType: 'Riqualificazione e Frazionamento',
-    beforeImage: './portfolio/universita-prima.jpeg',
-    afterImage: './portfolio/universita-dopo.jpeg',
+    beforeImage: './portfolio/universita-prima.webp',
+    afterImage: './portfolio/universita-dopo.webp',
     description:
       'Progetto di trasformazione e valorizzazione immobiliare attraverso un intervento mirato di frazionamento e riqualificazione. Gli spazi sono stati ripensati per ottenere unità abitative moderne, efficienti e in linea con la domanda di mercato, massimizzando il valore complessivo dell’operazione.',
     metrics: [
@@ -458,8 +458,8 @@ export const projects: Project[] = [
     location: 'Roma',
     status: 'In corso',
     assetType: 'Riqualificazione e frazionamento',
-    beforeImage: './portfolio/eroi-in-corso.jpeg',
-    afterImage: './portfolio/eroi-in-corso.jpeg',
+    beforeImage: './portfolio/eroi-in-corso.webp',
+    afterImage: './portfolio/eroi-in-corso.webp',
     description:
       'Intervento in corso di riqualificazione con frazionamento di un’unità esistente, finalizzato a una nuova organizzazione degli spazi interni. Il progetto prevede la realizzazione di ambienti abitativi moderni, con particolare attenzione a distribuzione, luminosità e vivibilità.',
     metrics: [

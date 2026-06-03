@@ -39,7 +39,7 @@ const Hero = () => {
     <section ref={containerRef} className="relative min-h-screen overflow-hidden bg-charcoal-950">
       <div className="absolute inset-0 bg-gradient-to-br from-charcoal-950 via-charcoal-900 to-charcoal-950" />
 
-      <motion.div className="absolute inset-0 will-change-transform" style={{ y: springBackgroundY }}>
+      <motion.div className="absolute inset-0 will-change-transform" style={isMobile ? undefined : { y: springBackgroundY }}>
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url('${hero.backgroundImage}')` }}
@@ -58,7 +58,7 @@ const Hero = () => {
 
       <motion.div
         className="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col justify-center px-6 pb-20 pt-32 text-center sm:px-12 sm:pb-24 sm:pt-40 lg:px-24"
-        style={{ opacity: springOpacity }}
+        style={isMobile ? undefined : { opacity: springOpacity }}
       >
         <div className="flex flex-col items-center gap-8 sm:gap-10">
           <div className="w-full">
@@ -144,7 +144,7 @@ const Hero = () => {
           className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
         >
           {hero.stats.map((stat) => (
-            <div key={stat.label} className="rounded-3xl border border-white/10 bg-black/30 p-6 backdrop-blur-xl">
+            <div key={stat.label} className="rounded-3xl border border-white/10 bg-charcoal-900/90 p-6 sm:bg-black/30 sm:backdrop-blur-xl">
               <div className="text-3xl font-display font-bold text-gold-400">{stat.value}</div>
               <div className="mt-2 text-sm uppercase tracking-[0.18em] text-charcoal-300">{stat.label}</div>
               {stat.detail && <p className="mt-3 text-sm leading-relaxed text-charcoal-500">{stat.detail}</p>}

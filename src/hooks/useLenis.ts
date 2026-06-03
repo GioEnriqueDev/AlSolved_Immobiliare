@@ -8,9 +8,10 @@ export const useLenis = () => {
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const hasCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+    const isSmallScreen = window.innerWidth < 1024;
 
     // Native scrolling generally feels better and costs less on touch devices.
-    if (prefersReducedMotion || hasCoarsePointer) {
+    if (prefersReducedMotion || hasCoarsePointer || isSmallScreen) {
       return;
     }
 

@@ -78,6 +78,8 @@ const BeforeAfterSlider = ({
         alt={`${title} prima`}
         className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
         loading="lazy"
+        decoding="async"
+        fetchPriority="low"
       />
 
       {/* After Image (Clipped) */}
@@ -116,6 +118,8 @@ const BeforeAfterSlider = ({
             alt={`${title} dopo`}
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
             loading="lazy"
+            decoding="async"
+            fetchPriority="low"
           />
         )}
       </motion.div>
@@ -126,7 +130,7 @@ const BeforeAfterSlider = ({
         style={{ left: revealPercentage }}
       >
         <div
-          className={`absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-charcoal-950/90 text-white shadow-xl backdrop-blur-2xl transition-all duration-300 ${
+          className={`absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-charcoal-950/90 text-white shadow-xl sm:backdrop-blur-2xl transition-all duration-300 ${
             isScrubbing ? 'scale-110 border-gold-400/50' : 'hover:scale-105'
           }`}
         >
@@ -135,10 +139,10 @@ const BeforeAfterSlider = ({
       </motion.div>
 
       {/* Labels */}
-      <div className="absolute left-4 top-4 z-40 rounded-full border border-white/10 bg-charcoal-950/60 px-3 py-1.5 text-[8px] uppercase tracking-[0.2em] text-white backdrop-blur-md">
+      <div className="absolute left-4 top-4 z-40 rounded-full border border-white/10 bg-charcoal-950/80 px-3 py-1.5 text-[8px] uppercase tracking-[0.2em] text-white sm:backdrop-blur-md">
         Prima
       </div>
-      <div className="absolute right-4 top-4 z-40 rounded-full border border-gold-500/20 bg-gold-500/10 px-3 py-1.5 text-[8px] uppercase tracking-[0.2em] text-gold-200 backdrop-blur-md">
+      <div className="absolute right-4 top-4 z-40 rounded-full border border-gold-500/20 bg-gold-900/80 px-3 py-1.5 text-[8px] uppercase tracking-[0.2em] text-gold-200 sm:backdrop-blur-md">
         Dopo
       </div>
     </div>

@@ -136,7 +136,7 @@ const ROICalculator = () => {
                 const Icon = [ShieldCheck, BarChart3, FileText][index] ?? ShieldCheck;
 
                 return (
-                  <div key={pillar.title} className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+                  <div key={pillar.title} className="rounded-3xl border border-white/10 bg-charcoal-900/90 p-6 sm:bg-white/5 sm:backdrop-blur-xl">
                     <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gold-500/15">
                       <Icon className="h-5 w-5 text-gold-400" />
                     </div>
@@ -151,7 +151,7 @@ const ROICalculator = () => {
               initial={{ opacity: 0, y: getY(24) }}
               animate={isInView ? { opacity: 1, y: 0 } : undefined}
               transition={{ duration: 0.8, delay: 0.15 }}
-              className="rounded-[2rem] border border-white/10 bg-black/20 p-6 backdrop-blur-xl sm:p-8"
+              className="rounded-[2rem] border border-white/10 bg-charcoal-900/90 p-6 sm:bg-black/20 sm:backdrop-blur-xl sm:p-8"
             >
               <p className="text-xs uppercase tracking-[0.24em] text-gold-300">{invest.operatingTitle}</p>
               <div className="mt-6 space-y-4">
@@ -187,7 +187,7 @@ const ROICalculator = () => {
               initial={{ opacity: 0, y: getY(24) }}
               animate={isInView ? { opacity: 1, y: 0 } : undefined}
               transition={{ duration: 0.8, delay: 0.18 }}
-              className="rounded-[2rem] border border-white/10 bg-black/20 p-6 backdrop-blur-xl sm:p-8"
+              className="rounded-[2rem] border border-white/10 bg-charcoal-900/90 p-6 sm:bg-black/20 sm:backdrop-blur-xl sm:p-8"
             >
               <div className="mb-8">
                 <div className="inline-flex items-center gap-2 rounded-full border border-gold-500/20 bg-gold-500/10 px-4 py-2">
@@ -420,7 +420,7 @@ const ROICalculator = () => {
               animate={isInView ? { opacity: 1, y: 0 } : undefined}
               transition={{ duration: 0.8, delay: 0.22 }}
               onSubmit={handleSubmit}
-              className="rounded-[2rem] border border-white/10 bg-white/5 p-6 backdrop-blur-xl sm:p-8"
+              className="rounded-[2rem] border border-white/10 bg-charcoal-900/90 p-6 sm:bg-white/5 sm:backdrop-blur-xl sm:p-8"
               noValidate
             >
               <h3 className="font-display text-2xl font-bold text-white">{invest.formTitle}</h3>

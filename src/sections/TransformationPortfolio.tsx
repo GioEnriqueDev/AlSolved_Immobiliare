@@ -145,7 +145,7 @@ const TransformationPortfolio = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-            className="relative overflow-hidden rounded-[2rem] border border-white/5 bg-white/5 p-1.5 shadow-2xl backdrop-blur-3xl sm:p-2.5"
+            className="relative overflow-hidden rounded-[2rem] border border-white/5 bg-charcoal-900/90 p-1.5 shadow-2xl sm:bg-white/5 sm:backdrop-blur-3xl sm:p-2.5"
           >
             <div
               className={`group relative aspect-[4/5] overflow-hidden rounded-[1.6rem] bg-charcoal-900 select-none touch-none sm:aspect-[16/9] ${
@@ -168,6 +168,8 @@ const TransformationPortfolio = () => {
                 alt={activeProject.title}
                 className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 loading="lazy"
+                decoding="async"
+                fetchPriority="low"
               />
 
               <motion.div className="absolute inset-0 overflow-hidden" style={{ clipPath: afterClipPath }}>
@@ -210,6 +212,8 @@ const TransformationPortfolio = () => {
                     alt={activeProject.title}
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
+                    decoding="async"
+                    fetchPriority="low"
                   />
                 )}
               </motion.div>
