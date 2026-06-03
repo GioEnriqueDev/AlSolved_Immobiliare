@@ -115,7 +115,7 @@ const TransformationPortfolio = () => {
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-10px' }}
+          viewport={{ once: true, margin: '0px' }}
           transition={{ duration: 0.8 }}
           className="mb-10 max-w-4xl sm:mb-12"
         >

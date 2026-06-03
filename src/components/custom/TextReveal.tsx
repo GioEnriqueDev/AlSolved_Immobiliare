@@ -17,7 +17,7 @@ const TextReveal = ({
     once = true,
 }: TextRevealProps) => {
     const ref = useRef<HTMLDivElement>(null);
-    const isInView = useInView(ref, { once, margin: '-50px' });
+    const isInView = useInView(ref, { once, margin: '0px' });
 
     return (
         <div ref={ref} className={`overflow-hidden ${className}`}>
@@ -52,7 +52,7 @@ export const SplitText = ({
     once = true,
 }: SplitTextProps) => {
     const ref = useRef<HTMLDivElement>(null);
-    const isInView = useInView(ref, { once, margin: '-50px' });
+    const isInView = useInView(ref, { once, margin: '0px' });
 
     const words = text.split(' ');
 

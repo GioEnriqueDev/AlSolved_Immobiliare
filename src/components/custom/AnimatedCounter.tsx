@@ -19,7 +19,7 @@ const AnimatedCounter = ({
   decimals = 0,
 }: AnimatedCounterProps) => {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, margin: '0px' });
   const [hasAnimated, setHasAnimated] = useState(false);
 
   const springValue = useSpring(0, {

@@ -18,7 +18,7 @@ const HomeOverview = () => {
         <motion.div
           initial={{ opacity: 0, y: getY(30) }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-10px' }}
+          viewport={{ once: true, margin: '0px' }}
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           className="mb-16 max-w-4xl sm:mb-24"
         >
@@ -51,7 +51,7 @@ const HomeOverview = () => {
               key={card.title}
               initial={{ opacity: 0, y: getY(40) }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
+              viewport={{ once: true, margin: '0px' }}
               transition={{ duration: 1, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
               className="group relative"
             >

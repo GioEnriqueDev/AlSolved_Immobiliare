@@ -13,7 +13,7 @@ const AboutSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-10px' }}
+          viewport={{ once: true, margin: '0px' }}
           transition={{ duration: 0.8 }}
           className="grid gap-14 lg:grid-cols-[1.05fr,0.95fr]"
         >
@@ -44,7 +44,7 @@ const AboutSection = () => {
                   key={pillar.title}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-80px' }}
+                  viewport={{ once: true, margin: '0px' }}
                   transition={{ duration: 0.7, delay: index * 0.08 }}
                   className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl"
                 >
