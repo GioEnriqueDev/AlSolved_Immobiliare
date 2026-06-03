@@ -19,6 +19,9 @@ const ProjectShowcase = () => {
     }
   }, []);
 
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const getY = (y: number) => isMobile ? y * 0.4 : y;
+
   const getMetricIcon = (label: string, accent?: boolean) => {
     if (accent) return TrendingUp;
     if (label.toLowerCase().includes('durata')) return CalendarRange;
@@ -34,7 +37,7 @@ const ProjectShowcase = () => {
 
       <div className="relative mx-auto max-w-7xl">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: getY(30) }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
@@ -68,7 +71,7 @@ const ProjectShowcase = () => {
             {projectSection.boardMetrics.map((metric, index) => (
               <motion.div
                 key={metric.label}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: getY(20) }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
@@ -87,7 +90,7 @@ const ProjectShowcase = () => {
             <motion.article
               key={project.id}
               id={`project-${project.id}`}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: getY(40) }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 1, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}

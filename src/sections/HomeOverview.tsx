@@ -4,6 +4,10 @@ import MagneticButton from '../components/custom/MagneticButton';
 import { homeOverview } from '../data/siteContent';
 
 const HomeOverview = () => {
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const getY = (y: number) => isMobile ? y * 0.4 : y;
+  const getX = (x: number) => isMobile ? x * 0.4 : x;
+
   return (
     <section className="relative bg-charcoal-950 px-6 py-24 sm:px-12 sm:py-32 lg:px-24">
       <div className="absolute inset-0">
@@ -12,14 +16,14 @@ const HomeOverview = () => {
 
       <div className="relative mx-auto max-w-6xl">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: getY(30) }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           className="mb-16 max-w-4xl sm:mb-24"
         >
           <motion.p 
-            initial={{ opacity: 0, x: -15 }}
+            initial={{ opacity: 0, x: getX(-15) }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -45,7 +49,7 @@ const HomeOverview = () => {
           {homeOverview.cards.map((card, index) => (
             <motion.article
               key={card.title}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: getY(40) }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 1, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}

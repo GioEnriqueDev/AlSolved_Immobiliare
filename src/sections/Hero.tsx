@@ -7,6 +7,8 @@ import { hero } from '../data/siteContent';
 const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const getY = (y: number) => (isMobile || prefersReducedMotion) ? y * 0.4 : y;
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -61,7 +63,7 @@ const Hero = () => {
         <div className="flex flex-col items-center gap-8 sm:gap-10">
           <div className="w-full">
             <motion.div
-              initial={{ opacity: 0, y: 18 }}
+              initial={{ opacity: 0, y: getY(18) }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
               className="mb-8 inline-flex max-w-full items-center gap-2 rounded-full border border-gold-500/20 bg-white/5 px-5 py-2 sm:mb-10 sm:px-6"
@@ -70,7 +72,7 @@ const Hero = () => {
             </motion.div>
             
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: getY(24) }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
               className="mb-6 flex flex-col items-center gap-2 sm:mb-8"
@@ -81,7 +83,7 @@ const Hero = () => {
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 32 }}
+              initial={{ opacity: 0, y: getY(32) }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="mb-2 font-display text-4xl font-bold leading-[1.1] tracking-tight text-white sm:mb-4 sm:text-6xl lg:text-7xl"
@@ -90,7 +92,7 @@ const Hero = () => {
             </motion.h1>
 
             <motion.h2
-              initial={{ opacity: 0, y: 32 }}
+              initial={{ opacity: 0, y: getY(32) }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
               className="mb-10 font-display text-4xl font-bold leading-[1.1] tracking-tight sm:mb-12 sm:text-6xl lg:text-7xl"
@@ -99,7 +101,7 @@ const Hero = () => {
             </motion.h2>
 
             <motion.p
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: getY(24) }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               className="mx-auto mb-10 max-w-2xl text-base leading-relaxed text-charcoal-300 sm:mb-12 sm:text-lg"
@@ -108,7 +110,7 @@ const Hero = () => {
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: getY(24) }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
               className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6"
@@ -136,7 +138,7 @@ const Hero = () => {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: getY(24) }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
           className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4"

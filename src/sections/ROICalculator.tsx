@@ -18,6 +18,7 @@ const ROICalculator = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, margin: '-100px' });
   const isMobile = useIsMobile();
+  const getY = (y: number) => isMobile ? y * 0.4 : y;
 
   const [investment, setInvestment] = useState(100000);
   const [years, setYears] = useState(2);
@@ -112,7 +113,7 @@ const ROICalculator = () => {
 
       <div className="relative mx-auto max-w-7xl">
         <motion.div
-          initial={{ opacity: 0, y: 28 }}
+          initial={{ opacity: 0, y: getY(28) }}
           animate={isInView ? { opacity: 1, y: 0 } : undefined}
           transition={{ duration: 0.8 }}
           className="mb-14 max-w-4xl"
@@ -126,7 +127,7 @@ const ROICalculator = () => {
         <div className="grid gap-8 xl:grid-cols-[0.92fr,1.08fr]">
           <div className="space-y-6">
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: getY(24) }}
               animate={isInView ? { opacity: 1, y: 0 } : undefined}
               transition={{ duration: 0.8, delay: 0.1 }}
               className="grid gap-4 md:grid-cols-3 xl:grid-cols-1"
@@ -147,7 +148,7 @@ const ROICalculator = () => {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: getY(24) }}
               animate={isInView ? { opacity: 1, y: 0 } : undefined}
               transition={{ duration: 0.8, delay: 0.15 }}
               className="rounded-[2rem] border border-white/10 bg-black/20 p-6 backdrop-blur-xl sm:p-8"
@@ -164,7 +165,7 @@ const ROICalculator = () => {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: getY(24) }}
               animate={isInView ? { opacity: 1, y: 0 } : undefined}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="rounded-[2rem] border border-white/10 bg-charcoal-900/70 p-6 sm:p-8"
@@ -183,7 +184,7 @@ const ROICalculator = () => {
 
           <div className="space-y-6">
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: getY(24) }}
               animate={isInView ? { opacity: 1, y: 0 } : undefined}
               transition={{ duration: 0.8, delay: 0.18 }}
               className="rounded-[2rem] border border-white/10 bg-black/20 p-6 backdrop-blur-xl sm:p-8"
@@ -415,7 +416,7 @@ const ROICalculator = () => {
             </motion.div>
 
             <motion.form
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: getY(24) }}
               animate={isInView ? { opacity: 1, y: 0 } : undefined}
               transition={{ duration: 0.8, delay: 0.22 }}
               onSubmit={handleSubmit}
