@@ -43,7 +43,7 @@ const Hero = () => {
     <section ref={containerRef} className="relative min-h-screen overflow-hidden bg-charcoal-950">
       <div className="absolute inset-0 bg-gradient-to-br from-charcoal-950 via-charcoal-900 to-charcoal-950" />
 
-      <motion.div className="absolute inset-0 will-change-transform" style={disableParallax ? undefined : { y: springBackgroundY }}>
+      <motion.div className={`absolute inset-0${disableParallax ? '' : ' will-change-transform'}`} style={disableParallax ? undefined : { y: springBackgroundY }}>
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url('${hero.backgroundImage}')` }}
@@ -54,9 +54,10 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-charcoal-950 via-charcoal-950/78 to-charcoal-950/55" />
       </motion.div>
 
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute left-[-8rem] top-20 h-72 w-72 rounded-full bg-gold-500/10 blur-[120px]" />
-        <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-gold-500/10 blur-[160px]" />
+      <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+        {/* Decorative blurs hidden on mobile — prevent iOS GPU saturation */}
+        <div className="absolute left-[-8rem] top-20 hidden h-72 w-72 rounded-full bg-gold-500/10 blur-[120px] sm:block" />
+        <div className="absolute bottom-0 right-0 hidden h-96 w-96 rounded-full bg-gold-500/10 blur-[160px] sm:block" />
         {decorativeDots && <div className="absolute inset-0 opacity-60">{decorativeDots}</div>}
       </div>
 

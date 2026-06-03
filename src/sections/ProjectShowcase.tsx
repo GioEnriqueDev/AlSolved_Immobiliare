@@ -32,7 +32,7 @@ const ProjectShowcase = () => {
 
   return (
     <section className="relative bg-charcoal-950 px-6 py-32 sm:px-12 sm:py-40 lg:px-24">
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 hidden sm:block" aria-hidden="true">
         <div className="absolute left-1/2 top-20 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full bg-gold-500/5 blur-[250px]" />
       </div>
 
@@ -58,7 +58,7 @@ const ProjectShowcase = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: '0px' }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-24 rounded-[3rem] border border-white/5 bg-charcoal-900/90 p-8 sm:bg-white/5 sm:backdrop-blur-3xl sm:p-12"
+          className="mb-24 rounded-[3rem] border border-white/5 bg-charcoal-900/90 p-8 sm:p-12"
         >
           <div className="mb-12 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-center gap-4">
@@ -169,7 +169,7 @@ const ProjectShowcase = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '0px' }}
           transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-20 flex flex-col gap-8 rounded-[2.5rem] border border-white/5 bg-charcoal-900/90 p-10 sm:bg-white/5 sm:backdrop-blur-2xl sm:flex-row sm:items-center sm:justify-between sm:p-14"
+          className="mt-20 flex flex-col gap-8 rounded-[2.5rem] border border-white/5 bg-charcoal-900/90 p-10 sm:flex-row sm:items-center sm:justify-between sm:p-14"
         >
           <div className="max-w-2xl">
             <p className="text-lg leading-relaxed text-charcoal-300">{projectSection.portfolioNote}</p>

@@ -70,10 +70,7 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
-/* Image loading optimization */
-img {
-  content-visibility: auto;
-}
+/* Image loading optimization — content-visibility:auto removed: causes blank images on iOS Safari */
 
 /* Prevent text selection on interactive elements */
 .no-select {

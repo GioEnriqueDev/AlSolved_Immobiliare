@@ -22,16 +22,24 @@ const Navigation = ({ currentPath }: NavigationProps) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
+  // Lock body scroll when mobile menu is open — use class-based lock for iOS Safari compat
   useEffect(() => {
+    const savedY = window.scrollY;
     if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.classList.add('menu-open');
+      document.body.style.top = `-${savedY}px`;
     } else {
-      document.body.style.overflow = '';
+      const top = document.body.style.top;
+      document.body.classList.remove('menu-open');
+      document.body.style.top = '';
+      if (top) {
+        window.scrollTo(0, parseInt(top || '0', 10) * -1);
+      }
     }
 
     return () => {
-      document.body.style.overflow = '';
+      document.body.classList.remove('menu-open');
+      document.body.style.top = '';
     };
   }, [isMobileMenuOpen]);
 
@@ -132,7 +140,7 @@ const Navigation = ({ currentPath }: NavigationProps) => {
             aria-modal="true"
           >
             <div
-              className="absolute inset-0 bg-charcoal-950/95 backdrop-blur-xl"
+              className="absolute inset-0 bg-charcoal-950/97"
               onClick={closeMenu}
               aria-hidden="true"
             />

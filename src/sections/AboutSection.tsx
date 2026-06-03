@@ -4,7 +4,7 @@ import { about } from '../data/siteContent';
 const AboutSection = () => {
   return (
     <section className="relative bg-charcoal-950 px-6 py-24 sm:px-12 lg:px-24">
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 hidden sm:block" aria-hidden="true">
         <div className="absolute left-0 top-0 h-80 w-80 rounded-full bg-gold-500/5 blur-[130px]" />
         <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-gold-500/5 blur-[150px]" />
       </div>
@@ -46,7 +46,7 @@ const AboutSection = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '0px' }}
                   transition={{ duration: 0.7, delay: index * 0.08 }}
-                  className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl"
+                  className="rounded-3xl border border-white/10 bg-charcoal-900/80 p-6 sm:bg-white/5 sm:backdrop-blur-xl"
                 >
                   <p className="text-xs uppercase tracking-[0.24em] text-gold-300">{pillar.title}</p>
                   <p className="mt-4 text-sm leading-relaxed text-charcoal-300">{pillar.text}</p>
@@ -54,7 +54,7 @@ const AboutSection = () => {
               ))}
             </div>
 
-            <div className="rounded-[2rem] border border-white/10 bg-black/20 p-6 backdrop-blur-xl">
+            <div className="rounded-[2rem] border border-white/10 bg-charcoal-900/80 p-6 sm:bg-black/20 sm:backdrop-blur-xl">
               <div className="mb-6 flex items-end justify-between gap-4">
                 <div>
                   <p className="text-xs uppercase tracking-[0.24em] text-gold-300">{about.processTitle}</p>

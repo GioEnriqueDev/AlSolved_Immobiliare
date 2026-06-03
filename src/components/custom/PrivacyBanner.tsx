@@ -30,7 +30,9 @@ const PrivacyBanner = () => {
           className="fixed bottom-4 left-4 right-4 z-[100] mx-auto max-w-4xl sm:bottom-6 sm:left-6 sm:right-6"
           style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
         >
-          <div className="overflow-hidden rounded-2xl border border-white/10 bg-charcoal-900/95 p-4 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] sm:rounded-3xl sm:p-6">
+          <div className="overflow-hidden rounded-2xl border border-white/10 bg-charcoal-900/97 p-4 shadow-[0_20px_50px_rgba(0,0,0,0.5)] sm:rounded-3xl sm:p-6"
+            style={{ backgroundColor: 'rgb(10 10 10 / 0.97)' }}
+          >
             <div className="flex flex-col gap-4 sm:gap-6 md:flex-row md:items-center md:justify-between">
               <div className="flex items-start gap-3 sm:gap-4 md:items-center">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gold-500/10 text-gold-400 sm:h-12 sm:w-12 sm:rounded-2xl">

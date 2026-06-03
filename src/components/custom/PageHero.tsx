@@ -11,7 +11,7 @@ interface PageHeroProps {
 const PageHero = ({ badge, title, description, aside, centered = false }: PageHeroProps & { centered?: boolean }) => {
   return (
     <section className="relative overflow-hidden bg-charcoal-950 px-6 pb-20 pt-32 sm:px-12 sm:pb-28 sm:pt-48 lg:px-24">
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 hidden sm:block" aria-hidden="true">
         <div className="absolute left-0 top-24 h-96 w-96 rounded-full bg-gold-500/5 blur-[180px]" />
         <div className="absolute right-0 top-10 h-[32rem] w-[32rem] rounded-full bg-gold-500/5 blur-[220px]" />
       </div>
@@ -33,7 +33,7 @@ const PageHero = ({ badge, title, description, aside, centered = false }: PageHe
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="rounded-[2.5rem] border border-white/5 bg-white/5 p-8 backdrop-blur-3xl sm:p-10"
+            className="rounded-[2.5rem] border border-white/5 bg-charcoal-900/80 p-8 sm:bg-white/5 sm:backdrop-blur-xl sm:p-10"
           >
             {aside}
           </motion.div>

@@ -125,7 +125,7 @@ const ContactSection = () => {
 
             <div className="mt-8 grid gap-4">
               {seller.offers.map((offer) => (
-                <div key={offer.title} className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
+                <div key={offer.title} className="rounded-3xl border border-white/10 bg-charcoal-900/80 p-6 sm:bg-white/5 sm:backdrop-blur-xl">
                   <p className="text-xs uppercase tracking-[0.22em] text-gold-300">{offer.title}</p>
                   <p className="mt-3 text-sm leading-relaxed text-charcoal-300">{offer.text}</p>
                 </div>
@@ -164,7 +164,7 @@ const ContactSection = () => {
 
           <form
             onSubmit={handleSubmit}
-            className="rounded-[2rem] border border-white/10 bg-white/5 p-6 backdrop-blur-xl sm:p-8"
+            className="rounded-[2rem] border border-white/10 bg-charcoal-900/80 p-6 sm:bg-white/5 sm:backdrop-blur-xl sm:p-8"
             noValidate
           >
             <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">

@@ -14,7 +14,7 @@ const SiteShell = ({ children, currentPath }: SiteShellProps) => {
   useLenis();
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-charcoal-950 text-white">
+    <div className="relative min-h-screen bg-charcoal-950 text-white">
       <CursorGlow />
       <Navigation currentPath={currentPath} />
       <main className="relative">{children}</main>

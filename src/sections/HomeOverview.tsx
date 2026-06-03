@@ -11,7 +11,7 @@ const HomeOverview = () => {
 
   return (
     <section className="relative bg-charcoal-950 px-6 py-24 sm:px-12 sm:py-32 lg:px-24">
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 hidden sm:block" aria-hidden="true">
         <div className="absolute left-1/2 top-0 h-[32rem] w-[32rem] -translate-x-1/2 rounded-full bg-gold-500/5 blur-[200px]" />
       </div>
 

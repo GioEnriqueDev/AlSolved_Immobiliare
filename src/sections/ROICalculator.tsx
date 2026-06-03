@@ -106,7 +106,7 @@ const ROICalculator = () => {
 
   return (
     <section ref={containerRef} className="relative overflow-hidden bg-charcoal-950 px-6 py-24 sm:px-12 lg:px-24">
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 hidden sm:block" aria-hidden="true">
         <div className="absolute left-0 top-24 h-80 w-80 rounded-full bg-gold-500/5 blur-[140px]" />
         <div className="absolute bottom-0 right-0 h-[28rem] w-[28rem] rounded-full bg-gold-500/5 blur-[170px]" />
       </div>

@@ -40,15 +40,20 @@
 @layer base {
   * {
     @apply border-border;
+    -webkit-tap-highlight-color: transparent;
   }
-  
+
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
-  
+
   body {
     @apply bg-charcoal-950 text-foreground font-sans antialiased;
     overflow-x: hidden;
+    /* Prevent iOS text size adjustment on orientation change */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
   
   ::selection {
@@ -221,6 +226,36 @@ html.lenis, html.lenis body {
   .cursor-glow,
   .noise::after {
     display: none !important;
+  }
+}
+
+/* iOS Safari fixes */
+@supports (-webkit-touch-callout: none) {
+  /* Prevent momentum scroll trapping on fixed overlays */
+  body.menu-open {
+    position: fixed;
+    width: 100%;
+  }
+
+  /* Prevent tap highlight flash on interactive elements */
+  a,
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Force GPU layer only when animating, not statically */
+  .will-change-transform {
+    will-change: auto;
+    transform: translateZ(0);
+  }
+}
+
+/* iOS: prevent auto-zoom on input focus (triggered when font-size < 16px) */
+@media (pointer: coarse) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
   }
 }
 
