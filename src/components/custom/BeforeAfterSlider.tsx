@@ -24,8 +24,9 @@ const BeforeAfterSlider = ({
 }: BeforeAfterSliderProps) => {
   const isTouch = useIsTouch();
   const [isScrubbing, setIsScrubbing] = useState(false);
+  const [touchReveal, setTouchReveal] = useState(DEFAULT_REVEAL);
 
-  // Motion values kept unconditionally per Rules of Hooks; only used on desktop.
+  // Motion values used only on desktop (clip-path approach)
   const revealValue = useMotionValue(DEFAULT_REVEAL);
   const revealSpring = useSpring(revealValue, { stiffness: 220, damping: 28, mass: 0.4 });
   const revealPercentage = useTransform(revealSpring, (value) => `${value}%`);
@@ -36,7 +37,12 @@ const BeforeAfterSlider = ({
 
   const updateReveal = (clientX: number, currentTarget: HTMLElement) => {
     const bounds = currentTarget.getBoundingClientRect();
-    revealValue.set(Math.min(95, Math.max(5, ((clientX - bounds.left) / bounds.width) * 100)));
+    const next = Math.min(95, Math.max(5, ((clientX - bounds.left) / bounds.width) * 100));
+    if (isTouch) {
+      setTouchReveal(next);
+    } else {
+      revealValue.set(next);
+    }
   };
 
   const stopScrubbing = (event?: React.PointerEvent<HTMLDivElement>) => {
@@ -46,35 +52,77 @@ const BeforeAfterSlider = ({
     setIsScrubbing(false);
   };
 
-  // Mobile: show after image statically — no clip-path (causes black screens on iOS Safari)
+  // Mobile: width-based reveal — no clip-path, fully safe on iOS Safari
   if (isTouch) {
     return (
-      <div className={`relative ${aspectRatio} overflow-hidden rounded-[1.6rem] bg-charcoal-900 ${className}`}>
-        {status === 'In corso' ? (
-          <div className="relative h-full w-full bg-charcoal-900">
-            <img src={beforeImage} alt={title} className="h-full w-full object-cover opacity-20" />
-            <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60">
-              <Sparkles className="h-8 w-8 text-gold-400" />
-              <p className="mt-3 text-[9px] font-bold uppercase tracking-[0.4em] text-gold-300">Cantiere Attivo</p>
+      <div
+        className={`group relative ${aspectRatio} overflow-hidden rounded-[1.6rem] bg-charcoal-900 select-none ${className}`}
+        onPointerDown={(event) => {
+          event.currentTarget.setPointerCapture(event.pointerId);
+          setIsScrubbing(true);
+          updateReveal(event.clientX, event.currentTarget);
+        }}
+        onPointerMove={(event) => {
+          if (isScrubbing) updateReveal(event.clientX, event.currentTarget);
+        }}
+        onPointerUp={stopScrubbing}
+        onPointerCancel={stopScrubbing}
+      >
+        {/* Before image — full width background */}
+        <img
+          src={beforeImage}
+          alt={`${title} prima`}
+          className="absolute inset-0 h-full w-full object-cover"
+          loading="lazy"
+          decoding="async"
+        />
+
+        {/* After image — revealed by width, no clip-path */}
+        <div
+          className="absolute inset-y-0 left-0 overflow-hidden"
+          style={{ width: `${touchReveal}%`, transition: isScrubbing ? 'none' : 'width 0.1s ease-out' }}
+        >
+          {status === 'In corso' ? (
+            <div className="relative h-full bg-charcoal-900" style={{ width: `${100 / (touchReveal / 100)}%` }}>
+              <img src={beforeImage} alt={title} className="h-full w-full object-cover opacity-20" />
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60">
+                <Sparkles className="h-8 w-8 text-gold-400" />
+                <p className="mt-3 text-[9px] font-bold uppercase tracking-[0.4em] text-gold-300">Cantiere Attivo</p>
+              </div>
             </div>
+          ) : (
+            <img
+              src={afterImage}
+              alt={`${title} dopo`}
+              className="h-full object-cover"
+              style={{ width: `${10000 / touchReveal}%`, maxWidth: 'none' }}
+              loading="lazy"
+              decoding="async"
+            />
+          )}
+        </div>
+
+        {/* Divider line */}
+        <div
+          className="absolute inset-y-0 z-30 w-px bg-white/60"
+          style={{ left: `${touchReveal}%` }}
+        >
+          <div className="absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-charcoal-950/90 text-white shadow-xl">
+            <MoveHorizontal className="h-4 w-4" />
           </div>
-        ) : (
-          <img
-            src={afterImage}
-            alt={`${title} dopo`}
-            className="h-full w-full object-cover"
-            loading="lazy"
-            decoding="async"
-          />
-        )}
-        <div className="absolute left-3 top-3 z-10 rounded-full border border-white/10 bg-charcoal-950/80 px-3 py-1.5 text-[8px] uppercase tracking-[0.2em] text-white">
+        </div>
+
+        <div className="absolute left-4 top-4 z-40 rounded-full border border-white/10 bg-charcoal-950/80 px-3 py-1.5 text-[8px] uppercase tracking-[0.2em] text-white">
+          Prima
+        </div>
+        <div className="absolute right-4 top-4 z-40 rounded-full border border-gold-500/20 bg-gold-900/80 px-3 py-1.5 text-[8px] uppercase tracking-[0.2em] text-gold-200">
           Dopo
         </div>
       </div>
     );
   }
 
-  // Desktop: full interactive scrubber with clip-path
+  // Desktop: clip-path based scrubber (no iOS issues on desktop browsers)
   return (
     <div
       className={`group relative ${aspectRatio} overflow-hidden rounded-[1.6rem] bg-charcoal-900 select-none touch-none ${

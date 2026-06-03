@@ -21,39 +21,84 @@ import { useIsMobile } from '../hooks/use-mobile';
 const AUTOPLAY_DELAY = 9500;
 const DEFAULT_REVEAL = 56;
 
-// Mobile-safe static image viewer — no clip-path, no springs, no GPU pressure
-const MobileSlider = ({ activeProject }: { activeProject: typeof transformationProjects[0] }) => (
-  <div className="relative aspect-[4/3] overflow-hidden rounded-[1.6rem] bg-charcoal-900">
-    {activeProject.status === 'In corso' ? (
-      <div className="relative h-full w-full bg-charcoal-900">
-        <img
-          src={activeProject.beforeImage}
-          alt={activeProject.title}
-          className="h-full w-full object-cover opacity-20"
-        />
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60">
-          <Sparkles className="h-10 w-10 text-gold-400" />
-          <p className="mt-4 text-xs font-medium uppercase tracking-[0.3em] text-gold-300">Work in Progress</p>
-        </div>
-      </div>
-    ) : (
+// Mobile-safe before/after — uses width reveal instead of clip-path (iOS Safari safe)
+const MobileSlider = ({ activeProject }: { activeProject: typeof transformationProjects[0] }) => {
+  const [reveal, setReveal] = useState(DEFAULT_REVEAL);
+  const [dragging, setDragging] = useState(false);
+
+  const updateReveal = (clientX: number, target: HTMLDivElement) => {
+    const bounds = target.getBoundingClientRect();
+    setReveal(Math.min(88, Math.max(12, ((clientX - bounds.left) / bounds.width) * 100)));
+  };
+
+  return (
+    <div
+      className="relative aspect-[4/3] overflow-hidden rounded-[1.6rem] bg-charcoal-900 select-none"
+      onPointerDown={(e) => {
+        e.currentTarget.setPointerCapture(e.pointerId);
+        setDragging(true);
+        updateReveal(e.clientX, e.currentTarget);
+      }}
+      onPointerMove={(e) => { if (dragging) updateReveal(e.clientX, e.currentTarget); }}
+      onPointerUp={() => setDragging(false)}
+      onPointerCancel={() => setDragging(false)}
+    >
+      {/* Before image — full background */}
       <img
-        src={activeProject.afterImage}
-        alt={`${activeProject.title} — dopo`}
-        className="h-full w-full object-cover"
+        src={activeProject.beforeImage}
+        alt={activeProject.title}
+        className="absolute inset-0 h-full w-full object-cover"
         loading="lazy"
         decoding="async"
       />
-    )}
-    <div className="absolute left-3 top-3 z-10 rounded-full border border-white/10 bg-charcoal-950/80 px-3 py-1 text-[9px] uppercase tracking-[0.3em] text-white">
-      Vision
+
+      {/* After image — revealed by width, no clip-path */}
+      {activeProject.status === 'In corso' ? (
+        <div
+          className="absolute inset-y-0 left-0 overflow-hidden bg-charcoal-900"
+          style={{ width: `${reveal}%`, transition: dragging ? 'none' : 'width 0.1s ease-out' }}
+        >
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/70">
+            <Sparkles className="h-8 w-8 text-gold-400" />
+            <p className="mt-3 text-[9px] font-bold uppercase tracking-[0.4em] text-gold-300">Work in Progress</p>
+          </div>
+        </div>
+      ) : (
+        <div
+          className="absolute inset-y-0 left-0 overflow-hidden"
+          style={{ width: `${reveal}%`, transition: dragging ? 'none' : 'width 0.1s ease-out' }}
+        >
+          <img
+            src={activeProject.afterImage}
+            alt={`${activeProject.title} — dopo`}
+            className="h-full object-cover"
+            style={{ width: `${10000 / reveal}%`, maxWidth: 'none' }}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      )}
+
+      {/* Divider */}
+      <div className="absolute inset-y-0 z-30 w-px bg-white/60" style={{ left: `${reveal}%` }}>
+        <div className="absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-charcoal-950/90 text-white shadow-xl">
+          <MoveHorizontal className="h-4 w-4" />
+        </div>
+      </div>
+
+      <div className="absolute left-5 top-5 z-40 rounded-full border border-white/10 bg-charcoal-950/70 px-4 py-2 text-[9px] uppercase tracking-[0.3em] text-white">Legacy</div>
+      <div className="absolute right-5 top-5 z-40 rounded-full border border-gold-500/20 bg-gold-500/10 px-4 py-2 text-[9px] uppercase tracking-[0.3em] text-gold-200">Vision</div>
+
+      <div className="absolute inset-x-5 bottom-5 z-40 rounded-[1.5rem] border border-white/5 bg-charcoal-950/70 p-5">
+        <h3 className="font-display text-xl font-bold tracking-tight text-white">{activeProject.title}</h3>
+        <div className="mt-2 flex items-center gap-2.5">
+          <span className="h-px w-6 bg-gold-500/40" />
+          <p className="text-xs font-medium tracking-wide text-charcoal-200">{activeProject.location} — {activeProject.assetType}</p>
+        </div>
+      </div>
     </div>
-    <div className="absolute inset-x-3 bottom-3 z-10 rounded-2xl bg-charcoal-950/80 p-4">
-      <h3 className="font-display text-xl font-bold tracking-tight text-white">{activeProject.title}</h3>
-      <p className="mt-1 text-xs text-charcoal-200">{activeProject.location} — {activeProject.assetType}</p>
-    </div>
-  </div>
-);
+  );
+};
 
 // Desktop-only before/after scrubber with clip-path and springs
 const DesktopSlider = ({

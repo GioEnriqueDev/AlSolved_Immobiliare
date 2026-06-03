@@ -22,24 +22,15 @@ const Navigation = ({ currentPath }: NavigationProps) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open — use class-based lock for iOS Safari compat
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    const savedY = window.scrollY;
     if (isMobileMenuOpen) {
-      document.body.classList.add('menu-open');
-      document.body.style.top = `-${savedY}px`;
+      document.body.style.overflow = 'hidden';
     } else {
-      const top = document.body.style.top;
-      document.body.classList.remove('menu-open');
-      document.body.style.top = '';
-      if (top) {
-        window.scrollTo(0, parseInt(top || '0', 10) * -1);
-      }
+      document.body.style.overflow = '';
     }
-
     return () => {
-      document.body.classList.remove('menu-open');
-      document.body.style.top = '';
+      document.body.style.overflow = '';
     };
   }, [isMobileMenuOpen]);
 
@@ -140,7 +131,7 @@ const Navigation = ({ currentPath }: NavigationProps) => {
             aria-modal="true"
           >
             <div
-              className="absolute inset-0 bg-charcoal-950/97"
+              className="absolute inset-0 bg-charcoal-950/95 backdrop-blur-xl"
               onClick={closeMenu}
               aria-hidden="true"
             />
