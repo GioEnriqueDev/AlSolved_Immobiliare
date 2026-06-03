@@ -16,7 +16,7 @@ import { useIsMobile } from '../hooks/use-mobile';
 
 const ROICalculator = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: true, margin: '-100px' });
+  const isInView = useInView(containerRef, { once: true, margin: '-10px' });
   const isMobile = useIsMobile();
   const getY = (y: number) => isMobile ? y * 0.4 : y;
 
