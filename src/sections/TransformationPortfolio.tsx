@@ -148,7 +148,7 @@ const TransformationPortfolio = () => {
             className="relative overflow-hidden rounded-[2rem] border border-white/5 bg-charcoal-900/90 p-1.5 shadow-2xl sm:bg-white/5 sm:backdrop-blur-3xl sm:p-2.5"
           >
             <div
-              className={`group relative aspect-[4/5] overflow-hidden rounded-[1.6rem] bg-charcoal-900 select-none touch-none sm:aspect-[16/9] ${
+              className={`group relative aspect-[3/4] overflow-hidden rounded-[1.6rem] bg-charcoal-900 select-none touch-none sm:aspect-[16/9] ${
                 isScrubbing ? 'cursor-grabbing' : 'cursor-grab'
               }`}
               onPointerDown={(event) => {
@@ -317,8 +317,8 @@ const TransformationPortfolio = () => {
               </div>
             </motion.article>
 
-            <div className="grid grid-cols-3 gap-3">
-              {transformationProjects.map((project, index) => {
+            <div className="flex gap-3">
+              {projectsToShow.map((project, index) => {
                 const isActive = index === activeIndex;
 
                 return (
@@ -326,8 +326,8 @@ const TransformationPortfolio = () => {
                     key={project.id}
                     type="button"
                     onClick={() => setActiveIndex(index)}
-                    className={`h-1.5 overflow-hidden rounded-full transition-all duration-500 ${
-                      isActive ? 'bg-gold-500 w-full' : 'bg-white/10 w-full hover:bg-white/20'
+                    className={`h-1.5 flex-1 overflow-hidden rounded-full transition-all duration-500 ${
+                      isActive ? 'bg-gold-500' : 'bg-white/10 hover:bg-white/20'
                     }`}
                     aria-label={`Vai al progetto ${project.title}`}
                   >

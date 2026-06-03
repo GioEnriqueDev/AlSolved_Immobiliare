@@ -49,18 +49,7 @@ body::-webkit-scrollbar-thumb:hover {
   backface-visibility: hidden;
 }
 
-/* Responsive typography */
-@media (max-width: 640px) {
-  html {
-    font-size: 14px;
-  }
-}
-
-@media (min-width: 1536px) {
-  html {
-    font-size: 18px;
-  }
-}
+/* Responsive typography — let Tailwind handle sizing via utility classes */
 
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {

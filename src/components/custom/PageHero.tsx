@@ -24,8 +24,8 @@ const PageHero = ({ badge, title, description, aside, centered = false }: PageHe
           className={centered ? 'max-w-4xl' : ''}
         >
           <p className="mb-6 text-[10px] font-bold uppercase tracking-[0.4em] text-gold-400">{badge}</p>
-          <h1 className="font-display text-5xl font-bold leading-[0.9] tracking-tight text-white sm:text-7xl lg:text-8xl">{title}</h1>
-          <p className={`mt-8 text-lg leading-relaxed text-charcoal-300 sm:text-xl ${centered ? 'mx-auto max-w-2xl' : 'max-w-2xl'}`}>{description}</p>
+          <h1 className="font-display text-3xl font-bold leading-[0.9] tracking-tight text-white break-words sm:text-5xl lg:text-7xl xl:text-8xl">{title}</h1>
+          <p className={`mt-8 text-base leading-relaxed text-charcoal-300 sm:text-lg lg:text-xl ${centered ? 'mx-auto max-w-2xl' : 'max-w-2xl'}`}>{description}</p>
         </motion.div>
 
         {aside && !centered && (

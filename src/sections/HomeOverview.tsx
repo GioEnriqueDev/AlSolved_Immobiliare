@@ -2,9 +2,10 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import MagneticButton from '../components/custom/MagneticButton';
 import { homeOverview } from '../data/siteContent';
+import { useIsMobile } from '../hooks/use-mobile';
 
 const HomeOverview = () => {
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const isMobile = useIsMobile();
   const getY = (y: number) => isMobile ? y * 0.4 : y;
   const getX = (x: number) => isMobile ? x * 0.4 : x;
 

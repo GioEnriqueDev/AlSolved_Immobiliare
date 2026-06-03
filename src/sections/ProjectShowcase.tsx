@@ -4,6 +4,7 @@ import { ArrowRight, Building2, CalendarRange, MapPin, TrendingUp, Euro } from '
 import MagneticButton from '../components/custom/MagneticButton';
 import BeforeAfterSlider from '../components/custom/BeforeAfterSlider';
 import { projectSection, projects } from '../data/siteContent';
+import { useIsMobile } from '../hooks/use-mobile';
 
 const ProjectShowcase = () => {
   useEffect(() => {
@@ -19,7 +20,7 @@ const ProjectShowcase = () => {
     }
   }, []);
 
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const isMobile = useIsMobile();
   const getY = (y: number) => isMobile ? y * 0.4 : y;
 
   const getMetricIcon = (label: string, accent?: boolean) => {

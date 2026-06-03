@@ -1,17 +1,28 @@
 import { useEffect, useRef } from 'react';
 import { motion, useSpring } from 'framer-motion';
+import { useIsTouch, usePrefersReducedMotion } from '../../hooks/use-mobile';
 
 const CursorGlow = () => {
+  const isTouch = useIsTouch();
+  const prefersReduced = usePrefersReducedMotion();
+
+  // Early return BEFORE any hooks that create springs/animations
+  // This prevents framer-motion from allocating GPU resources on mobile
+  if (isTouch || prefersReduced) {
+    return null;
+  }
+
+  return <CursorGlowInner />;
+};
+
+/** Only mounted on desktop with pointer:fine and no reduced-motion preference */
+const CursorGlowInner = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const springConfig = { damping: 25, stiffness: 200 };
   const x = useSpring(0, springConfig);
   const y = useSpring(0, springConfig);
 
   useEffect(() => {
-    const hasTouch = window.matchMedia('(pointer: coarse)').matches;
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (hasTouch || prefersReducedMotion) return;
-
     const handleMouseMove = (e: MouseEvent) => {
       x.set(e.clientX);
       y.set(e.clientY);
@@ -23,15 +34,6 @@ const CursorGlow = () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
   }, [x, y]);
-
-  // Don't render on touch devices or when motion should be reduced.
-  if (
-    typeof window !== 'undefined' &&
-    (window.matchMedia('(pointer: coarse)').matches ||
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches)
-  ) {
-    return null;
-  }
 
   return (
     <motion.div

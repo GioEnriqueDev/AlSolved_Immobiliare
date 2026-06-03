@@ -3,43 +3,47 @@ import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'fr
 import { ArrowDown, ArrowRight } from 'lucide-react';
 import MagneticButton from '../components/custom/MagneticButton';
 import { hero } from '../data/siteContent';
+import { useIsMobile } from '../hooks/use-mobile';
 
 const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-  const getY = (y: number) => (isMobile || prefersReducedMotion) ? y * 0.4 : y;
+  const isMobile = useIsMobile();
+  const disableParallax = isMobile || prefersReducedMotion;
+  const getY = (y: number) => disableParallax ? y * 0.4 : y;
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end start'],
   });
 
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', prefersReducedMotion ? '0%' : '22%']);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.45], [1, prefersReducedMotion ? 1 : 0.1]);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', disableParallax ? '0%' : '22%']);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.45], [1, disableParallax ? 1 : 0.1]);
   const springBackgroundY = useSpring(backgroundY, { stiffness: 70, damping: 20 });
   const springOpacity = useSpring(contentOpacity, { stiffness: 90, damping: 20 });
 
   const decorativeDots = useMemo(
     () =>
-      [...Array(12)].map((_, index) => (
-        <div
-          key={index}
-          className="absolute h-1.5 w-1.5 rounded-full bg-gold-400/30"
-          style={{
-            left: `${10 + ((index * 7) % 80)}%`,
-            top: `${12 + ((index * 11) % 70)}%`,
-          }}
-        />
-      )),
-    []
+      isMobile
+        ? null
+        : [...Array(12)].map((_, index) => (
+            <div
+              key={index}
+              className="absolute h-1.5 w-1.5 rounded-full bg-gold-400/30"
+              style={{
+                left: `${10 + ((index * 7) % 80)}%`,
+                top: `${12 + ((index * 11) % 70)}%`,
+              }}
+            />
+          )),
+    [isMobile]
   );
 
   return (
     <section ref={containerRef} className="relative min-h-screen overflow-hidden bg-charcoal-950">
       <div className="absolute inset-0 bg-gradient-to-br from-charcoal-950 via-charcoal-900 to-charcoal-950" />
 
-      <motion.div className="absolute inset-0 will-change-transform" style={isMobile ? undefined : { y: springBackgroundY }}>
+      <motion.div className="absolute inset-0 will-change-transform" style={disableParallax ? undefined : { y: springBackgroundY }}>
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url('${hero.backgroundImage}')` }}
@@ -50,15 +54,15 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-charcoal-950 via-charcoal-950/78 to-charcoal-950/55" />
       </motion.div>
 
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 overflow-hidden">
         <div className="absolute left-[-8rem] top-20 h-72 w-72 rounded-full bg-gold-500/10 blur-[120px]" />
         <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-gold-500/10 blur-[160px]" />
-        <div className="absolute inset-0 opacity-60">{decorativeDots}</div>
+        {decorativeDots && <div className="absolute inset-0 opacity-60">{decorativeDots}</div>}
       </div>
 
       <motion.div
         className="relative z-10 mx-auto flex min-h-screen max-w-6xl flex-col justify-center px-6 pb-20 pt-32 text-center sm:px-12 sm:pb-24 sm:pt-40 lg:px-24"
-        style={isMobile ? undefined : { opacity: springOpacity }}
+        style={disableParallax ? undefined : { opacity: springOpacity }}
       >
         <div className="flex flex-col items-center gap-8 sm:gap-10">
           <div className="w-full">
@@ -86,7 +90,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: getY(32) }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="mb-2 font-display text-4xl font-bold leading-[1.1] tracking-tight text-white sm:mb-4 sm:text-6xl lg:text-7xl"
+              className="mb-2 font-display text-3xl font-bold leading-[1.1] tracking-tight text-white sm:mb-4 sm:text-5xl md:text-6xl lg:text-7xl"
             >
               {hero.titlePrimary}
             </motion.h1>
@@ -95,7 +99,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: getY(32) }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="mb-10 font-display text-4xl font-bold leading-[1.1] tracking-tight sm:mb-12 sm:text-6xl lg:text-7xl"
+              className="mb-10 font-display text-3xl font-bold leading-[1.1] tracking-tight sm:mb-12 sm:text-5xl md:text-6xl lg:text-7xl"
             >
               <span className="text-gradient">{hero.titleHighlight}</span>
             </motion.h2>
@@ -120,7 +124,7 @@ const Hero = () => {
                 className="group w-full rounded-full bg-gold-500 px-8 py-4 text-center font-bold text-charcoal-950 transition-all duration-300 hover:shadow-glow-xl sm:w-auto sm:px-10"
                 aria-label={hero.ctas.primary.label}
               >
-                <span className="flex items-center gap-2">
+                <span className="flex items-center justify-center gap-2">
                   {hero.ctas.primary.label}
                   <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </span>

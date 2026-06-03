@@ -22,6 +22,19 @@ const Navigation = ({ currentPath }: NavigationProps) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
   useEffect(() => {
     if (!isMobileMenuOpen) return;
 
@@ -110,39 +123,46 @@ const Navigation = ({ currentPath }: NavigationProps) => {
         {isMobileMenuOpen && (
           <motion.div
             id={mobileMenuId}
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-[45] md:hidden"
             role="dialog"
             aria-modal="true"
           >
-            <div className="absolute inset-0 bg-charcoal-950/95 backdrop-blur-xl" />
-            <div className="relative flex h-full flex-col items-center justify-center gap-6 px-6 pb-8 pt-24 text-center">
+            <div
+              className="absolute inset-0 bg-charcoal-950/95 backdrop-blur-xl"
+              onClick={closeMenu}
+              aria-hidden="true"
+            />
+            <div className="relative flex h-full flex-col items-center justify-center gap-8 px-6 pb-8 pt-28 text-center">
               {navLinks.map((link, index) => (
-                <motion.a
+                <motion.div
                   key={link.label}
-                  href={link.href}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.08 }}
-                  aria-label={`Vai a ${link.label}`}
-                  className="font-display text-xl text-white sm:text-2xl"
-                  onClick={closeMenu}
                 >
-                  {link.label}
-                </motion.a>
+                  <a
+                    href={link.href}
+                    aria-label={`Vai a ${link.label}`}
+                    className="font-display text-xl text-white sm:text-2xl active:text-gold-400 transition-colors"
+                    onClick={closeMenu}
+                  >
+                    {link.label}
+                  </a>
+                </motion.div>
               ))}
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
-                <MagneticButton
+                <a
                   href={routes.sell}
-                  className="w-full rounded-full bg-gold-500 px-8 py-3 text-center font-semibold text-charcoal-950"
+                  className="inline-block w-full rounded-full bg-gold-500 px-8 py-3 text-center font-semibold text-charcoal-950 active:bg-gold-400 transition-colors"
                   aria-label="Vai alla sezione per vendere il tuo immobile"
                   onClick={closeMenu}
                 >
                   Richiedi valutazione
-                </MagneticButton>
+                </a>
               </motion.div>
             </div>
           </motion.div>

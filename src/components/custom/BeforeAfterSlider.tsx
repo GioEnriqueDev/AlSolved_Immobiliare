@@ -130,7 +130,7 @@ const BeforeAfterSlider = ({
         style={{ left: revealPercentage }}
       >
         <div
-          className={`absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-charcoal-950/90 text-white shadow-xl sm:backdrop-blur-2xl transition-all duration-300 ${
+          className={`absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-charcoal-950/90 text-white shadow-xl transition-all duration-300 sm:backdrop-blur-2xl ${
             isScrubbing ? 'scale-110 border-gold-400/50' : 'hover:scale-105'
           }`}
         >
