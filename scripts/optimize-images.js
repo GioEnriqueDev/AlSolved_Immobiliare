@@ -22,6 +22,7 @@ async function optimizeImages() {
         
         // Convert to WebP, compress and resize
         await sharp(inputPath)
+          .rotate() // Automatically read EXIF rotation data and apply it
           .resize({ width: 1920, withoutEnlargement: true }) // Prevent extremely large dimensions
           .webp({ quality: 80, effort: 6 }) // 80 quality is visually identical to original
           .toFile(outputPath);
