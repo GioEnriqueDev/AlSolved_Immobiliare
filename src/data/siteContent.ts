@@ -476,8 +476,8 @@ export const projects: Project[] = [
     location: 'Roma',
     status: 'In corso',
     assetType: 'Riqualificazione e frazionamento',
-    beforeImage: './portfolio/talenti-prima.jpeg',
-    afterImage: './portfolio/talenti-prima.jpeg',
+    beforeImage: './portfolio/talenti-prima.webp',
+    afterImage: './portfolio/talenti-prima.webp',
     description:
       'Intervento in corso di frazionamento e riqualificazione di un intero attico, con ridefinizione degli spazi per creare due unità abitative distinte. Il progetto punta a soluzioni moderne, funzionali e luminose, valorizzando al massimo le caratteristiche dell’immobile.',
     metrics: [

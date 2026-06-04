@@ -43,41 +43,45 @@ const MobileSlider = ({ activeProject }: { activeProject: typeof transformationP
       onPointerUp={() => setDragging(false)}
       onPointerCancel={() => setDragging(false)}
     >
-      {/* Before image — full background */}
-      <img
-        src={activeProject.beforeImage}
-        alt={activeProject.title}
-        className="absolute inset-0 h-full w-full object-cover"
-        loading="lazy"
-        decoding="async"
-      />
-
-      {/* After image — revealed by width, no clip-path */}
+      {/* Base image (Right side) — After image or Future Creation overlay */}
       {activeProject.status === 'In corso' ? (
-        <div
-          className="absolute inset-y-0 left-0 overflow-hidden bg-charcoal-900"
-          style={{ width: `${reveal}%`, transition: dragging ? 'none' : 'width 0.1s ease-out' }}
-        >
+        <div className="absolute inset-0 h-full w-full bg-charcoal-900">
+          <img
+            src={activeProject.afterImage}
+            alt={activeProject.title}
+            className="h-full w-full object-cover opacity-20 blur-md scale-110"
+            loading="lazy"
+            decoding="async"
+          />
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/70">
             <Sparkles className="h-8 w-8 text-gold-400" />
             <p className="mt-3 text-[9px] font-bold uppercase tracking-[0.4em] text-gold-300">Work in Progress</p>
           </div>
         </div>
       ) : (
-        <div
-          className="absolute inset-y-0 left-0 overflow-hidden"
-          style={{ width: `${reveal}%`, transition: dragging ? 'none' : 'width 0.1s ease-out' }}
-        >
-          <img
-            src={activeProject.afterImage}
-            alt={`${activeProject.title} — dopo`}
-            className="h-full object-cover"
-            style={{ width: `${10000 / reveal}%`, maxWidth: 'none' }}
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
+        <img
+          src={activeProject.afterImage}
+          alt={`${activeProject.title} — dopo`}
+          className="absolute inset-0 h-full w-full object-cover"
+          loading="lazy"
+          decoding="async"
+        />
       )}
+
+      {/* Clipped image (Left side) — Before image */}
+      <div
+        className="absolute inset-y-0 left-0 overflow-hidden"
+        style={{ width: `${reveal}%`, transition: dragging ? 'none' : 'width 0.1s ease-out' }}
+      >
+        <img
+          src={activeProject.beforeImage}
+          alt={`${activeProject.title} — prima`}
+          className="h-full object-cover"
+          style={{ width: `${10000 / reveal}%`, maxWidth: 'none' }}
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
 
       {/* Divider */}
       <div className="absolute inset-y-0 z-30 w-px bg-white/60" style={{ left: `${reveal}%` }}>
@@ -132,44 +136,46 @@ const DesktopSlider = ({
     onPointerUp={stopScrubbing}
     onPointerCancel={stopScrubbing}
   >
-    <img
-      src={activeProject.beforeImage}
-      alt={activeProject.title}
-      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-      loading="lazy"
-      decoding="async"
-      fetchPriority="low"
-    />
-
-    <motion.div className="absolute inset-0 overflow-hidden" style={{ clipPath: afterClipPath }}>
-      {activeProject.status === 'In corso' ? (
-        <div className="relative h-full w-full bg-charcoal-900">
-          <img
-            src={activeProject.beforeImage}
-            alt={activeProject.title}
-            className="h-full w-full object-cover opacity-20 blur-md scale-110"
-          />
-          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60">
-            <motion.div
-              animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.8, 0.4] }}
-              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-              className="relative flex h-32 w-32 items-center justify-center rounded-full border border-gold-500/30 bg-gold-500/5"
-            >
-              <Sparkles className="h-10 w-10 text-gold-400 drop-shadow-[0_0_10px_rgba(212,175,55,0.4)]" />
-            </motion.div>
-            <p className="mt-6 text-[10px] font-medium uppercase tracking-[0.5em] text-gold-300">Future Creation</p>
-          </div>
-        </div>
-      ) : (
+    {/* Base image (Right side) — After image or Future Creation overlay */}
+    {activeProject.status === 'In corso' ? (
+      <div className="absolute inset-0 h-full w-full bg-charcoal-900">
         <img
           src={activeProject.afterImage}
           alt={activeProject.title}
-          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-          loading="lazy"
-          decoding="async"
-          fetchPriority="low"
+          className="h-full w-full object-cover opacity-20 blur-md scale-110"
         />
-      )}
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60">
+          <motion.div
+            animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.8, 0.4] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            className="relative flex h-32 w-32 items-center justify-center rounded-full border border-gold-500/30 bg-gold-500/5"
+          >
+            <Sparkles className="h-10 w-10 text-gold-400 drop-shadow-[0_0_10px_rgba(212,175,55,0.4)]" />
+          </motion.div>
+          <p className="mt-6 text-[10px] font-medium uppercase tracking-[0.5em] text-gold-300">Future Creation</p>
+        </div>
+      </div>
+    ) : (
+      <img
+        src={activeProject.afterImage}
+        alt={activeProject.title}
+        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+        loading="lazy"
+        decoding="async"
+        fetchPriority="low"
+      />
+    )}
+
+    {/* Clipped image (Left side) — Before image */}
+    <motion.div className="absolute inset-0 overflow-hidden" style={{ clipPath: afterClipPath }}>
+      <img
+        src={activeProject.beforeImage}
+        alt={activeProject.title}
+        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+        loading="lazy"
+        decoding="async"
+        fetchPriority="low"
+      />
     </motion.div>
 
     <motion.div

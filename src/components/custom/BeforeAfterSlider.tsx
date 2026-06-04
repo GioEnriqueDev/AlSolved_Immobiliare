@@ -68,38 +68,38 @@ const BeforeAfterSlider = ({
         onPointerUp={stopScrubbing}
         onPointerCancel={stopScrubbing}
       >
-        {/* Before image — full width background */}
-        <img
-          src={beforeImage}
-          alt={`${title} prima`}
-          className="absolute inset-0 h-full w-full object-cover"
-          loading="lazy"
-          decoding="async"
-        />
+        {/* Base image (Right side) — After image or Future Creation overlay */}
+        {status === 'In corso' ? (
+          <div className="absolute inset-0 h-full w-full bg-charcoal-900">
+            <img src={afterImage} alt={title} className="h-full w-full object-cover opacity-20" />
+            <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60">
+              <Sparkles className="h-8 w-8 text-gold-400" />
+              <p className="mt-3 text-[9px] font-bold uppercase tracking-[0.4em] text-gold-300">Cantiere Attivo</p>
+            </div>
+          </div>
+        ) : (
+          <img
+            src={afterImage}
+            alt={`${title} dopo`}
+            className="absolute inset-0 h-full w-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+        )}
 
-        {/* After image — revealed by width, no clip-path */}
+        {/* Clipped image (Left side) — Before image */}
         <div
           className="absolute inset-y-0 left-0 overflow-hidden"
           style={{ width: `${touchReveal}%`, transition: isScrubbing ? 'none' : 'width 0.1s ease-out' }}
         >
-          {status === 'In corso' ? (
-            <div className="relative h-full bg-charcoal-900" style={{ width: `${100 / (touchReveal / 100)}%` }}>
-              <img src={beforeImage} alt={title} className="h-full w-full object-cover opacity-20" />
-              <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60">
-                <Sparkles className="h-8 w-8 text-gold-400" />
-                <p className="mt-3 text-[9px] font-bold uppercase tracking-[0.4em] text-gold-300">Cantiere Attivo</p>
-              </div>
-            </div>
-          ) : (
-            <img
-              src={afterImage}
-              alt={`${title} dopo`}
-              className="h-full object-cover"
-              style={{ width: `${10000 / touchReveal}%`, maxWidth: 'none' }}
-              loading="lazy"
-              decoding="async"
-            />
-          )}
+          <img
+            src={beforeImage}
+            alt={`${title} prima`}
+            className="h-full object-cover"
+            style={{ width: `${10000 / touchReveal}%`, maxWidth: 'none' }}
+            loading="lazy"
+            decoding="async"
+          />
         </div>
 
         {/* Divider line */}
@@ -139,40 +139,42 @@ const BeforeAfterSlider = ({
       onPointerUp={stopScrubbing}
       onPointerCancel={stopScrubbing}
     >
-      <img
-        src={beforeImage}
-        alt={`${title} prima`}
-        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-        loading="lazy"
-        decoding="async"
-        fetchPriority="low"
-      />
-
-      <motion.div className="absolute inset-0 overflow-hidden" style={{ clipPath: afterClipPath }}>
-        {status === 'In corso' ? (
-          <div className="relative h-full w-full bg-charcoal-900">
-            <img src={beforeImage} alt={title} className="h-full w-full object-cover opacity-20 blur-md scale-110" />
-            <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60">
-              <motion.div
-                animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.8, 0.4] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="relative flex h-24 w-24 items-center justify-center rounded-full border border-gold-500/30 bg-gold-500/5"
-              >
-                <Sparkles className="h-8 w-8 text-gold-400 drop-shadow-[0_0_10px_rgba(212,175,55,0.4)]" />
-              </motion.div>
-              <p className="mt-4 text-[9px] font-bold uppercase tracking-[0.4em] text-gold-300">Cantiere Attivo</p>
-            </div>
+      {/* Base image (Right side) — After image or Future Creation overlay */}
+      {status === 'In corso' ? (
+        <div className="absolute inset-0 h-full w-full bg-charcoal-900">
+          <img src={afterImage} alt={title} className="h-full w-full object-cover opacity-20 blur-md scale-110" />
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60">
+            <motion.div
+              animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.8, 0.4] }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              className="relative flex h-24 w-24 items-center justify-center rounded-full border border-gold-500/30 bg-gold-500/5"
+            >
+              <Sparkles className="h-8 w-8 text-gold-400 drop-shadow-[0_0_10px_rgba(212,175,55,0.4)]" />
+            </motion.div>
+            <p className="mt-4 text-[9px] font-bold uppercase tracking-[0.4em] text-gold-300">Cantiere Attivo</p>
           </div>
-        ) : (
-          <img
-            src={afterImage}
-            alt={`${title} dopo`}
-            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-            loading="lazy"
-            decoding="async"
-            fetchPriority="low"
-          />
-        )}
+        </div>
+      ) : (
+        <img
+          src={afterImage}
+          alt={`${title} dopo`}
+          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
+        />
+      )}
+
+      {/* Clipped image (Left side) — Before image */}
+      <motion.div className="absolute inset-0 overflow-hidden" style={{ clipPath: afterClipPath }}>
+        <img
+          src={beforeImage}
+          alt={`${title} prima`}
+          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
+        />
       </motion.div>
 
       <motion.div
